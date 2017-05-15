@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Arbor.ModelBinding</id>
+    <version>0.1.0</version>
+    <title>Arbor.ModelBinding</title>
+    <authors>Niklas Lundberg</authors>
+    <owners></owners>
+    <description>
+      This packages makes it possible to extract values from a request primitives into .NET poco objects.
+    </description>
+    <releaseNotes>
+    </releaseNotes>
+    <summary>
+
+    </summary>
+    <language>en-US</language>
+    <projectUrl>http://github.com/niklaslundberg</projectUrl>
+    <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/niklaslundberg/Arbor.WebApi.Formatting.X-www-form-urlencoded/blob/develop/LICENSE.txt</licenseUrl>
+    <copyright>Copyright Niklas Lundberg 2017</copyright>
+    <dependencies>
+      <group targetFramework="netstandard1.6">
+        <dependency id="Newtonsoft.Json" version="[9.0.1,)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[1.1,2.0)" />
+      </group>
+      <group targetFramework="net461">
+        <dependency id="Newtonsoft.Json" version="[9.0.1,)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[1.1,2.0)" />
+      </group>
+    </dependencies>
+    <references></references>
+    <tags></tags>
+  </metadata>
+  <files>
+    <file src="Arbor.ModelBinding.Core\bin\$configuration$\netstandard1.4\Arbor.ModelBinding.Core.dll" target="lib\netstandard1.4" exclude="*.vshost*;**\*.vshost*;*.trx" />
+    <file src="Arbor.ModelBinding.Core\bin\$configuration$\net461\Arbor.ModelBinding.Core.dll" target="lib\net461" exclude="*.vshost*;**\*.vshost*;*.trx" />
+  </files>
+</package>
