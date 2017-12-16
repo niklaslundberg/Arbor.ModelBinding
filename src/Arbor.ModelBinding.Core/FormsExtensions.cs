@@ -56,6 +56,8 @@ namespace Arbor.ModelBinding.Core
 
             Console.WriteLine("parsing " + json + " into type " + targetType);
             object instance = JsonConvert.DeserializeObject(json, targetType);
+            JsonConverter[] converts = { new BooleanJsonConverter() };
+            object instance = JsonConvert.DeserializeObject(json, targetType, converts);
 
             if (instance != null)
             {
