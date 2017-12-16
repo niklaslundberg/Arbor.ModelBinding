@@ -7,7 +7,7 @@
     <authors>Niklas Lundberg</authors>
     <owners></owners>
     <description>
-      This packages makes it possible to extract values from a request primitives into .NET poco objects.
+      This packages makes it possible to extract values from request primitives into .NET poco objects.
     </description>
     <releaseNotes>
     </releaseNotes>
