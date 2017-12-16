@@ -27,6 +27,11 @@ namespace Arbor.ModelBinding.Core
 
             KeyValuePair<string, StringValues>[] nameCollection = collection.ToArray();
 
+            if (nameCollection.Length == 0)
+            {
+                return default;
+            }
+
             var dynamicObject = new ExpandoObject();
 
             KeyValuePair<string, StringValues>[] nested =
