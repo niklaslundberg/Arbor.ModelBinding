@@ -25,6 +25,16 @@ namespace Arbor.ModelBinding.Core
                 throw new ArgumentNullException(nameof(targetType));
             }
 
+            if (targetType.IsAbstract)
+            {
+                return default;
+            }
+
+            if (targetType.IsGenericType && targetType.GenericTypeArguments.Any(argType => argType.IsAbstract))
+            {
+                return default;
+            }
+
             KeyValuePair<string, StringValues>[] nameCollection = collection.ToArray();
 
             if (nameCollection.Length == 0)
