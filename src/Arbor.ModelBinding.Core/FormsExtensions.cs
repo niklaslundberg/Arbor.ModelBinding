@@ -25,12 +25,27 @@ namespace Arbor.ModelBinding.Core
                 throw new ArgumentNullException(nameof(targetType));
             }
 
+            if (targetType.IsAbstract)
+            {
+                return default;
+            }
+
+            if (targetType.IsGenericType && targetType.GenericTypeArguments.Any(argType => argType.IsAbstract))
+            {
+                return default;
+            }
+
             KeyValuePair<string, StringValues>[] nameCollection = collection.ToArray();
+
+            if (nameCollection.Length == 0)
+            {
+                return default;
+            }
 
             var dynamicObject = new ExpandoObject();
 
             KeyValuePair<string, StringValues>[] nested =
-                nameCollection.Where(pair => pair.Key.Contains("[")).ToArray();
+                nameCollection.Where(pair => pair.Key.IndexOf("[", StringComparison.Ordinal) >= 0).ToArray();
 
             IDictionary<string, object> dynamicObjectDictionary = dynamicObject;
 
@@ -54,8 +69,8 @@ namespace Arbor.ModelBinding.Core
 
             string json = JsonConvert.SerializeObject(dynamicObject);
 
-            Console.WriteLine("parsing " + json + " into type " + targetType);
-            object instance = JsonConvert.DeserializeObject(json, targetType);
+            JsonConverter[] converts = { new BooleanJsonConverter() };
+            object instance = JsonConvert.DeserializeObject(json, targetType, converts);
 
             if (instance != null)
             {
