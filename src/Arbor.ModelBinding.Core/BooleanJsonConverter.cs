@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Arbor.ModelBinding.Core
@@ -10,6 +11,27 @@ namespace Arbor.ModelBinding.Core
     /// </summary>
     internal class BooleanJsonConverter : JsonConverter
     {
+        Dictionary<string, bool> _dictionary;
+
+        public BooleanJsonConverter()
+        {
+            _dictionary = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "true", true },
+                { "y", true },
+                { "yes", true },
+                { "1", true },
+                { "on", true },
+                { "false", false },
+                { "n", false },
+                { "no", false },
+                { "0", false },
+                { "off", false }
+            };
+
+
+        }
+
         /// <summary>
         /// Specifies that this converter will not participate in writing results.
         /// </summary>
@@ -43,24 +65,18 @@ namespace Arbor.ModelBinding.Core
             object existingValue,
             JsonSerializer serializer)
         {
-            switch (reader.Value?.ToString().ToLowerInvariant().Trim() ?? "")
+            object readerValue = reader.Value;
+
+            if (readerValue is string stringValue)
             {
-                case "true":
-                case "yes":
-                case "y":
-                case "1":
-                case "on":
-                    return true;
-                case "false":
-                case "no":
-                case "n":
-                case "0":
-                case "off":
-                    return false;
+                if (_dictionary.TryGetValue(stringValue, out bool result))
+                {
+                    return result;
+                }
             }
 
             // If we reach here, we're pretty much going to throw an error so let's let Json.NET throw it's pretty-fied error message.
-            return new JsonSerializer().Deserialize(reader, objectType);
+            return serializer.Deserialize(reader, objectType);
         }
 
         /// <summary>

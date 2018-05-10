@@ -9,7 +9,6 @@ CALL "%~dp0\Build.exe"
 REM Restore variables to default
 
 SET Arbor.X.Build.Bootstrapper.AllowPrerelease=
-REM SET Arbor.X.Vcs.Branch.Name=
 SET Arbor.X.Tools.External.MSpec.Enabled=
 SET Arbor.X.NuGet.Package.Artifacts.Suffix=
 SET Arbor.X.NuGet.Package.Artifacts.BuildNumber.Enabled=

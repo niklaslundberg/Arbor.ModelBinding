@@ -69,8 +69,8 @@ namespace Arbor.ModelBinding.Core
 
             string json = JsonConvert.SerializeObject(dynamicObject);
 
-            JsonConverter[] converts = { new BooleanJsonConverter() };
-            object instance = JsonConvert.DeserializeObject(json, targetType, converts);
+            JsonConverter[] converters = { new BooleanJsonConverter() };
+            object instance = JsonConvert.DeserializeObject(json, targetType, converters);
 
             if (instance != null)
             {
@@ -156,8 +156,8 @@ namespace Arbor.ModelBinding.Core
                                     $"Could not create new {propertyInfo.PropertyType.FullName}");
                             }
 
-                            if (propertyInfo.PropertyType.GetTypeInfo()
-                                .IsAssignableFrom(newCollection.GetType().GetTypeInfo()))
+                            if (propertyInfo.PropertyType
+                                .IsInstanceOfType(newCollection))
                             {
                                 propertyInfo.SetValue(instance, newCollection);
 
@@ -173,11 +173,10 @@ namespace Arbor.ModelBinding.Core
 
                         if (currentCollection != null)
                         {
-                            if (constructedCollectionType.GetTypeInfo()
-                                .IsAssignableFrom(currentCollection.GetType().GetTypeInfo()))
+                            if (constructedCollectionType.IsInstanceOfType(currentCollection))
                             {
                                 MethodInfo addMethod = currentCollection.GetType().GetTypeInfo()
-                                    .GetDeclaredMethod("Add");
+                                    .GetDeclaredMethod(nameof(ICollection<object>.Add));
 
                                 addMethod.Invoke(currentCollection, new[] { subTargetInstance });
                             }
