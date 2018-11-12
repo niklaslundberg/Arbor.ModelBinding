@@ -70,7 +70,17 @@ namespace Arbor.ModelBinding.Core
             string json = JsonConvert.SerializeObject(dynamicObject);
 
             JsonConverter[] converters = { new BooleanJsonConverter() };
-            object instance = JsonConvert.DeserializeObject(json, targetType, converters);
+
+            object instance;
+
+            try
+            {
+                instance = JsonConvert.DeserializeObject(json, targetType, converters);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException($"Could not deserialize type {targetType} from json {json}", ex);
+            }
 
             if (instance != null)
             {
