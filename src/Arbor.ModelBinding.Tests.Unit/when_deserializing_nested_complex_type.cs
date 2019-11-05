@@ -22,17 +22,22 @@ namespace Arbor.ModelBinding.Tests.Unit
 
         Establish context = () =>
         {
+            KeyValuePair<string, StringValues> Pair(string key, string value)
+            {
+                return new KeyValuePair<string, StringValues>(key, value);
+            }
+
             values = new List<KeyValuePair<string, StringValues>>
             {
-                new KeyValuePair<string, StringValues>("rootTitle", "myRootTitle"),
-                new KeyValuePair<string, StringValues>("rootOtherProperty", "911"),
-                new KeyValuePair<string, StringValues>("subTypes[0].subTitle", "myFirstSubTitle"),
-                new KeyValuePair<string, StringValues>("subTypes[0].subOtherProperty", "42"),
-                new KeyValuePair<string, StringValues>("subTypes[0].subListItems[0].note", "The quick brown"),
-                new KeyValuePair<string, StringValues>("subTypes[0].subListItems[1].note", "fox"),
-                new KeyValuePair<string, StringValues>("subTypes[0].subListItems[2].note", "jumps"),
-                new KeyValuePair<string, StringValues>("subTypes[1].subTitle", "mySecondSubTypeTitle"),
-                new KeyValuePair<string, StringValues>("subTypes[1].subOtherProperty", "123")
+                Pair("rootTitle", "myRootTitle"),
+                Pair("rootOtherProperty", "911"),
+                Pair("subTypes[0].subTitle", "myFirstSubTitle"),
+                Pair("subTypes[0].subOtherProperty", "42"),
+                Pair("subTypes[0].subListItems[0].note", "The quick brown"),
+                Pair("subTypes[0].subListItems[1].note", "fox"),
+                Pair("subTypes[0].subListItems[2].note", "jumps"),
+                Pair("subTypes[1].subTitle", "mySecondSubTypeTitle"),
+                Pair("subTypes[1].subOtherProperty", "123")
             };
         };
 
