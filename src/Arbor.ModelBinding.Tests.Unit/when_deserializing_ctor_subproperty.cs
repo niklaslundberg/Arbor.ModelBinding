@@ -9,7 +9,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Arbor.ModelBinding.Tests.Unit
 {
-    public class when_deserializing_ctor_with_subproperty
+    public class when_deserializing_ctor_subproperty
     {
         static object result;
 
@@ -26,13 +26,13 @@ namespace Arbor.ModelBinding.Tests.Unit
             };
 
         Because of =
-            () => { result = FormsExtensions.ParseFromPairs(values, typeof(MainTypeCtor)); };
+            () => { result = FormsExtensions.ParseFromPairs(values, typeof(MainType)); };
 
         It should_parse_all_properties = () =>
             {
                 result.ShouldNotBeNull();
 
-                var mainType = result as MainTypeCtor;
+                var mainType = result as MainType;
 
                 mainType.ShouldNotBeNull();
 
