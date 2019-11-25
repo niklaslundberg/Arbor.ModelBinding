@@ -67,9 +67,103 @@ namespace Arbor.ModelBinding.Core
                 dynamicObjectDictionary[keyValuePair.Key] = values;
             }
 
-            string json = JsonConvert.SerializeObject(dynamicObject);
+            foreach (PropertyInfo propertyInfo in targetType
+                .GetTypeInfo()
+                .DeclaredProperties
+                .Where(
+                    property => !(typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(
+                                    property.PropertyType.GetTypeInfo())
+                                || property.PropertyType == typeof(string))
+                                && !property.PropertyType.IsPrimitive
+                                && !property.PropertyType.GetTypeInfo().IsGenericType))
+            {
+                var subProperties = nameCollection
+                    .Where(pair => pair.Key.IndexOf(".", StringComparison.Ordinal) >= 0)
+                    .Select(pair => new KeyValuePair<string, StringValues>(pair.Key.Substring(pair.Key.IndexOf(".", StringComparison.Ordinal)).TrimStart('.'), pair.Value))
+                    .ToArray();
+
+                var subInstance = ParseFromPairs(subProperties, propertyInfo.PropertyType);
+
+                dynamicObjectDictionary[propertyInfo.Name] = subInstance;
+            }
+
+            foreach (PropertyInfo propertyInfo in targetType
+                .GetTypeInfo()
+                .DeclaredProperties
+                .Where(
+                    property => typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(
+                                    property.PropertyType.GetTypeInfo()) &&
+                                property.PropertyType.GetTypeInfo().IsGenericType))
+            {
+                Type subTargetType = propertyInfo.PropertyType.GenericTypeArguments.FirstOrDefault();
+
+                string expectedName = propertyInfo.Name;
+
+                var matchingProperty = nested.Select(
+                        nestedGroup =>
+                            {
+                                int indexIndex = nestedGroup.Key.IndexOf("[", StringComparison.Ordinal);
+                                int indexStopIndex = nestedGroup.Key.IndexOf("]", StringComparison.Ordinal);
+                                int indexLength = indexStopIndex - indexIndex;
+
+                                int dotIndex = nestedGroup.Key.IndexOf(".", StringComparison.Ordinal);
+
+                                string name = nestedGroup.Key.Substring(0, indexIndex);
+
+                                string index = nestedGroup.Key.Substring(indexIndex + 1, indexLength - 1);
+
+                                string propertyName = nestedGroup.Key.Substring(dotIndex + 1);
+
+                                return new { GroupName = name, nestedGroup.Value, Index = index, propertyName };
+                            })
+                    .Where(s => s.GroupName.Equals(expectedName, StringComparison.OrdinalIgnoreCase))
+                    .ToArray();
+
+                var indexedGroups = matchingProperty.GroupBy(_ => _.Index);
+
+
+                object newCollection = null;
+
+                Type listType = typeof(List<>);
+                Type constructedListType = listType.MakeGenericType(subTargetType);
+
+                try
+                {
+                    newCollection = Activator.CreateInstance(constructedListType);
+                }
+                catch (Exception)
+                {
+                    // Ignore exception
+                }
+
+                if (newCollection == null)
+                {
+                    throw new InvalidOperationException(
+                        $"Could not create new {propertyInfo.PropertyType.FullName}");
+                }
+
+                dynamicObjectDictionary[propertyInfo.Name] = newCollection;
+
+                foreach (var item in indexedGroups)
+                {
+                    var pairs = new List<KeyValuePair<string, StringValues>>();
+                    foreach (var value in item)
+                    {
+                        foreach (string valueProperty in value.Value)
+                        {
+                            pairs.Add(new KeyValuePair<string, StringValues>(value.propertyName, valueProperty));
+                        }
+                    }
+
+                    object subTargetInstance = ParseFromPairs(pairs, subTargetType);
+
+                    AddInstanceToCollection(subTargetType, newCollection, subTargetInstance);
+                }
+            }
 
             JsonConverter[] converters = { new BooleanJsonConverter() };
+
+            string json = JsonConvert.SerializeObject(dynamicObject);
 
             object instance;
 
@@ -82,120 +176,22 @@ namespace Arbor.ModelBinding.Core
                 throw new ArgumentException($"Could not deserialize type {targetType} from json {json}", ex);
             }
 
-            if (instance != null)
-            {
-                foreach (PropertyInfo propertyInfo in targetType
-                    .GetTypeInfo()
-                    .DeclaredProperties
-                    .Where(property => property.CanWrite &&
-                                       typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(
-                                           property.PropertyType.GetTypeInfo()) &&
-                                       property.PropertyType.GetTypeInfo().IsGenericType))
-                {
-                    Type subTargetType = propertyInfo.PropertyType.GenericTypeArguments.FirstOrDefault();
-
-                    string expectedName = propertyInfo.Name;
-
-                    var matchingProperty = nested.Select(nestedGroup =>
-                        {
-                            int indexIndex = nestedGroup.Key.IndexOf("[", StringComparison.Ordinal);
-                            int indexStopIndex = nestedGroup.Key.IndexOf("]", StringComparison.Ordinal);
-                            int indexLength = indexStopIndex - indexIndex;
-
-                            int dotIndex = nestedGroup.Key.IndexOf(".", StringComparison.Ordinal);
-
-                            string name = nestedGroup.Key.Substring(0, indexIndex);
-
-                            string index = nestedGroup.Key.Substring(indexIndex + 1, indexLength - 1);
-
-                            string propertyName = nestedGroup.Key.Substring(dotIndex + 1);
-
-                            return new { GroupName = name, nestedGroup.Value, Index = index, propertyName };
-                        })
-                        .Where(s => s.GroupName.Equals(expectedName, StringComparison.OrdinalIgnoreCase))
-                        .ToArray();
-
-                    var indexedGroups = matchingProperty.GroupBy(_ => _.Index);
-
-                    foreach (var item in indexedGroups)
-                    {
-                        var pairs = new List<KeyValuePair<string, StringValues>>();
-                        foreach (var value in item)
-                        {
-                            foreach (string valueProperty in value.Value)
-                            {
-                                pairs.Add(new KeyValuePair<string, StringValues>(value.propertyName, valueProperty));
-                            }
-                        }
-
-                        object currentCollection = propertyInfo.GetValue(instance);
-
-                        if (currentCollection == null)
-                        {
-                            object newCollection = null;
-
-                            if (!propertyInfo.PropertyType.GetTypeInfo().IsAbstract)
-                            {
-                                try
-                                {
-                                    newCollection = Activator.CreateInstance(propertyInfo.PropertyType);
-                                }
-                                catch (Exception)
-                                {
-                                    // Ignore exception
-                                }
-                            }
-                            else
-                            {
-                                Type listType = typeof(List<>);
-                                Type constructedListType = listType.MakeGenericType(subTargetType);
-
-                                try
-                                {
-                                    newCollection = Activator.CreateInstance(constructedListType);
-                                }
-                                catch (Exception)
-                                {
-                                    // Ignore exception
-                                }
-                            }
-
-                            if (newCollection == null)
-                            {
-                                throw new InvalidOperationException(
-                                    $"Could not create new {propertyInfo.PropertyType.FullName}");
-                            }
-
-                            if (propertyInfo.PropertyType
-                                .IsInstanceOfType(newCollection))
-                            {
-                                propertyInfo.SetValue(instance, newCollection);
-
-                                currentCollection = newCollection;
-                            }
-                        }
-
-                        object subTargetInstance = ParseFromPairs(pairs, subTargetType);
-
-                        Type genericCollectionType = typeof(ICollection<>);
-
-                        Type constructedCollectionType = genericCollectionType.MakeGenericType(subTargetType);
-
-                        if (currentCollection != null)
-                        {
-                            if (constructedCollectionType.IsInstanceOfType(currentCollection))
-                            {
-                                MethodInfo addMethod = currentCollection.GetType().GetTypeInfo()
-                                    .GetDeclaredMethod(nameof(ICollection<object>.Add));
-
-                                addMethod.Invoke(currentCollection, new[] { subTargetInstance });
-                            }
-                        }
-                    }
-                }
-            }
-
             return instance;
+        }
+
+        static void AddInstanceToCollection(Type subTargetType, object newCollection, object subTargetInstance)
+        {
+            Type genericCollectionType = typeof(ICollection<>);
+
+            Type constructedCollectionType = genericCollectionType.MakeGenericType(subTargetType);
+
+            if (constructedCollectionType.IsInstanceOfType(newCollection))
+            {
+                MethodInfo addMethod = newCollection.GetType().GetTypeInfo()
+                    .GetDeclaredMethod(nameof(ICollection<object>.Add));
+
+                addMethod.Invoke(newCollection, new[] { subTargetInstance });
+            }
         }
     }
 }

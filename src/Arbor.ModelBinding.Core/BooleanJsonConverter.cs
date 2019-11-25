@@ -11,7 +11,7 @@ namespace Arbor.ModelBinding.Core
     /// </summary>
     internal class BooleanJsonConverter : JsonConverter
     {
-        Dictionary<string, bool> _dictionary;
+        readonly Dictionary<string, bool> _dictionary;
 
         public BooleanJsonConverter()
         {
