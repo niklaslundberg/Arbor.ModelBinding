@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using Newtonsoft.Json;
 
 namespace Arbor.ModelBinding.Core
@@ -11,23 +12,23 @@ namespace Arbor.ModelBinding.Core
     /// </summary>
     internal class BooleanJsonConverter : JsonConverter
     {
-        readonly Dictionary<string, bool> _dictionary;
+        private readonly Dictionary<string, bool> _dictionary;
 
         public BooleanJsonConverter()
         {
             _dictionary = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "true", true },
-                { "y", true },
-                { "yes", true },
-                { "1", true },
-                { "on", true },
-                { "false", false },
-                { "n", false },
-                { "no", false },
-                { "0", false },
-                { "off", false }
-            };
+                          {
+                              { "true", true },
+                              { "y", true },
+                              { "yes", true },
+                              { "1", true },
+                              { "on", true },
+                              { "false", false },
+                              { "n", false },
+                              { "no", false },
+                              { "0", false },
+                              { "off", false }
+                          };
 
 
         }
@@ -37,6 +38,8 @@ namespace Arbor.ModelBinding.Core
         /// </summary>
         public override bool CanWrite => false;
 
+        public override bool CanRead => true;
+
         /// <summary>
         /// Determines whether this instance can convert the specified object type.
         /// </summary>
@@ -44,10 +47,7 @@ namespace Arbor.ModelBinding.Core
         /// <returns>
         /// <c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
         /// </returns>
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof(bool);
-        }
+        public override bool CanConvert(Type objectType) => objectType == typeof(bool);
 
         /// <summary>
         /// Reads the JSON representation of the object.
@@ -85,6 +85,7 @@ namespace Arbor.ModelBinding.Core
         /// <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter"/> to write to.</param><param name="value">The value.</param><param name="serializer">The calling serializer.</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
+            throw new NotSupportedException();
         }
     }
 }

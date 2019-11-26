@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
+
 using Microsoft.Extensions.Primitives;
+
 using Newtonsoft.Json;
 
 namespace Arbor.ModelBinding.Core
@@ -49,6 +51,11 @@ namespace Arbor.ModelBinding.Core
 
             IDictionary<string, object> dynamicObjectDictionary = dynamicObject;
 
+            bool ContainsKey(string lookup)
+            {
+                return dynamicObjectDictionary.Keys.Any(key => key.Equals(lookup, StringComparison.OrdinalIgnoreCase));
+            }
+
             IEnumerable<KeyValuePair<string, StringValues>> singleValuePairs =
                 nameCollection.Where(pairGroup => pairGroup.Value.Count == 1).Except(nested);
 
@@ -72,14 +79,18 @@ namespace Arbor.ModelBinding.Core
                 .DeclaredProperties
                 .Where(
                     property => !(typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(
-                                    property.PropertyType.GetTypeInfo())
-                                || property.PropertyType == typeof(string))
+                                      property.PropertyType.GetTypeInfo())
+                                  || property.PropertyType == typeof(string))
                                 && !property.PropertyType.IsPrimitive
-                                && !property.PropertyType.GetTypeInfo().IsGenericType))
+                                && !property.PropertyType.GetTypeInfo().IsGenericType
+                                && !ContainsKey(property.Name)))
             {
                 var subProperties = nameCollection
                     .Where(pair => pair.Key.IndexOf(".", StringComparison.Ordinal) >= 0)
-                    .Select(pair => new KeyValuePair<string, StringValues>(pair.Key.Substring(pair.Key.IndexOf(".", StringComparison.Ordinal)).TrimStart('.'), pair.Value))
+                    .Select(
+                        pair => new KeyValuePair<string, StringValues>(
+                            pair.Key.Substring(pair.Key.IndexOf(".", StringComparison.Ordinal)).TrimStart('.'),
+                            pair.Value))
                     .ToArray();
 
                 var subInstance = ParseFromPairs(subProperties, propertyInfo.PropertyType);
@@ -101,26 +112,25 @@ namespace Arbor.ModelBinding.Core
 
                 var matchingProperty = nested.Select(
                         nestedGroup =>
-                            {
-                                int indexIndex = nestedGroup.Key.IndexOf("[", StringComparison.Ordinal);
-                                int indexStopIndex = nestedGroup.Key.IndexOf("]", StringComparison.Ordinal);
-                                int indexLength = indexStopIndex - indexIndex;
+                        {
+                            int indexIndex = nestedGroup.Key.IndexOf("[", StringComparison.Ordinal);
+                            int indexStopIndex = nestedGroup.Key.IndexOf("]", StringComparison.Ordinal);
+                            int indexLength = indexStopIndex - indexIndex;
 
-                                int dotIndex = nestedGroup.Key.IndexOf(".", StringComparison.Ordinal);
+                            int dotIndex = nestedGroup.Key.IndexOf(".", StringComparison.Ordinal);
 
-                                string name = nestedGroup.Key.Substring(0, indexIndex);
+                            string name = nestedGroup.Key.Substring(0, indexIndex);
 
-                                string index = nestedGroup.Key.Substring(indexIndex + 1, indexLength - 1);
+                            string index = nestedGroup.Key.Substring(indexIndex + 1, indexLength - 1);
 
-                                string propertyName = nestedGroup.Key.Substring(dotIndex + 1);
+                            string propertyName = nestedGroup.Key.Substring(dotIndex + 1);
 
-                                return new { GroupName = name, nestedGroup.Value, Index = index, propertyName };
-                            })
+                            return new { GroupName = name, nestedGroup.Value, Index = index, propertyName };
+                        })
                     .Where(s => s.GroupName.Equals(expectedName, StringComparison.OrdinalIgnoreCase))
                     .ToArray();
 
                 var indexedGroups = matchingProperty.GroupBy(_ => _.Index);
-
 
                 object newCollection = null;
 
@@ -161,7 +171,11 @@ namespace Arbor.ModelBinding.Core
                 }
             }
 
-            JsonConverter[] converters = { new BooleanJsonConverter() };
+            JsonConverter[] converters =
+            {
+                new BooleanJsonConverter(),
+                new StringValuesJsonConverter()
+            };
 
             string json = JsonConvert.SerializeObject(dynamicObject);
 
@@ -179,7 +193,7 @@ namespace Arbor.ModelBinding.Core
             return instance;
         }
 
-        static void AddInstanceToCollection(Type subTargetType, object newCollection, object subTargetInstance)
+        private static void AddInstanceToCollection(Type subTargetType, object newCollection, object subTargetInstance)
         {
             Type genericCollectionType = typeof(ICollection<>);
 
