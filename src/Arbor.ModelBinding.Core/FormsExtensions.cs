@@ -59,7 +59,7 @@ namespace Arbor.ModelBinding.Core
             IEnumerable<KeyValuePair<string, StringValues>> singleValuePairs =
                 nameCollection.Where(pairGroup => pairGroup.Value.Count == 1).Except(nested);
 
-            foreach (KeyValuePair<string, StringValues> keyValuePair in singleValuePairs)
+            foreach (KeyValuePair<string, StringValues> keyValuePair in singleValuePairs.Where(pair => !pair.Key.Contains(".")))
             {
                 dynamicObjectDictionary[keyValuePair.Key] = keyValuePair.Value.Single();
             }
@@ -86,16 +86,19 @@ namespace Arbor.ModelBinding.Core
                                 && !ContainsKey(property.Name)))
             {
                 var subProperties = nameCollection
-                    .Where(pair => pair.Key.IndexOf(".", StringComparison.Ordinal) >= 0)
+                    .Where(pair => pair.Key.IndexOf(".", StringComparison.Ordinal) >= 0 && pair.Key.StartsWith(propertyInfo.Name + ".", StringComparison.OrdinalIgnoreCase))
                     .Select(
                         pair => new KeyValuePair<string, StringValues>(
                             pair.Key.Substring(pair.Key.IndexOf(".", StringComparison.Ordinal)).TrimStart('.'),
                             pair.Value))
                     .ToArray();
 
-                var subInstance = ParseFromPairs(subProperties, propertyInfo.PropertyType);
+                if (subProperties.Length > 0)
+                {
+                    var subInstance = ParseFromPairs(subProperties, propertyInfo.PropertyType);
 
-                dynamicObjectDictionary[propertyInfo.Name] = subInstance;
+                    dynamicObjectDictionary[propertyInfo.Name] = subInstance;
+                }
             }
 
             foreach (PropertyInfo propertyInfo in targetType
