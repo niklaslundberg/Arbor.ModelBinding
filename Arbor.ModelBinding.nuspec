@@ -23,23 +23,23 @@
     <dependencies>
       <group targetFramework="netstandard2.0">
         <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
-        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,4.0.0)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,6.0.0)" />
       </group>
       <group targetFramework="net461">
         <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
-        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,4.0.0)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,6.0.0)" />
       </group>
       <group targetFramework="net471">
         <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
-        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,4.0.0)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,6.0.0)" />
       </group>
       <group targetFramework="net472">
         <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
-        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,4.0.0)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,6.0.0)" />
       </group>
       <group targetFramework="netcoreapp3.0">
         <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
-        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,4.0.0)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,6.0.0)" />
       </group>
     </dependencies>
     <references></references>
@@ -51,6 +51,7 @@
     <file src="Arbor.ModelBinding.Core\bin\$configuration$\net471\Arbor.ModelBinding.Core.dll" target="lib\net471" exclude="*.vshost*;**\*.vshost*;*.trx" />
     <file src="Arbor.ModelBinding.Core\bin\$configuration$\net472\Arbor.ModelBinding.Core.dll" target="lib\net471" exclude="*.vshost*;**\*.vshost*;*.trx" />
     <file src="Arbor.ModelBinding.Core\bin\$configuration$\netcoreapp2.1\Arbor.ModelBinding.Core.dll" target="lib\netcoreapp2.1" exclude="*.vshost*;**\*.vshost*;*.trx" />
-    <file src="Arbor.ModelBinding.Core\bin\$configuration$\netcoreapp3.0\Arbor.ModelBinding.Core.dll" target="lib\netcoreapp3.0" exclude="*.vshost*;**\*.vshost*;*.trx" />
+    <file src="Arbor.ModelBinding.Core\bin\$configuration$\netcoreapp3.1\Arbor.ModelBinding.Core.dll" target="lib\netcoreapp3.0" exclude="*.vshost*;**\*.vshost*;*.trx" />
+    <file src="Arbor.ModelBinding.Core\bin\$configuration$\net5.0\Arbor.ModelBinding.Core.dll" target="lib\net5.0" exclude="*.vshost*;**\*.vshost*;*.trx" />
   </files>
 </package>
