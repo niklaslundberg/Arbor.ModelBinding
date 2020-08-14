@@ -225,6 +225,49 @@
         "contentHash": "6oEx3elihyJmDIcofF5g5AB2hSk0P+lc9WIyDEEVxi6BlBk1xkoOik/r16YlLT/rq/a7rUdyXzbRtabH9N+Dxg=="
       }
     },
+    ".NETFramework,Version=v4.8": {
+      "Microsoft.Extensions.Primitives": {
+        "type": "Direct",
+        "requested": "[5.0.0-preview.7.20364.11, )",
+        "resolved": "5.0.0-preview.7.20364.11",
+        "contentHash": "ddBYIH2AlflSH7wMT8XKpWpfA08lAn+fU/pVCvY3kt5TRRMXpBgzUDZ39S8MRNXFlqBsJDuapkxKjsv193we6g==",
+        "dependencies": {
+          "System.Memory": "4.5.3",
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0-preview.7.20364.11"
+        }
+      },
+      "Newtonsoft.Json": {
+        "type": "Direct",
+        "requested": "[12.0.3, )",
+        "resolved": "12.0.3",
+        "contentHash": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg=="
+      },
+      "System.Buffers": {
+        "type": "Transitive",
+        "resolved": "4.4.0",
+        "contentHash": "AwarXzzoDwX6BgrhjoJsk6tUezZEozOT5Y9QKF94Gl4JK91I4PIIBkBco9068Y9/Dra8Dkbie99kXB8+1BaYKw=="
+      },
+      "System.Memory": {
+        "type": "Transitive",
+        "resolved": "4.5.3",
+        "contentHash": "3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
+        "dependencies": {
+          "System.Buffers": "4.4.0",
+          "System.Numerics.Vectors": "4.4.0",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
+        }
+      },
+      "System.Numerics.Vectors": {
+        "type": "Transitive",
+        "resolved": "4.4.0",
+        "contentHash": "UiLzLW+Lw6HLed1Hcg+8jSRttrbuXv7DANVj0DkL9g6EnnzbL75EB7EWsw5uRbhxd/4YdG8li5XizGWepmG3PQ=="
+      },
+      "System.Runtime.CompilerServices.Unsafe": {
+        "type": "Transitive",
+        "resolved": "5.0.0-preview.7.20364.11",
+        "contentHash": "6oEx3elihyJmDIcofF5g5AB2hSk0P+lc9WIyDEEVxi6BlBk1xkoOik/r16YlLT/rq/a7rUdyXzbRtabH9N+Dxg=="
+      }
+    },
     ".NETStandard,Version=v2.0": {
       "Microsoft.Extensions.Primitives": {
         "type": "Direct",
