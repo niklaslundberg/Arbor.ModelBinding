@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml;
 
 using Newtonsoft.Json;
 
@@ -47,7 +48,7 @@ namespace Arbor.ModelBinding.Core
         /// <returns>
         /// <c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
         /// </returns>
-        public override bool CanConvert(Type objectType) => objectType == typeof(bool);
+        public override bool CanConvert(Type objectType) => objectType == typeof(bool) || objectType == typeof(bool?);
 
         /// <summary>
         /// Reads the JSON representation of the object.
@@ -67,11 +68,36 @@ namespace Arbor.ModelBinding.Core
         {
             object readerValue = reader.Value;
 
+            if (reader.Value is bool value)
+            {
+                return value;
+            }
+
             if (readerValue is string stringValue)
             {
+                if (string.IsNullOrWhiteSpace(stringValue))
+                {
+                    if (objectType == typeof(bool?))
+                    {
+                        return null;
+                    }
+
+                    return false;
+                }
+
                 if (_dictionary.TryGetValue(stringValue, out bool result))
                 {
                     return result;
+                }
+
+                throw new FormatException($"Cannot parse {objectType.FullName} from value '{stringValue}'");
+            }
+
+            if (objectType == typeof(bool?))
+            {
+                if (reader.Value is null && readerValue is null)
+                {
+                    return null;
                 }
             }
 
