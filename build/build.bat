@@ -15,6 +15,7 @@ SET Arbor.Build.BuildNumber.UnixEpochSecondsEnabled=true
 SET Arbor.Build.Tools.External.MSBuild.DotNet.Enabled=true
 SET Arbor.Build.Vcs.Branch.BranchModel=GitFlowBuildOnMain
 SET Fallback.Version.Build=0
+SET CI_BUILD=true
 
 IF "%Arbor.Build.Bootstrapper.AllowPrerelease%" == "" (
 	SET Arbor.Build.Bootstrapper.AllowPrerelease=true
