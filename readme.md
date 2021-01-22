@@ -4,7 +4,7 @@ Makes it possible to bind key-value pairs to complex objects, supporting immutab
 
 ## Examples
 
-Se https://github.com/niklaslundberg/Arbor.ModelBinding/tree/master/src/Arbor.ModelBinding.Tests.Unit for some examples
+Se https://github.com/niklaslundberg/Arbor.ModelBinding/tree/main/test/Arbor.ModelBinding.Tests.Unit for some examples
 
 ## NuGet package
 
