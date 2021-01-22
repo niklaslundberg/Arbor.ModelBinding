@@ -1,22 +1,28 @@
 @ECHO OFF
-SET Arbor.X.Build.Bootstrapper.AllowPrerelease=true
-SET Arbor.X.Tools.External.MSpec.Enabled=true
-SET Arbor.X.MSBuild.NuGetRestore.Enabled=true
-SET Arbor.X.NuGet.Package.Artifacts.CreateOnAnyBranchEnabled=false
-SET Arbor.X.NuGet.Package.CreateNuGetWebPackages.Enabled=true
+SET Arbor.Build.Bootstrapper.AllowPrerelease=true
+SET Arbor.Build.Build.Bootstrapper.AllowPrerelease=true
+SET Arbor.Build.NuGet.Package.Artifacts.Suffix=
+SET Arbor.Build.NuGet.Package.Artifacts.BuildNumber.Enabled=
+SET Arbor.Build.NuGetPackageVersion=
+SET Arbor.Build.Vcs.Branch.Name.Version.OverrideEnabled=true
+SET Arbor.Build.Vcs.Branch.Name=%GITHUB_REF%
+SET Arbor.Build.VariableOverrideEnabled=true
+SET Arbor.Build.Artifacts.CleanupBeforeBuildEnabled=true
+SET Arbor.Build.NetAssembly.Configuration=
+SET Arbor.Build.MSBuild.NuGetRestore.Enabled=true
+SET Arbor.Build.Tools.External.Xunit.NetCoreApp.Enabled=false
+SET Arbor.Build.BuildNumber.UnixEpochSecondsEnabled=true
+
+SET Fallback.Version.Build=0
+
+IF "%Arbor.Build.Bootstrapper.AllowPrerelease%" == "" (
+	SET Arbor.Build.Bootstrapper.AllowPrerelease=true
+)
+
+SET Arbor.Build.NuGet.ReinstallArborPackageEnabled=true
+SET Arbor.Build.NuGet.VersionUpdateEnabled=false
+SET Arbor.Build.Artifacts.PdbArtifacts.Enabled=true
+SET Arbor.Build.NuGet.Package.CreateNuGetWebPackages.Enabled=true
 CALL dotnet arbor-build
-
-REM Restore variables to default
-
-SET Arbor.X.Build.Bootstrapper.AllowPrerelease=
-SET Arbor.X.Tools.External.MSpec.Enabled=
-SET Arbor.X.NuGet.Package.Artifacts.Suffix=
-SET Arbor.X.NuGet.Package.Artifacts.BuildNumber.Enabled=
-SET Arbor.X.Log.Level=
-SET Arbor.X.NuGetPackageVersion=
-SET Arbor.X.Vcs.Branch.Name.Version.OverrideEnabled=
-SET Arbor.X.VariableOverrideEnabled=
-SET Arbor.X.Artifacts.CleanupBeforeBuildEnabled=
-SET Arbor.X.Build.NetAssembly.Configuration=
 
 EXIT /B %ERRORLEVEL%

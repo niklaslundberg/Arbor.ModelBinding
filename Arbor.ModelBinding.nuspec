@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Arbor.ModelBinding</id>
+    <version>0.1.0</version>
+    <title>Arbor.ModelBinding</title>
+    <authors>Niklas Lundberg</authors>
+    <owners></owners>
+    <description>
+      This packages makes it possible to extract values from request primitives into .NET poco objects also with immutable classes.
+    </description>
+    <releaseNotes>
+    </releaseNotes>
+    <summary>
+
+    </summary>
+    <language>en-US</language>
+    <projectUrl>http://github.com/niklaslundberg</projectUrl>
+    <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <copyright>Copyright Niklas Lundberg 2017-2021</copyright>
+    <dependencies>
+      <group targetFramework="netstandard2.0">
+        <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,6.0.0)" />
+      </group>
+      <group targetFramework="net461">
+        <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,6.0.0)" />
+      </group>
+      <group targetFramework="net471">
+        <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,6.0.0)" />
+      </group>
+      <group targetFramework="net472">
+        <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,6.0.0)" />
+      </group>
+      <group targetFramework="netcoreapp3.1">
+        <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,6.0.0)" />
+      </group>
+      <group targetFramework="net48">
+        <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,6.0.0)" />
+      </group>
+      <group targetFramework="net50">
+        <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
+        <dependency id="Microsoft.Extensions.Primitives" version="[5.0.0,6.0.0)" />
+      </group>
+    </dependencies>
+    <references></references>
+    <tags></tags>
+  </metadata>
+  <files>
+    <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\netstandard2.0\Arbor.ModelBinding.Core.dll" target="lib\netstandard2.0" exclude="*.vshost*;**\*.vshost*;*.trx" />
+    <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\net461\Arbor.ModelBinding.Core.dll" target="lib\net461" exclude="*.vshost*;**\*.vshost*;*.trx" />
+    <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\net471\Arbor.ModelBinding.Core.dll" target="lib\net471" exclude="*.vshost*;**\*.vshost*;*.trx" />
+    <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\net472\Arbor.ModelBinding.Core.dll" target="lib\net471" exclude="*.vshost*;**\*.vshost*;*.trx" />
+    <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\net48\Arbor.ModelBinding.Core.dll" target="lib\net48" exclude="*.vshost*;**\*.vshost*;*.trx" />
+    <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\netcoreapp2.1\Arbor.ModelBinding.Core.dll" target="lib\netcoreapp2.1" exclude="*.vshost*;**\*.vshost*;*.trx" />
+    <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\netcoreapp3.1\Arbor.ModelBinding.Core.dll" target="lib\netcoreapp3.1" exclude="*.vshost*;**\*.vshost*;*.trx" />
+    <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\net5.0\Arbor.ModelBinding.Core.dll" target="lib\net5.0" exclude="*.vshost*;**\*.vshost*;*.trx" />
+  </files>
+</package>
