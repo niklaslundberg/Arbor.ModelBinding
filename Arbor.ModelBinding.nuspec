@@ -59,7 +59,6 @@
     <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\net471\Arbor.ModelBinding.Core.dll" target="lib\net471" exclude="*.vshost*;**\*.vshost*;*.trx" />
     <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\net472\Arbor.ModelBinding.Core.dll" target="lib\net471" exclude="*.vshost*;**\*.vshost*;*.trx" />
     <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\net48\Arbor.ModelBinding.Core.dll" target="lib\net48" exclude="*.vshost*;**\*.vshost*;*.trx" />
-    <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\netcoreapp2.1\Arbor.ModelBinding.Core.dll" target="lib\netcoreapp2.1" exclude="*.vshost*;**\*.vshost*;*.trx" />
     <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\netcoreapp3.1\Arbor.ModelBinding.Core.dll" target="lib\netcoreapp3.1" exclude="*.vshost*;**\*.vshost*;*.trx" />
     <file src="src\Arbor.ModelBinding.Core\bin\$configuration$\net5.0\Arbor.ModelBinding.Core.dll" target="lib\net5.0" exclude="*.vshost*;**\*.vshost*;*.trx" />
   </files>
