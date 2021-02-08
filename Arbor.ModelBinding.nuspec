@@ -45,7 +45,7 @@
         <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
         <dependency id="Microsoft.Extensions.Primitives" version="[3.0.0,6.0.0)" />
       </group>
-      <group targetFramework="net50">
+      <group targetFramework="net5.0">
         <dependency id="Newtonsoft.Json" version="[12.0.1,)" />
         <dependency id="Microsoft.Extensions.Primitives" version="[5.0.0,6.0.0)" />
       </group>
