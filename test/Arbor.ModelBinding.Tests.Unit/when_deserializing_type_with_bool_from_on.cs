@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Arbor.ModelBinding.Core;
 using Arbor.ModelBinding.Tests.Unit.SampleTypes;
 using Machine.Specifications;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
+using Arbor.ModelBinding.NewtonsoftJson;
 
 namespace Arbor.ModelBinding.Tests.Unit
 {

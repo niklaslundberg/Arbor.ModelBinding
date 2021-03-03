@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Arbor.ModelBinding.Core;
 using Machine.Specifications;
 using Microsoft.Extensions.Primitives;
+using Arbor.ModelBinding.NewtonsoftJson;
 
 namespace Arbor.ModelBinding.Tests.Unit
 {

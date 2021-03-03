@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Arbor.ModelBinding.Core;
 using Arbor.ModelBinding.Tests.Unit.ComplexTypes;
 using Machine.Specifications;
+using Arbor.ModelBinding.NewtonsoftJson;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Arbor.ModelBinding.Core;
+using Arbor.ModelBinding.NewtonsoftJson;
 using Machine.Specifications;
 using Microsoft.Extensions.Primitives;
 

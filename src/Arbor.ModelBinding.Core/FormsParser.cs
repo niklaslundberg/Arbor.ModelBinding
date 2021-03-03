@@ -7,15 +7,15 @@ using System.Reflection;
 
 using Microsoft.Extensions.Primitives;
 
-using Newtonsoft.Json;
-
 namespace Arbor.ModelBinding.Core
 {
-    public static class FormsExtensions
+    internal static class FormsParser
     {
-        public static object ParseFromPairs(
+        public static object? ParseFromPairs(
             IEnumerable<KeyValuePair<string, StringValues>> collection,
-            Type targetType)
+            Type targetType,
+            Func<object, string> serializer,
+            Func<string, Type, object> deserializer)
         {
             if (collection == null)
             {
@@ -95,7 +95,7 @@ namespace Arbor.ModelBinding.Core
 
                 if (subProperties.Length > 0)
                 {
-                    var subInstance = ParseFromPairs(subProperties, propertyInfo.PropertyType);
+                    var subInstance = ParseFromPairs(subProperties, propertyInfo.PropertyType, serializer, deserializer);
 
                     dynamicObjectDictionary[propertyInfo.Name] = subInstance;
                 }
@@ -168,25 +168,20 @@ namespace Arbor.ModelBinding.Core
                         }
                     }
 
-                    object subTargetInstance = ParseFromPairs(pairs, subTargetType);
+                    object subTargetInstance = ParseFromPairs(pairs, subTargetType, serializer, deserializer);
 
                     AddInstanceToCollection(subTargetType, newCollection, subTargetInstance);
                 }
             }
 
-            JsonConverter[] converters =
-            {
-                new BooleanJsonConverter(),
-                new StringValuesJsonConverter()
-            };
 
-            string json = JsonConvert.SerializeObject(dynamicObject);
+            string json = serializer.Invoke(dynamicObject);
 
             object instance;
 
             try
             {
-                instance = JsonConvert.DeserializeObject(json, targetType, converters);
+                instance = deserializer(json, targetType);
             }
             catch (Exception ex)
             {

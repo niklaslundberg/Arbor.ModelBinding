@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Arbor.ModelBinding.Core;
 using Arbor.ModelBinding.Tests.Unit.ComplexTypes;
+using Arbor.ModelBinding.NewtonsoftJson;
 using Machine.Specifications;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
