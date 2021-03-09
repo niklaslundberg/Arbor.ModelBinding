@@ -7,13 +7,34 @@ using System.Collections.Immutable;
 using System;
 namespace Test
 {
-    public static class GeneratedTest
+    public static partial class GeneratedTest
     {
     public static void DoIt(){}
 {{~ for mapping in mappings ~}}
- // {mapping.key}
+ // {{mapping.key}}
 {{~ end ~}}
          // throw new InvalidOperationException("Missing mapping");
 
     }
 }
+
+{{~ for mapping in mappings ~}}
+namespace {{mapping.namespace}}
+{
+    [System.ComponentModel.TypeConverter(typeof({{mapping.key}}Converter))]
+    public partial class {{mapping.key}}
+    {
+    }
+}
+    {{~ end ~}}
+
+
+{{~ for mapping in mappings ~}}
+namespace {{mapping.namespace}}
+{
+    public class {{mapping.key}}Converter : System.ComponentModel.TypeConverter
+    {
+    }
+}
+
+{{~ end ~}}

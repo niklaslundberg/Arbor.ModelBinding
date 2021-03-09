@@ -1036,7 +1036,7 @@
       "System.Xml.XPath": {
         "type": "Transitive",
         "resolved": "4.0.1",
-        "contentHash": "myxrdUZynsP73T3rIUozs1oMI+k3kMRC6kLwXtXiNa6mkHZ1BO7/VbECvZQXT6v/Yt6hi2rCYU2X/BPBvQxKiA==",
+        "contentHash": "UWd1H+1IJ9Wlq5nognZ/XJdyj8qPE4XufBUkAW59ijsCPjZkZe0MUzKKJFBr+ZWBe5Wq1u1d5f2CYgE93uH7DA==",
         "dependencies": {
           "System.Collections": "4.0.11",
           "System.Diagnostics.Debug": "4.0.11",
