@@ -1,0 +1,19 @@
+﻿/// <summary>
+///
+/// </summary>
+
+using System.Threading.Tasks;
+using System.Collections.Immutable;
+using System;
+namespace Test
+{
+    public static class GeneratedTest
+    {
+    public static void DoIt(){}
+{{~ for mapping in mappings ~}}
+ // {mapping.key}
+{{~ end ~}}
+         // throw new InvalidOperationException("Missing mapping");
+
+    }
+}

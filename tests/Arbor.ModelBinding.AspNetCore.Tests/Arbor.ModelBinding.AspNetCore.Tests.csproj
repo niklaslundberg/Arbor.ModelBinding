@@ -11,4 +11,14 @@
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Arbor.ModelBinding.Generators\Arbor.ModelBinding.Generators.csproj" OutputItemType="Analyzer" GeneratePathProperty="true" ReferenceOutputAssembly="false" />
+    <AdditionalFiles Include="*.sbntxt" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>-->
+  </PropertyGroup>
+
 </Project>

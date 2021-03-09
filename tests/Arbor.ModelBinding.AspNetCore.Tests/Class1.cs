@@ -109,6 +109,14 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
         }
     }
 
+    public class TestParser
+    {
+        public static void Consume()
+        {
+            Test.GeneratedTest.DoIt();
+        }
+    }
+
 
     public class Class1
 

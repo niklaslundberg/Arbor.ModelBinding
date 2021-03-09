@@ -28,7 +28,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{B7C2E2D3-D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.NewtonsoftJson", "src\Arbor.ModelBinding.NewtonsoftJson\Arbor.ModelBinding.NewtonsoftJson.csproj", "{3FA1A24E-977A-430A-A57B-5B5E71145A84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbor.ModelBinding.AspNetCore.Tests", "tests\Arbor.ModelBinding.AspNetCore.Tests\Arbor.ModelBinding.AspNetCore.Tests.csproj", "{DFBD28C6-9901-4F9C-A25C-B4F034612D6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.AspNetCore.Tests", "tests\Arbor.ModelBinding.AspNetCore.Tests\Arbor.ModelBinding.AspNetCore.Tests.csproj", "{DFBD28C6-9901-4F9C-A25C-B4F034612D6B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.Generators", "src\Arbor.ModelBinding.Generators\Arbor.ModelBinding.Generators.csproj", "{B6CAD951-9878-40B7-AD75-BAC2C442C08F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +90,18 @@ Global
 		{DFBD28C6-9901-4F9C-A25C-B4F034612D6B}.Release|x64.Build.0 = Release|Any CPU
 		{DFBD28C6-9901-4F9C-A25C-B4F034612D6B}.Release|x86.ActiveCfg = Release|Any CPU
 		{DFBD28C6-9901-4F9C-A25C-B4F034612D6B}.Release|x86.Build.0 = Release|Any CPU
+		{B6CAD951-9878-40B7-AD75-BAC2C442C08F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6CAD951-9878-40B7-AD75-BAC2C442C08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6CAD951-9878-40B7-AD75-BAC2C442C08F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B6CAD951-9878-40B7-AD75-BAC2C442C08F}.Debug|x64.Build.0 = Debug|Any CPU
+		{B6CAD951-9878-40B7-AD75-BAC2C442C08F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B6CAD951-9878-40B7-AD75-BAC2C442C08F}.Debug|x86.Build.0 = Debug|Any CPU
+		{B6CAD951-9878-40B7-AD75-BAC2C442C08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6CAD951-9878-40B7-AD75-BAC2C442C08F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6CAD951-9878-40B7-AD75-BAC2C442C08F}.Release|x64.ActiveCfg = Release|Any CPU
+		{B6CAD951-9878-40B7-AD75-BAC2C442C08F}.Release|x64.Build.0 = Release|Any CPU
+		{B6CAD951-9878-40B7-AD75-BAC2C442C08F}.Release|x86.ActiveCfg = Release|Any CPU
+		{B6CAD951-9878-40B7-AD75-BAC2C442C08F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
