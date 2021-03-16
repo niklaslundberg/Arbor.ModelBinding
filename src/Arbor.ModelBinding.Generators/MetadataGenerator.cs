@@ -52,11 +52,11 @@ namespace Arbor.ModelBinding.Generators
                             Key = n.Syntax.Identifier.ValueText,
                             n.Namespace,
                             Value = "TestValue",
-                            IsAsyncHandle = true
+                            n.DataType,
+                            IsAsyncHandle = true,
+                            n.NetType
                         }).ToArray()
                 };
-
-                //var template = context.AdditionalFiles.SingleOrDefault(file => file.Path.Contains("Handlers.sbntxt"));
 
                 using var manifestResourceStream = typeof(MetadataGenerator).Assembly.GetManifestResourceStream("Arbor.ModelBinding.Generators.Handlers.sbntxt");
 

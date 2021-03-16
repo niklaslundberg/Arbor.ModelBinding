@@ -1,10 +1,13 @@
 ﻿/// <summary>
 ///
 /// </summary>
-
+#nullable enable
 using System.Threading.Tasks;
 using System.Collections.Immutable;
 using System;
+using System.ComponentModel;
+using System.Globalization;
+using System.ComponentModel.DataAnnotations;
 namespace Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers
 {
     public static partial class GeneratedClass
@@ -22,9 +25,16 @@ namespace Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers
 namespace {{mapping.namespace}}
 {
     [System.ComponentModel.TypeConverter(typeof({{mapping.key}}Converter))]
-    public partial class {{mapping.key}}
+    public partial class {{mapping.key}} : Arbor.ModelBinding.AspNetCore.Tests.ValueObjectBase<{{mapping.net_type}}>
     {
+        public {{mapping.key}}({{mapping.net_type}} value) : base(value)
+        {
+
+        // DataType {{mapping.data_type}}
+		// NetType {{mapping.net_type}}
+        }
     }
+
 }
     {{~ end ~}}
 
@@ -34,6 +44,15 @@ namespace {{mapping.namespace}}
 {
     public class {{mapping.key}}Converter : System.ComponentModel.TypeConverter
     {
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) => sourceType == typeof(string);
+
+
+        public override object? ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) =>
+            value switch
+            {
+                {{mapping.net_type}} theValue => new {{mapping.namespace}}.{{mapping.key}}(theValue),
+                _ => base.ConvertFrom(context, culture, value)
+            };
     }
 }
 

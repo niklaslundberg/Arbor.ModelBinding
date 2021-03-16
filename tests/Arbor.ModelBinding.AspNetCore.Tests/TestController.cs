@@ -28,5 +28,17 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
 
             return Ok(id.Value);
         }
+
+        [HttpGet]
+        [Route("/typeconvertergenerated/{id}")]
+        public IActionResult Get2([FromRoute] Partial1Parser? id)
+        {
+            if (id is null)
+            {
+                return StatusCode(500);
+            }
+
+            return Ok(id.Value);
+        }
     }
 }

@@ -15,9 +15,7 @@ namespace Arbor.ModelBinding.Generators
             if (syntaxNode is ClassDeclarationSyntax cds &&
                 cds.Identifier.ValueText.EndsWith("Parser", StringComparison.Ordinal))
             {
-                SyntaxNode current = cds;
-                CommandsToGenerateFor.Add(new ClassData(cds, cds.Namespace()));
-
+                CommandsToGenerateFor.Add(new ClassData(cds, cds.Namespace(), cds.DataType()));
             }
         }
     }

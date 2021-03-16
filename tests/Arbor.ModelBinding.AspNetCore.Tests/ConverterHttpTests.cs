@@ -66,6 +66,21 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
 
             httpResponseMessage.IsSuccessStatusCode.Should().BeTrue();
         }
+
+        [Fact]
+        public async Task Get3()
+        {
+            // Arrange
+            var client = _testServer.CreateClient();
+
+            var httpResponseMessage = await client.GetAsync("/typeconvertergenerated/abc");
+
+            string content = await httpResponseMessage.Content.ReadAsStringAsync();
+
+            _testOutputHelper.WriteLine(content);
+
+            httpResponseMessage.IsSuccessStatusCode.Should().BeTrue();
+        }
     }
 
     //Generate

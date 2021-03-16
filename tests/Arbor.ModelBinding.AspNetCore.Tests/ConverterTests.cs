@@ -1,18 +1,8 @@
-﻿using Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Xunit;
 
 namespace Arbor.ModelBinding.AspNetCore.Tests
 {
-    public class CodGenParserTests
-    {
-        [Fact]
-        public void Do()
-        {
-            Partial1Parser.Consume();
-        }
-    }
-
     public class ConverterTests
     {
 
