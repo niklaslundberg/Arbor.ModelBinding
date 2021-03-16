@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace Arbor.ModelBinding.AspNetCore.Tests
 {
-    public class MyConverter : System.Text.Json.Serialization.JsonConverter<MyValueObject>
+    public class MyValueObjectJsonConverter : System.Text.Json.Serialization.JsonConverter<MyValueObject>
     {
         public override MyValueObject? Read(
             ref Utf8JsonReader reader,

@@ -1,22 +1,20 @@
 ﻿using System.Threading.Tasks;
-using Arbor.ModelBinding.AspNetCore.Tests;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Xunit.Abstractions;
-using WebHostBuilderExtensions = Microsoft.AspNetCore.TestHost.WebHostBuilderExtensions;
 
 namespace Arbor.ModelBinding.AspNetCore.Tests
 {
-    public class Class1
+    public class ConverterHttpTests
 
     {
         private readonly ITestOutputHelper _testOutputHelper;
-        private TestServer _testServer;
+        private readonly TestServer _testServer;
 
-        public Class1(ITestOutputHelper testOutputHelper)
+        public ConverterHttpTests(ITestOutputHelper testOutputHelper)
         {
             _testOutputHelper = testOutputHelper;
 
@@ -25,10 +23,9 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
                     c =>
                     {
                         c.ModelBinderProviders.Insert(0, new CustomModelBindingProvider());
-
                     }).AddJsonOptions(options =>
                 {
-                    foreach (var jsonConverter in CustomJsonConverters.Converters)
+                    foreach (var jsonConverter in CustomManualJsonConverters.Converters)
                     {
                         options.JsonSerializerOptions.Converters.Add(jsonConverter);
                     }
@@ -37,38 +34,6 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
             _testServer = new TestServer(builder);
         }
 
-        [Fact]
-        public void Do()
-        {
-            var myValueObject = new MyValueObject("Abc");
-            var valueObject = new MyValueObject("abc");
-            myValueObject.Equals(valueObject).Should().BeTrue();
-            myValueObject.GetHashCode().Should().Be(valueObject.GetHashCode());
-        }
-        [Fact]
-        public void Do3()
-        {
-            var myValueObject = new MyIntValueObject(1);
-            var valueObject = new MyIntValueObject(1);
-            myValueObject.Equals(valueObject).Should().BeTrue();
-            myValueObject.GetHashCode().Should().Be(valueObject.GetHashCode());
-        }
-        [Fact]
-        public void D4()
-        {
-            var myValueObject = new MyIntValueObject("1");
-            var valueObject = new MyIntValueObject(1);
-            myValueObject.Equals(valueObject).Should().BeTrue();
-            myValueObject.GetHashCode().Should().Be(valueObject.GetHashCode());
-        }
-        [Fact]
-        public void Do1()
-        {
-            var myValueObject = new MyOrdinalValueObject("Abc");
-            var valueObject = new MyOrdinalValueObject("abc");
-            myValueObject.Equals(valueObject).Should().BeFalse();
-            myValueObject.GetHashCode().Should().NotBe(valueObject.GetHashCode());
-        }
 
         [Fact]
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType()

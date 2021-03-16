@@ -4,13 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace Arbor.ModelBinding.AspNetCore.Tests
 {
-    public static class CustomJsonConverters
+    public static class CustomManualJsonConverters
     {
         public static readonly ImmutableArray<JsonConverter> Converters =
-            new List<JsonConverter>()
-            {
-
-                new MyConverter() //Generate
-            }.ToImmutableArray();
+            new List<JsonConverter> {new MyValueObjectJsonConverter()}.ToImmutableArray();
     }
 }

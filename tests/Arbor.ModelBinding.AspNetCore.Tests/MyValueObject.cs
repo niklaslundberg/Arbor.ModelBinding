@@ -2,7 +2,7 @@
 
 namespace Arbor.ModelBinding.AspNetCore.Tests
 {
-    public sealed class MyValueObject : ValueObject<string>
+    public sealed class MyValueObject : ValueObjectBase<string>
     {
         public MyValueObject(string value): base(value, StringComparer.OrdinalIgnoreCase)
         {

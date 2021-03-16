@@ -5,16 +5,16 @@
 using System.Threading.Tasks;
 using System.Collections.Immutable;
 using System;
-namespace Test
+namespace Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers
 {
-    public static partial class GeneratedTest
+    public static partial class GeneratedClass
     {
-    public static void DoIt(){}
+        public static void CodeGeneratedMethod() {
+            throw new System.Exception("This is code generated");
+        }
 {{~ for mapping in mappings ~}}
  // {{mapping.key}}
 {{~ end ~}}
-         // throw new InvalidOperationException("Missing mapping");
-
     }
 }
 

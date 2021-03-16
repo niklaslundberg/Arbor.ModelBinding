@@ -8,14 +8,11 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
     {
         private readonly int _name;
 
-        public CustomModelBinder(int name)
-        {
-            _name = name;
-        }
+        public CustomModelBinder(int name) => _name = name;
 
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
-            Console.WriteLine("Running bind " + _name);
+            Console.WriteLine($"Running bind {_name}");
             if (bindingContext.ModelType == typeof(MyValueObject) && bindingContext.ValueProvider.GetValue(bindingContext.ModelName).FirstValue is { } value)
             {
                 bindingContext.Result = ModelBindingResult.Success(new MyValueObject(value));

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace Arbor.ModelBinding.AspNetCore.Tests
 {
-    public abstract class ValueObject<T> : IEquatable<ValueObject<T>>
+    public abstract class ValueObjectBase<T> : IEquatable<ValueObjectBase<T>>
     {
         private readonly IComparer<T>? _comparer;
 
-        protected ValueObject(T value, IComparer<T>? comparer = null)
+        protected ValueObjectBase(T value, IComparer<T>? comparer = null)
         {
             Value = value;
             _comparer = comparer;
         }
 
-        public bool Equals(ValueObject<T>? other)
+        public bool Equals(ValueObjectBase<T>? other)
         {
             if (other is null)
             {
@@ -33,7 +33,7 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
             return EqualityComparer<T>.Default.Equals(Value, other.Value);
         }
 
-        public override bool Equals(object? obj) => Equals(obj as ValueObject<T>);
+        public override bool Equals(object? obj) => Equals(obj as ValueObjectBase<T>);
 
 
         public override int GetHashCode()
@@ -46,9 +46,9 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
             return EqualityComparer<T>.Default.GetHashCode(Value!);
         }
 
-        public static bool operator ==(ValueObject<T>? left, ValueObject<T>? right) => Equals(left, right);
+        public static bool operator ==(ValueObjectBase<T>? left, ValueObjectBase<T>? right) => Equals(left, right);
 
-        public static bool operator !=(ValueObject<T>? left, ValueObject<T>? right) => !Equals(left, right);
+        public static bool operator !=(ValueObjectBase<T>? left, ValueObjectBase<T>? right) => !Equals(left, right);
 
         public T Value { get; }
     }

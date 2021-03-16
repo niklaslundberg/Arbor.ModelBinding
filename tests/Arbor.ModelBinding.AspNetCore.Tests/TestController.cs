@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Arbor.ModelBinding.AspNetCore.Tests
 {
@@ -18,7 +19,7 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
 
         [HttpGet]
         [Route("/typeconverter/{id}")]
-        public IActionResult Get([FromRoute] Test2Value? id)
+        public IActionResult Get([FromRoute] SimpleValue? id)
         {
             if (id is null)
             {
