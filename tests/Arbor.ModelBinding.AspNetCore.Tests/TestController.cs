@@ -40,5 +40,17 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
 
             return Ok(id.Value);
         }
+
+        [HttpPost]
+        [Route("/typeconvertergenerated/")]
+        public IActionResult Post([FromBody] PostObject? instance)
+        {
+            if (instance is null)
+            {
+                return StatusCode(500);
+            }
+
+            return Ok(instance.Value);
+        }
     }
 }

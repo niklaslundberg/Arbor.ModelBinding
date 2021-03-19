@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http.Json;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -74,6 +77,28 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
             var client = _testServer.CreateClient();
 
             var httpResponseMessage = await client.GetAsync("/typeconvertergenerated/abc");
+
+            string content = await httpResponseMessage.Content.ReadAsStringAsync();
+
+            _testOutputHelper.WriteLine(content);
+
+            httpResponseMessage.IsSuccessStatusCode.Should().BeTrue();
+        }
+
+        [Fact]
+        public async Task Post2()
+        {
+            // Arrange
+            var client = _testServer.CreateClient();
+
+            var jsonSerializerOptions = new JsonSerializerOptions()
+            {
+
+            };
+            jsonSerializerOptions.Converters.Add(new Partial1ParserJsonConverter());
+
+            var httpResponseMessage = await client.PostAsJsonAsync("/typeconvertergenerated/",new PostObject{Value =  new Partial1Parser("abc")},
+                jsonSerializerOptions);
 
             string content = await httpResponseMessage.Content.ReadAsStringAsync();
 

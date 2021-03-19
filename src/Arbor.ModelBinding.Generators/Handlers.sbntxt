@@ -8,6 +8,8 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
+
 namespace Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers
 {
     public static partial class GeneratedClass
@@ -24,8 +26,9 @@ namespace Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers
 {{~ for mapping in mappings ~}}
 namespace {{mapping.namespace}}
 {
+    // {{mapping.key}} 
     [System.ComponentModel.TypeConverter(typeof({{mapping.key}}Converter))]
-    public partial class {{mapping.key}} : Arbor.ModelBinding.AspNetCore.Tests.ValueObjectBase<{{mapping.net_type}}>
+    public sealed partial class {{mapping.key}} : Arbor.ModelBinding.AspNetCore.Tests.ValueObjectBase<{{mapping.net_type}}>
     {
         public {{mapping.key}}({{mapping.net_type}} value) : base(value)
         {
@@ -35,14 +38,31 @@ namespace {{mapping.namespace}}
         }
     }
 
-}
-    {{~ end ~}}
+    {{ if mapping.net_type == 'string'}}
+    public class {{mapping.key}}JsonConverter : System.Text.Json.Serialization.JsonConverter<{{mapping.key}}>
+    {
+        public override {{mapping.key}}? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options) => reader.GetString() is { } value ? new {{mapping.key}}(value) : null;
 
+        public override void Write(Utf8JsonWriter writer, {{mapping.key}} value, JsonSerializerOptions options) => writer.WriteStringValue(value.Value);
+    }
+    {{ else if mapping.net_type == 'int'}}
+    public class {{mapping.key}}JsonConverter : System.Text.Json.Serialization.JsonConverter<{{mapping.key}}>
+    {
+        public override {{mapping.key}}? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options) => reader.TryGetInt32(out var value) ? new {{mapping.key}}(value) : null;
 
-{{~ for mapping in mappings ~}}
-namespace {{mapping.namespace}}
-{
-    public class {{mapping.key}}Converter : System.ComponentModel.TypeConverter
+        public override void Write(Utf8JsonWriter writer, {{mapping.key}} value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+    }
+    {{ else }}
+        // No supported net type {{mapping.net_type}}
+    {{ end }}
+
+    public sealed class {{mapping.key}}Converter : System.ComponentModel.TypeConverter
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) => sourceType == typeof(string);
 
