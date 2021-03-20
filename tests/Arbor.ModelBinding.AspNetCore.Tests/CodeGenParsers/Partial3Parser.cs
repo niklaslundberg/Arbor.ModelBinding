@@ -2,9 +2,5 @@
 {
     public partial class Partial3Parser
     {
-        public static void Consume()
-        {
-            GeneratedClass.CodeGeneratedMethod();
-        }
     }
 }

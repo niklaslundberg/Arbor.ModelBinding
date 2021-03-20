@@ -1,4 +1,6 @@
-﻿namespace Arbor.ModelBinding.AspNetCore.Tests
+﻿using Arbor.ModelBinding.Primitives;
+
+namespace Arbor.ModelBinding.AspNetCore.Tests
 {
     public sealed class MyOrdinalValueObject : ValueObjectBase<string>
     {

@@ -38,7 +38,7 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
                 return StatusCode(500);
             }
 
-            return Ok(id.Value);
+            return Ok(id);
         }
 
         [HttpPost]

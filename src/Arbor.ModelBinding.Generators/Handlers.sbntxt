@@ -10,25 +10,12 @@ using System.Globalization;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 
-namespace Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers
-{
-    public static partial class GeneratedClass
-    {
-        public static void CodeGeneratedMethod() {
-            throw new System.Exception("This is code generated");
-        }
-{{~ for mapping in mappings ~}}
- // {{mapping.key}}
-{{~ end ~}}
-    }
-}
-
 {{~ for mapping in mappings ~}}
 namespace {{mapping.namespace}}
 {
-    // {{mapping.key}} 
+    // {{mapping.key}}
     [System.ComponentModel.TypeConverter(typeof({{mapping.key}}Converter))]
-    public sealed partial class {{mapping.key}} : Arbor.ModelBinding.AspNetCore.Tests.ValueObjectBase<{{mapping.net_type}}>
+    public sealed partial class {{mapping.key}} : Arbor.ModelBinding.Primitives.ValueObjectBase<{{mapping.net_type}}>
     {
         public {{mapping.key}}({{mapping.net_type}} value) : base(value)
         {

@@ -8,9 +8,9 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
         [Fact]
         public void Do()
         {
-            var parser = new Partial1Parser("123");
+            //var parser = new Partial1Parser("123");
 
-            
+
         }
     }
 }

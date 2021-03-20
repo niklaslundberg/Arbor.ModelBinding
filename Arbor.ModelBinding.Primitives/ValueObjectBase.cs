@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Arbor.ModelBinding.AspNetCore.Tests
+namespace Arbor.ModelBinding.Primitives
 {
     public abstract class ValueObjectBase<T> : IEquatable<ValueObjectBase<T>>
     {

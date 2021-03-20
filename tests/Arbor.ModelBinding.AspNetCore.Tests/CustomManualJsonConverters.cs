@@ -11,7 +11,7 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
             new List<JsonConverter>
             {
                 new MyValueObjectJsonConverter(),
-                new Partial1ParserJsonConverter()
+                //new Partial1ParserJsonConverter()
 
             }.ToImmutableArray();
     }

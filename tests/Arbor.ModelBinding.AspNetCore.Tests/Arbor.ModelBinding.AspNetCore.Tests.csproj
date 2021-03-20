@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Arbor.ModelBinding.Generators\Arbor.ModelBinding.Generators.csproj" OutputItemType="Analyzer" GeneratePathProperty="true" ReferenceOutputAssembly="false" />
-    <AdditionalFiles Include="*.sbntxt" />
+    <ProjectReference Include="..\..\Arbor.ModelBinding.Primitives\Arbor.ModelBinding.Primitives.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -1,4 +1,5 @@
 ﻿using System;
+using Arbor.ModelBinding.Primitives;
 
 namespace Arbor.ModelBinding.AspNetCore.Tests
 {

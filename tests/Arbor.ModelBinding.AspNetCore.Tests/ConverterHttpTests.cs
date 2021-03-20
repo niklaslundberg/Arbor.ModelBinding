@@ -95,16 +95,17 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
             {
 
             };
-            jsonSerializerOptions.Converters.Add(new Partial1ParserJsonConverter());
 
-            var httpResponseMessage = await client.PostAsJsonAsync("/typeconvertergenerated/",new PostObject{Value =  new Partial1Parser("abc")},
-                jsonSerializerOptions);
+            //jsonSerializerOptions.Converters.Add(new Partial1ParserJsonConverter());
 
-            string content = await httpResponseMessage.Content.ReadAsStringAsync();
+            //var httpResponseMessage = await client.PostAsJsonAsync("/typeconvertergenerated/",new PostObject{Value =  new Partial1Parser("abc")},
+            //    jsonSerializerOptions);
 
-            _testOutputHelper.WriteLine(content);
+            //string content = await httpResponseMessage.Content.ReadAsStringAsync();
 
-            httpResponseMessage.IsSuccessStatusCode.Should().BeTrue();
+            //_testOutputHelper.WriteLine(content);
+
+            //httpResponseMessage.IsSuccessStatusCode.Should().BeTrue();
         }
     }
 
