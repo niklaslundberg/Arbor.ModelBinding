@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Arbor.ModelBinding.Generators
 {
-    public static class SyntaxExtensions
+    internal static class SyntaxExtensions
     {
         public static string? Namespace(this ClassDeclarationSyntax classDeclarationSyntax)
         {
@@ -25,8 +25,8 @@ namespace Arbor.ModelBinding.Generators
             return @namespace;
         }
 
-        [DataType(System.ComponentModel.DataAnnotations.DataType.Custom)]
-        public static int A { get; }
+        public static bool IsPartial(this ClassDeclarationSyntax classDeclarationSyntax) =>
+            classDeclarationSyntax.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword));
 
         public static string? DataType(
             this ClassDeclarationSyntax classDeclarationSyntax) =>

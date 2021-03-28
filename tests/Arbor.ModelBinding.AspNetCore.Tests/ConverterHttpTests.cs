@@ -29,7 +29,7 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
                         c.ModelBinderProviders.Insert(0, new CustomModelBindingProvider());
                     }).AddJsonOptions(options =>
                 {
-                    foreach (var jsonConverter in CustomManualJsonConverters.Converters)
+                    foreach (var jsonConverter in GeneratedJsonConverters.Converters)
                     {
                         options.JsonSerializerOptions.Converters.Add(jsonConverter);
                     }
@@ -90,19 +90,19 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
 
             var jsonSerializerOptions = new JsonSerializerOptions();
 
-            //jsonSerializerOptions.Converters.Add(new TestIdJsonConverter());
+            jsonSerializerOptions.Converters.Add(new TestIdJsonConverter());
 
-            //var httpResponseMessage = await client.PostAsJsonAsync("/typeconvertergenerated/",
-            //    new PostObject {Value = new TestId("abc")},
-            ////    jsonSerializerOptions);
+            var httpResponseMessage = await client.PostAsJsonAsync("/typeconvertergenerated/",
+                new PostObject { Value = new TestId("abc") },
+                jsonSerializerOptions);
 
-            //string content = await httpResponseMessage.Content.ReadAsStringAsync();
+            string content = await httpResponseMessage.Content.ReadAsStringAsync();
 
-            //_testOutputHelper.WriteLine(content);
+            _testOutputHelper.WriteLine(content);
 
-            //httpResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
+            httpResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
 
-            //httpResponseMessage.IsSuccessStatusCode.Should().BeTrue();
+            httpResponseMessage.IsSuccessStatusCode.Should().BeTrue();
         }
     }
 }

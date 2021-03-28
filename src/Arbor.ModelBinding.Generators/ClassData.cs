@@ -2,7 +2,7 @@
 
 namespace Arbor.ModelBinding.Generators
 {
-    public class ClassData
+    internal class ClassData
     {
         public ClassData(ClassDeclarationSyntax syntax, string? @namespace, string? dataType)
         {

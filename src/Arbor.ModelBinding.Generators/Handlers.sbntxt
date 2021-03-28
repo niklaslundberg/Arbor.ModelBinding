@@ -3,12 +3,27 @@
 /// </summary>
 #nullable enable
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
+
+namespace {{main_namespace}} {
+    public static class GeneratedJsonConverters
+    {
+        public static readonly ImmutableArray<System.Text.Json.Serialization.JsonConverter> Converters =
+            new List<System.Text.Json.Serialization.JsonConverter>
+            {
+{{~ for mapping in mappings ~}}
+                new {{mapping.namespace}}.{{mapping.key}}JsonConverter(),
+{{~ end ~}}
+
+            }.ToImmutableArray();
+    }
+}
 
 {{~ for mapping in mappings ~}}
 namespace {{mapping.namespace}}

@@ -35,7 +35,7 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
         {
             if (id is null)
             {
-                return StatusCode(500);
+                return StatusCode(500, new {Message= $"Could not convert string value to {nameof(TestId)}"});
             }
 
             return Ok(id);

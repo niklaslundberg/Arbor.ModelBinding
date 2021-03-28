@@ -9,7 +9,7 @@ using Scriban;
 namespace Arbor.ModelBinding.Generators
 {
     [Generator]
-    public class MetadataGenerator : ISourceGenerator
+    internal class MetadataGenerator : ISourceGenerator
     {
         private static readonly DiagnosticDescriptor WarningMessage = new("Arbor.ModelBinding.Generators",
             "General message",
@@ -54,7 +54,8 @@ namespace Arbor.ModelBinding.Generators
                             Value = "TestValue",
                             n.DataType,
                             n.NetType
-                        }).ToArray()
+                        }).ToArray(),
+                    MainNamespace = mySyntaxReceiver.CommandsToGenerateFor.FirstOrDefault()?.Namespace
                 };
 
                 using var manifestResourceStream = typeof(MetadataGenerator).Assembly.GetManifestResourceStream("Arbor.ModelBinding.Generators.Handlers.sbntxt");
@@ -81,11 +82,11 @@ namespace Arbor.ModelBinding.Generators
 
                 var template1 = Template.Parse(templateData);
                 context.ReportDiagnostic(Diagnostic.Create(WarningMessage, Location.None,
-                    "Rendering model with " + model.Mappings.Length + " items"));
+                    $"Rendering model with {model.Mappings.Length} items"));
 
                 string? output = template1.Render(model);
                 context.ReportDiagnostic(Diagnostic.Create(WarningMessage, Location.None,
-                    "Rendering done with result " + output?.Length));
+                    $"Rendering done with result {output?.Length}"));
 
                 context.AddSource("Parsers.g.cs", SourceText.From(output, Encoding.UTF8));
             }

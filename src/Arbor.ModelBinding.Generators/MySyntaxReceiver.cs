@@ -14,10 +14,10 @@ namespace Arbor.ModelBinding.Generators
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
         {
             if (syntaxNode is ClassDeclarationSyntax cds
-                && cds.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)))
+                && cds.IsPartial() && cds.DataType() is {} dataType)
 
             {
-                CommandsToGenerateFor.Add(new ClassData(cds, cds.Namespace(), cds.DataType()));
+                CommandsToGenerateFor.Add(new ClassData(cds, cds.Namespace(), dataType));
             }
         }
     }
