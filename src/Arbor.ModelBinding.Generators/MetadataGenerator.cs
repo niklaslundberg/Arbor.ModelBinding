@@ -9,7 +9,7 @@ using Scriban;
 namespace Arbor.ModelBinding.Generators
 {
     [Generator]
-    internal class MetadataGenerator : ISourceGenerator
+    public class MetadataGenerator : ISourceGenerator
     {
         private static readonly DiagnosticDescriptor WarningMessage = new("Arbor.ModelBinding.Generators",
             "General message",

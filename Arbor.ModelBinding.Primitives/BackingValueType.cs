@@ -1,4 +1,4 @@
-﻿namespace Arbor.ModelBinding.Core
+﻿namespace Arbor.ModelBinding.Primitives
 {
     public enum BackingValueType
     {

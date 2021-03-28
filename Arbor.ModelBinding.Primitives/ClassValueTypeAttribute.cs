@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Arbor.ModelBinding.Core
+namespace Arbor.ModelBinding.Primitives
 {
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class ClassValueTypeAttribute : Attribute

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Arbor.ModelBinding.Core
+namespace Arbor.ModelBinding.NewtonsoftJson
 {
     // Taken from https://gist.github.com/randyburden/5924981
 

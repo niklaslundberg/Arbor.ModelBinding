@@ -1,4 +1,4 @@
-﻿using Arbor.ModelBinding.Core;
+﻿using Arbor.ModelBinding.Primitives;
 
 namespace Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers
 {
