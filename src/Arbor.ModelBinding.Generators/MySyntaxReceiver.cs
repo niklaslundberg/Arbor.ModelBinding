@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Arbor.ModelBinding.Generators
 {
     internal class MySyntaxReceiver : ISyntaxReceiver
     {
-        public List<ClassData> CommandsToGenerateFor { get; } = new List<ClassData>();
+        public List<ClassData> CommandsToGenerateFor { get; } = new ();
 
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
         {
-            // Business logic to decide what we're interested in goes here
-            if (syntaxNode is ClassDeclarationSyntax cds &&
-                cds.Identifier.ValueText.EndsWith("Parser", StringComparison.Ordinal))
+            if (syntaxNode is ClassDeclarationSyntax cds
+                && cds.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)))
+
             {
                 CommandsToGenerateFor.Add(new ClassData(cds, cds.Namespace(), cds.DataType()));
             }

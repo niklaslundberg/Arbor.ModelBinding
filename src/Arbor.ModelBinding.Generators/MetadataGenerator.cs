@@ -40,7 +40,7 @@ namespace Arbor.ModelBinding.Generators
                 mySyntaxReceiver.CommandsToGenerateFor.Select(s => s.Syntax.Identifier.ValueText));
 
             context.ReportDiagnostic(Diagnostic.Create(WarningMessage, Location.None,
-                "Received nodes " + all));
+                $"Received nodes {all}"));
 
             try
             {
@@ -53,7 +53,6 @@ namespace Arbor.ModelBinding.Generators
                             n.Namespace,
                             Value = "TestValue",
                             n.DataType,
-                            IsAsyncHandle = true,
                             n.NetType
                         }).ToArray()
                 };

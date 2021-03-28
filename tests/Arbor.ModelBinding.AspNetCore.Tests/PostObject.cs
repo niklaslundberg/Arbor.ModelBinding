@@ -4,6 +4,6 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
 {
     public class PostObject
     {
-        public Partial1Parser Value { get; set; }
+        public TestId Value { get; set; }
     }
 }

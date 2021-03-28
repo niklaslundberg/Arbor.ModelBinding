@@ -31,7 +31,7 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
 
         [HttpGet]
         [Route("/typeconvertergenerated/{id}")]
-        public IActionResult Get2([FromRoute] Partial1Parser? id)
+        public IActionResult GetPartial([FromRoute] TestId? id)
         {
             if (id is null)
             {

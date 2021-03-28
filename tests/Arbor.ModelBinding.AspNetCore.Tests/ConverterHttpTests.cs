@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net;
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers;
@@ -39,9 +40,8 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
 
 
         [Fact]
-        public async Task Get_EndpointsReturnSuccessAndCorrectContentType()
+        public async Task GetShouldReturnOk()
         {
-            // Arrange
             var client = _testServer.CreateClient();
 
             var httpResponseMessage = await client.GetAsync("/123");
@@ -56,9 +56,8 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
         }
 
         [Fact]
-        public async Task Get2()
+        public async Task GetForStringTypeConverter()
         {
-            // Arrange
             var client = _testServer.CreateClient();
 
             var httpResponseMessage = await client.GetAsync("/typeconverter/abc");
@@ -71,9 +70,8 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
         }
 
         [Fact]
-        public async Task Get3()
+        public async Task GetForValueObjectPath()
         {
-            // Arrange
             var client = _testServer.CreateClient();
 
             var httpResponseMessage = await client.GetAsync("/typeconvertergenerated/abc");
@@ -86,31 +84,25 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
         }
 
         [Fact]
-        public async Task Post2()
+        public async Task PostValueObjectTypeConverter()
         {
-            // Arrange
             var client = _testServer.CreateClient();
 
-            var jsonSerializerOptions = new JsonSerializerOptions()
-            {
+            var jsonSerializerOptions = new JsonSerializerOptions();
 
-            };
+            //jsonSerializerOptions.Converters.Add(new TestIdJsonConverter());
 
-            //jsonSerializerOptions.Converters.Add(new Partial1ParserJsonConverter());
-
-            //var httpResponseMessage = await client.PostAsJsonAsync("/typeconvertergenerated/",new PostObject{Value =  new Partial1Parser("abc")},
-            //    jsonSerializerOptions);
+            //var httpResponseMessage = await client.PostAsJsonAsync("/typeconvertergenerated/",
+            //    new PostObject {Value = new TestId("abc")},
+            ////    jsonSerializerOptions);
 
             //string content = await httpResponseMessage.Content.ReadAsStringAsync();
 
             //_testOutputHelper.WriteLine(content);
 
+            //httpResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
+
             //httpResponseMessage.IsSuccessStatusCode.Should().BeTrue();
         }
     }
-
-    //Generate
-
-
-    //Generate
 }

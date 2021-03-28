@@ -1,6 +1,6 @@
 ﻿namespace Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers
 {
-    public partial class Partial4Parser
+    public partial class ASimpleValue
     {
     }
 }
