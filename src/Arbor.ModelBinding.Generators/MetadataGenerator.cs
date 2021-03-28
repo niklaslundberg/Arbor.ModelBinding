@@ -11,14 +11,14 @@ namespace Arbor.ModelBinding.Generators
     [Generator]
     public class MetadataGenerator : ISourceGenerator
     {
-        private static readonly DiagnosticDescriptor WarningMessage = new("Arbor.ModelBinding.Generators",
+        private static readonly DiagnosticDescriptor WarningMessage = new("ARB1000",
             "General message",
             "'{0}'.",
             "Arbor",
             DiagnosticSeverity.Warning,
             true);
 
-        private static readonly DiagnosticDescriptor CustomInformation = new("Arbor.ModelBinding.Generators",
+        private static readonly DiagnosticDescriptor CustomInformation = new("ARB2000",
             "Codegen info",
             "Info from parser '{0}'.",
             "Arbor",
@@ -85,10 +85,16 @@ namespace Arbor.ModelBinding.Generators
                     $"Rendering model with {model.Mappings.Length} items"));
 
                 string? output = template1.Render(model);
-                context.ReportDiagnostic(Diagnostic.Create(WarningMessage, Location.None,
-                    $"Rendering done with result {output?.Length}"));
 
-                context.AddSource("Parsers.g.cs", SourceText.From(output, Encoding.UTF8));
+                if (!string.IsNullOrWhiteSpace(output))
+                {
+                    context.AddSource("Parsers.g.cs", SourceText.From(output, Encoding.UTF8));
+                }
+                else
+                {
+                    context.ReportDiagnostic(Diagnostic.Create(WarningMessage, Location.None,
+                        $"No source content was rendered"));
+                }
             }
             catch (Exception ex)
             {
