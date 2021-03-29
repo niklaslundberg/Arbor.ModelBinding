@@ -15,7 +15,8 @@ namespace Arbor.ModelBinding.Generators
         {
             "string" => "string",
             "int" => "int",
-            "Custom" => "int",
+            "String" => "string",
+            "Int" => "int",
             _ => "string"
         };
 

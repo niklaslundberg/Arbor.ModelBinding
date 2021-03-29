@@ -15,7 +15,7 @@ namespace Arbor.ModelBinding.NewtonsoftJson
 
         public override bool CanConvert(Type objectType) => objectType == typeof(StringValues);
 
-        public override object ReadJson(
+        public override object? ReadJson(
             JsonReader reader,
             Type objectType,
             object? existingValue,
@@ -25,7 +25,7 @@ namespace Arbor.ModelBinding.NewtonsoftJson
             {
                 var array = JArray.Load(reader);
 
-                var strings = array.OfType<JValue>()
+                string?[] strings = array.OfType<JValue>()
                     .Select(value => value.Value as string)
                     .Where(value => value is { })
                     .ToArray()!;
@@ -33,11 +33,11 @@ namespace Arbor.ModelBinding.NewtonsoftJson
                 return strings.Length > 0 ? new StringValues(strings) : StringValues.Empty;
             }
 
-            // If we reach here, we're pretty much going to throw an error so let's let Json.NET throw it's pretty-fied error message.
+            // If we reach here, we're pretty much going to throw an error so let's let Json.NET throw it's pretty-field error message.
             return serializer.Deserialize(reader, objectType);
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer) =>
             throw new NotSupportedException();
     }
 }

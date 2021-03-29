@@ -24,20 +24,17 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
 
             var builder = new WebHostBuilder()
                 .ConfigureServices(services => services.AddControllers(
-                    c =>
+                    options => options.ModelBinderProviders.Insert(0, new CustomModelBindingProvider())).AddJsonOptions(
+                    options =>
                     {
-                        c.ModelBinderProviders.Insert(0, new CustomModelBindingProvider());
-                    }).AddJsonOptions(options =>
-                {
-                    foreach (var jsonConverter in GeneratedJsonConverters.Converters)
-                    {
-                        options.JsonSerializerOptions.Converters.Add(jsonConverter);
-                    }
-                }))
+                        foreach (var jsonConverter in GeneratedJsonConverters.Converters)
+                        {
+                            options.JsonSerializerOptions.Converters.Add(jsonConverter);
+                        }
+                    }))
                 .UseStartup<TestStartup>();
             _testServer = new TestServer(builder);
         }
-
 
         [Fact]
         public async Task GetShouldReturnOk()
@@ -93,7 +90,7 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
             jsonSerializerOptions.Converters.Add(new TestIdJsonConverter());
 
             var httpResponseMessage = await client.PostAsJsonAsync("/typeconvertergenerated/",
-                new PostObject { Value = new TestId("abc") },
+                new PostObject {Value = new TestId("abc")},
                 jsonSerializerOptions);
 
             string content = await httpResponseMessage.Content.ReadAsStringAsync();

@@ -34,13 +34,11 @@ namespace {{mapping.namespace}}
     {
         public {{mapping.key}}({{mapping.net_type}} value) : base(value)
         {
-
-        // DataType {{mapping.data_type}}
-		// NetType {{mapping.net_type}}
+            // DataType {{mapping.data_type}}
         }
     }
 
-    {{ if mapping.net_type == 'string'}}
+    {{~ if mapping.net_type == 'string'~}}
     public class {{mapping.key}}JsonConverter : System.Text.Json.Serialization.JsonConverter<{{mapping.key}}>
     {
         public override {{mapping.key}}? Read(
@@ -50,7 +48,7 @@ namespace {{mapping.namespace}}
 
         public override void Write(Utf8JsonWriter writer, {{mapping.key}} value, JsonSerializerOptions options) => writer.WriteStringValue(value.Value);
     }
-    {{ else if mapping.net_type == 'int'}}
+    {{~ else if mapping.net_type == 'int'~}}
     public class {{mapping.key}}JsonConverter : System.Text.Json.Serialization.JsonConverter<{{mapping.key}}>
     {
         public override {{mapping.key}}? Read(
@@ -60,14 +58,13 @@ namespace {{mapping.namespace}}
 
         public override void Write(Utf8JsonWriter writer, {{mapping.key}} value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
     }
-    {{ else }}
+    {{~ else ~}}
         // No supported net type {{mapping.net_type}}
-    {{ end }}
+    {{~ end ~}}
 
     public sealed class {{mapping.key}}Converter : System.ComponentModel.TypeConverter
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) => sourceType == typeof(string);
-
 
         public override object? ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) =>
             value switch

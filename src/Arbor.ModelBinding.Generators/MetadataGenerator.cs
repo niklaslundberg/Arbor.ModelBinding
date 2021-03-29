@@ -12,22 +12,21 @@ namespace Arbor.ModelBinding.Generators
     public class MetadataGenerator : ISourceGenerator
     {
         private static readonly DiagnosticDescriptor WarningMessage = new("ARB1000",
-            "General message",
-            "'{0}'.",
+            "Arbor Source generator",
+            "'{0}'",
             "Arbor",
             DiagnosticSeverity.Warning,
             true);
 
         private static readonly DiagnosticDescriptor CustomInformation = new("ARB2000",
-            "Codegen info",
-            "Info from parser '{0}'.",
+            "Code generation info",
+            "Info from parser '{0}'",
             "Arbor",
             DiagnosticSeverity.Info,
             true);
 
         public void Initialize(GeneratorInitializationContext context) =>
             context.RegisterForSyntaxNotifications(() => new MySyntaxReceiver());
-
 
         public void Execute(GeneratorExecutionContext context)
         {
@@ -39,7 +38,7 @@ namespace Arbor.ModelBinding.Generators
             string all = string.Join(", ",
                 mySyntaxReceiver.CommandsToGenerateFor.Select(s => s.Syntax.Identifier.ValueText));
 
-            context.ReportDiagnostic(Diagnostic.Create(WarningMessage, Location.None,
+            context.ReportDiagnostic(Diagnostic.Create(CustomInformation, Location.None,
                 $"Received nodes {all}"));
 
             try
@@ -81,7 +80,7 @@ namespace Arbor.ModelBinding.Generators
                 }
 
                 var template1 = Template.Parse(templateData);
-                context.ReportDiagnostic(Diagnostic.Create(WarningMessage, Location.None,
+                context.ReportDiagnostic(Diagnostic.Create(CustomInformation, Location.None,
                     $"Rendering model with {model.Mappings.Length} items"));
 
                 string? output = template1.Render(model);
@@ -93,7 +92,7 @@ namespace Arbor.ModelBinding.Generators
                 else
                 {
                     context.ReportDiagnostic(Diagnostic.Create(WarningMessage, Location.None,
-                        $"No source content was rendered"));
+                        "No source content was rendered"));
                 }
             }
             catch (Exception ex)

@@ -10,7 +10,6 @@ namespace Arbor.ModelBinding.Generators
         public static string? Namespace(this ClassDeclarationSyntax classDeclarationSyntax)
         {
             SyntaxNode current = classDeclarationSyntax;
-            string? @namespace = null;
             while (current.Parent is not null)
             {
                 if (current.Parent is NamespaceDeclarationSyntax
@@ -22,7 +21,7 @@ namespace Arbor.ModelBinding.Generators
                 current = current.Parent;
             }
 
-            return @namespace;
+            return null;
         }
 
         public static bool IsPartial(this ClassDeclarationSyntax classDeclarationSyntax) =>

@@ -8,15 +8,15 @@ namespace Arbor.ModelBinding.NewtonsoftJson
 {
     public static class FormsExtensions
     {
-        private static readonly JsonConverter[] _converters = {new BooleanJsonConverter(), new StringValuesJsonConverter()};
+        private static readonly JsonConverter[] Converters = {new BooleanJsonConverter(), new StringValuesJsonConverter()};
 
         public static object? ParseFromPairs(
-            IEnumerable<KeyValuePair<string, StringValues>> collection,
+            this IEnumerable<KeyValuePair<string, StringValues>> collection,
             Type targetType) => FormsParser.ParseFromPairs(collection, targetType, Serialize, Deserialize);
 
         private static string Serialize(object? instance) => JsonConvert.SerializeObject(instance);
 
         private static object? Deserialize(string json, Type targetType) =>
-            JsonConvert.DeserializeObject(json, targetType, _converters);
+            JsonConvert.DeserializeObject(json, targetType, Converters);
     }
 }

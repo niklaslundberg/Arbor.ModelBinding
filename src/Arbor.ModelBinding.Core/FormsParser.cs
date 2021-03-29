@@ -15,7 +15,7 @@ namespace Arbor.ModelBinding.Core
             IEnumerable<KeyValuePair<string, StringValues>> collection,
             Type targetType,
             Func<object, string> serializer,
-            Func<string, Type, object> deserializer)
+            Func<string, Type, object?> deserializer)
         {
             if (collection == null)
             {
@@ -49,7 +49,7 @@ namespace Arbor.ModelBinding.Core
             KeyValuePair<string, StringValues>[] nested =
                 nameCollection.Where(pair => pair.Key.IndexOf("[", StringComparison.Ordinal) >= 0).ToArray();
 
-            IDictionary<string, object> dynamicObjectDictionary = dynamicObject;
+            IDictionary<string, object?> dynamicObjectDictionary = dynamicObject;
 
             bool ContainsKey(string lookup)
             {
@@ -95,9 +95,7 @@ namespace Arbor.ModelBinding.Core
 
                 if (subProperties.Length > 0)
                 {
-                    var subInstance = ParseFromPairs(subProperties, propertyInfo.PropertyType, serializer, deserializer);
-
-                    dynamicObjectDictionary[propertyInfo.Name] = subInstance;
+                    dynamicObjectDictionary[propertyInfo.Name] = ParseFromPairs(subProperties, propertyInfo.PropertyType, serializer, deserializer);
                 }
             }
 
@@ -109,7 +107,12 @@ namespace Arbor.ModelBinding.Core
                                     property.PropertyType.GetTypeInfo()) &&
                                 property.PropertyType.GetTypeInfo().IsGenericType))
             {
-                Type subTargetType = propertyInfo.PropertyType.GenericTypeArguments.FirstOrDefault();
+                Type? subTargetType = propertyInfo.PropertyType.GenericTypeArguments.FirstOrDefault();
+
+                if (subTargetType is null)
+                {
+                    continue;
+                }
 
                 string expectedName = propertyInfo.Name;
 
@@ -135,7 +138,7 @@ namespace Arbor.ModelBinding.Core
 
                 var indexedGroups = matchingProperty.GroupBy(_ => _.Index);
 
-                object newCollection = null;
+                object? newCollection = null;
 
                 Type listType = typeof(List<>);
                 Type constructedListType = listType.MakeGenericType(subTargetType);
@@ -149,13 +152,8 @@ namespace Arbor.ModelBinding.Core
                     // Ignore exception
                 }
 
-                if (newCollection == null)
-                {
-                    throw new InvalidOperationException(
-                        $"Could not create new {propertyInfo.PropertyType.FullName}");
-                }
-
-                dynamicObjectDictionary[propertyInfo.Name] = newCollection;
+                dynamicObjectDictionary[propertyInfo.Name] = newCollection ?? throw new InvalidOperationException(
+                    $"Could not create new {propertyInfo.PropertyType.FullName}");
 
                 foreach (var item in indexedGroups)
                 {
@@ -168,16 +166,18 @@ namespace Arbor.ModelBinding.Core
                         }
                     }
 
-                    object subTargetInstance = ParseFromPairs(pairs, subTargetType, serializer, deserializer);
+                    object? subTargetInstance = ParseFromPairs(pairs, subTargetType, serializer, deserializer);
 
-                    AddInstanceToCollection(subTargetType, newCollection, subTargetInstance);
+                    if (subTargetInstance is { })
+                    {
+                        AddInstanceToCollection(subTargetType, newCollection, subTargetInstance);
+                    }
                 }
             }
 
-
             string json = serializer.Invoke(dynamicObject);
 
-            object instance;
+            object? instance;
 
             try
             {
@@ -199,10 +199,10 @@ namespace Arbor.ModelBinding.Core
 
             if (constructedCollectionType.IsInstanceOfType(newCollection))
             {
-                MethodInfo addMethod = newCollection.GetType().GetTypeInfo()
+                MethodInfo? addMethod = newCollection.GetType().GetTypeInfo()
                     .GetDeclaredMethod(nameof(ICollection<object>.Add));
 
-                addMethod.Invoke(newCollection, new[] { subTargetInstance });
+                addMethod?.Invoke(newCollection, new[] { subTargetInstance });
             }
         }
     }

@@ -8,7 +8,6 @@ namespace Arbor.ModelBinding.Generators.Tests
 {
     public class GeneratorTests
     {
-
         [Fact]
         public void Test()
         {
@@ -34,7 +33,6 @@ namespace MyCode
 
             generatorResult.GeneratedSources.Length.Should().Be(1);
         }
-
 
         private static Compilation CreateCompilation(string source)
             => CSharpCompilation.Create("compilation",

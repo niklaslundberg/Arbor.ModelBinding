@@ -22,7 +22,7 @@ namespace Arbor.ModelBinding.Tests.Unit
             public bool? Enabled2 { get; }
         }
 
-        static object result;
+        static object? result;
 
         static List<KeyValuePair<string, StringValues>> values;
 
@@ -35,8 +35,7 @@ namespace Arbor.ModelBinding.Tests.Unit
                      };
         };
 
-        Because of =
-            () => { result = FormsExtensions.ParseFromPairs(values, typeof(SubType3)); };
+        Because of = () => result = FormsExtensions.ParseFromPairs(values, typeof(SubType3));
 
         It should_parse_all_properties = () =>
         {
@@ -48,7 +47,7 @@ namespace Arbor.ModelBinding.Tests.Unit
 
             mainType.Enabled.ShouldBeTrue();
             mainType.Enabled2.HasValue.ShouldBeTrue();
-            mainType.Enabled2.Value.ShouldBeTrue();
+            mainType.Enabled2!.Value.ShouldBeTrue();
         };
     }
 }
