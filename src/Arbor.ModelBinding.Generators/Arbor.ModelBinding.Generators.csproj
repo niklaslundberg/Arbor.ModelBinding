@@ -14,11 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Handlers.sbntxt" />
+    <None Remove="Template.sbntxt" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Handlers.sbntxt" />
+    <EmbeddedResource Include="Template.sbntxt" />
   </ItemGroup>
 
   <ItemGroup>

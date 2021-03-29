@@ -26,11 +26,11 @@ namespace Arbor.ModelBinding.Generators
             true);
 
         public void Initialize(GeneratorInitializationContext context) =>
-            context.RegisterForSyntaxNotifications(() => new MySyntaxReceiver());
+            context.RegisterForSyntaxNotifications(() => new ModelBindingSyntaxReceiver());
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.SyntaxReceiver is not MySyntaxReceiver mySyntaxReceiver)
+            if (context.SyntaxReceiver is not ModelBindingSyntaxReceiver mySyntaxReceiver)
             {
                 return;
             }
@@ -57,7 +57,7 @@ namespace Arbor.ModelBinding.Generators
                     MainNamespace = mySyntaxReceiver.CommandsToGenerateFor.FirstOrDefault()?.Namespace
                 };
 
-                using var manifestResourceStream = typeof(MetadataGenerator).Assembly.GetManifestResourceStream("Arbor.ModelBinding.Generators.Handlers.sbntxt");
+                using var manifestResourceStream = typeof(MetadataGenerator).Assembly.GetManifestResourceStream("Arbor.ModelBinding.Generators.Template.sbntxt");
 
                 if (manifestResourceStream is null)
                 {

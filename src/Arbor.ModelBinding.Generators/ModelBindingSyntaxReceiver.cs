@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Arbor.ModelBinding.Generators
 {
-    internal class MySyntaxReceiver : ISyntaxReceiver
+    internal class ModelBindingSyntaxReceiver : ISyntaxReceiver
     {
         public List<ClassData> CommandsToGenerateFor { get; } = new ();
 
