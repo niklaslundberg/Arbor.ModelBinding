@@ -38,6 +38,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Authors>Niklas Lundberg</Authors>
     <Company />
+    <PackageProjectUrl>https://github.com/niklaslundberg/Arbor.ModelBinding</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/niklaslundberg/Arbor.ModelBinding</RepositoryUrl>
   </PropertyGroup>
 
   <Target Name="GetDependencyTargetPaths">
