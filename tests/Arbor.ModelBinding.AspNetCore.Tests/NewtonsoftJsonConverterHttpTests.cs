@@ -12,24 +12,23 @@ using Xunit.Abstractions;
 
 namespace Arbor.ModelBinding.AspNetCore.Tests
 {
-    public class ConverterHttpTests
-
+    public class NewtonsoftJsonConverterHttpTests
     {
         private readonly ITestOutputHelper _testOutputHelper;
         private readonly TestServer _testServer;
 
-        public ConverterHttpTests(ITestOutputHelper testOutputHelper)
+        public NewtonsoftJsonConverterHttpTests(ITestOutputHelper testOutputHelper)
         {
             _testOutputHelper = testOutputHelper;
 
             var builder = new WebHostBuilder()
                 .ConfigureServices(services => services.AddControllers(
-                    options => options.ModelBinderProviders.Insert(0, new CustomModelBindingProvider())).AddJsonOptions(
+                    options => options.ModelBinderProviders.Insert(0, new CustomModelBindingProvider())).AddNewtonsoftJson(
                     options =>
                     {
-                        foreach (var jsonConverter in GeneratedJsonConverters.Converters)
+                        foreach (var jsonConverter in GeneratedJsonConverters.NewtonsoftJsonConverters)
                         {
-                            options.JsonSerializerOptions.Converters.Add(jsonConverter);
+                            options.SerializerSettings.Converters.Add(jsonConverter);
                         }
                     }))
                 .UseStartup<TestStartup>();
@@ -87,7 +86,7 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
 
             var jsonSerializerOptions = new JsonSerializerOptions();
 
-            jsonSerializerOptions.Converters.Add(new TestIdJsonConverter());
+            jsonSerializerOptions.Converters.Add(new TestIdSystemJsonConverter());
 
             var httpResponseMessage = await client.PostAsJsonAsync("/typeconvertergenerated/",
                 new PostObject {Value = new TestId("abc")},
