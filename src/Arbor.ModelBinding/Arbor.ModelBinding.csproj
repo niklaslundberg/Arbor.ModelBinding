@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461;net471;net472;net48;netcoreapp3.1;net5.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
+    <RootNamespace>Arbor.ModelBinding.Core</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(CI_BUILD)' == 'true'">

@@ -1065,7 +1065,7 @@
           "System.Xml.XPath": "4.0.1"
         }
       },
-      "arbor.modelbinding.core": {
+      "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Primitives": "5.0.0"
@@ -1074,7 +1074,7 @@
       "arbor.modelbinding.newtonsoftjson": {
         "type": "Project",
         "dependencies": {
-          "Arbor.ModelBinding.Core": "1.0.0",
+          "Arbor.ModelBinding": "1.0.0",
           "Microsoft.Extensions.Primitives": "5.0.0",
           "Newtonsoft.Json": "13.0.1"
         }

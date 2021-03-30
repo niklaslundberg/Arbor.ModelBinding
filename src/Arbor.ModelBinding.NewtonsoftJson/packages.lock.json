@@ -14,7 +14,7 @@
         "resolved": "13.0.1",
         "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
       },
-      "arbor.modelbinding.core": {
+      "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Primitives": "5.0.0"
@@ -64,7 +64,7 @@
         "resolved": "5.0.0",
         "contentHash": "ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA=="
       },
-      "arbor.modelbinding.core": {
+      "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Primitives": "5.0.0"
@@ -114,7 +114,7 @@
         "resolved": "5.0.0",
         "contentHash": "ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA=="
       },
-      "arbor.modelbinding.core": {
+      "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Primitives": "5.0.0"
@@ -164,7 +164,7 @@
         "resolved": "5.0.0",
         "contentHash": "ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA=="
       },
-      "arbor.modelbinding.core": {
+      "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Primitives": "5.0.0"
@@ -214,7 +214,7 @@
         "resolved": "5.0.0",
         "contentHash": "ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA=="
       },
-      "arbor.modelbinding.core": {
+      "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Primitives": "5.0.0"
@@ -278,7 +278,7 @@
         "resolved": "5.0.0",
         "contentHash": "ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA=="
       },
-      "arbor.modelbinding.core": {
+      "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Primitives": "5.0.0"
@@ -298,7 +298,7 @@
         "resolved": "13.0.1",
         "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
       },
-      "arbor.modelbinding.core": {
+      "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Primitives": "5.0.0"
