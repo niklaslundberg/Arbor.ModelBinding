@@ -40,7 +40,11 @@ namespace Arbor.ModelBinding.Primitives
         {
             if (_comparer is StringComparer comparer && comparer == StringComparer.OrdinalIgnoreCase && Value is string stringValue)
             {
+                #if NETSTANDARD2_0
                 return stringValue.ToLowerInvariant().GetHashCode();
+#else
+                    return stringValue.GetHashCode(StringComparison.OrdinalIgnoreCase);
+#endif
             }
 
             return EqualityComparer<T>.Default.GetHashCode(Value!);
