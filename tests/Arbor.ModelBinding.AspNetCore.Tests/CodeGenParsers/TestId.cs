@@ -1,8 +1,9 @@
-﻿using Arbor.ModelBinding.Primitives;
+﻿using System;
+using Arbor.ModelBinding.Primitives;
 
 namespace Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers
 {
-    [ClassValueType(BackingValueType.String)]
+    [StringValueType(StringComparison.OrdinalIgnoreCase)]
     public partial class TestId
     {
     }

@@ -2,8 +2,8 @@
 
 namespace Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers
 {
-    [StringValueType]
-    public partial class MyId
+    [IntValueType]
+    public partial class IntTestId
     {
     }
 }

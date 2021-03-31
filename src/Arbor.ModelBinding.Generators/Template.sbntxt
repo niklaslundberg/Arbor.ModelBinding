@@ -51,8 +51,9 @@ namespace {{mapping.namespace}}
     [System.ComponentModel.TypeConverter(typeof({{mapping.identifier}}Converter))]
     public sealed partial class {{mapping.identifier}} : Arbor.ModelBinding.Primitives.ValueObjectBase<{{mapping.net_type}}>
     {
-        public {{mapping.identifier}}({{mapping.net_type}} value) : base(value)
+        public {{mapping.identifier}}({{mapping.net_type}} value) : base(value{{if mapping.string_comparison}}, System.StringComparer.{{mapping.string_comparison}}{{end}})
         {
+            // {{mapping.string_comparison}}
         }
     }
 }

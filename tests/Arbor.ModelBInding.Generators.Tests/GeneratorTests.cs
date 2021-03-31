@@ -14,7 +14,7 @@ namespace Arbor.ModelBinding.Generators.Tests
             Compilation inputCompilation = CreateCompilation(@"
 namespace MyCode
 {
-    [Arbor.ModelBinding.Primitives.ClassValueTypeAttribute(Arbor.ModelBinding.Primitives.BackingValueType.String)]
+    [Arbor.ModelBinding.Primitives.StringValueType(System.StringComparison.OrdinalIgnoreCase)]
     public partial class Program
     {
         
