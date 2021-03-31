@@ -87,7 +87,7 @@ namespace Arbor.ModelBinding.Generators
 
                 if (!string.IsNullOrWhiteSpace(output))
                 {
-                    context.AddSource("Parsers.g.cs", SourceText.From(output, Encoding.UTF8));
+                    context.AddSource("Converters.g.cs", SourceText.From(output, Encoding.UTF8));
                 }
                 else
                 {
