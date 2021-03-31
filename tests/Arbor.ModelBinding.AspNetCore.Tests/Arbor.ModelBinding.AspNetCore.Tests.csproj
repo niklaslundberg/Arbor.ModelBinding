@@ -14,6 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="*.ncrunchproject" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\Arbor.ModelBinding.Generators\Arbor.ModelBinding.Generators.csproj" OutputItemType="Analyzer" GeneratePathProperty="true" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\..\Arbor.ModelBinding.Primitives\Arbor.ModelBinding.Primitives.csproj" />
   </ItemGroup>

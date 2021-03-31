@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Arbor.ModelBinding\Arbor.ModelBinding.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="*.ncrunchproject" />
+  </ItemGroup>
+
 </Project>

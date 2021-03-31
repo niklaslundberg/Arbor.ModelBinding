@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="*.ncrunchproject" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Template.sbntxt" />
   </ItemGroup>
 
