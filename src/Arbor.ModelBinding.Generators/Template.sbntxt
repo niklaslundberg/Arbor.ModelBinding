@@ -17,7 +17,7 @@ namespace {{main_namespace}} {
             new List<System.Text.Json.Serialization.JsonConverter>
             {
 {{~ for mapping in mappings ~}}
-                new {{mapping.namespace}}.{{mapping.key}}SystemJsonConverter(),
+                new {{mapping.namespace}}.{{mapping.identifier}}SystemJsonConverter(),
 {{~ end ~}}
 
             }.ToImmutableArray();
@@ -26,35 +26,33 @@ namespace {{main_namespace}} {
             new List<Newtonsoft.Json.JsonConverter>
             {
 {{~ for mapping in mappings ~}}
-                new {{mapping.namespace}}.{{mapping.key}}NewtonsoftJsonConverter(),
+                new {{mapping.namespace}}.{{mapping.identifier}}NewtonsoftJsonConverter(),
 {{~ end ~}}
 
             }.ToImmutableArray();
     }
 }
 
-
 {{~ for mapping in mappings ~}}
 namespace {{mapping.namespace}}
 {
-    public sealed class {{mapping.key}}Converter : System.ComponentModel.TypeConverter
+    public sealed class {{mapping.identifier}}Converter : System.ComponentModel.TypeConverter
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) => sourceType == typeof(string);
 
         public override object? ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) =>
             value switch
             {
-                {{mapping.net_type}} theValue => new {{mapping.namespace}}.{{mapping.key}}(theValue),
+                {{mapping.net_type}} theValue => new {{mapping.namespace}}.{{mapping.identifier}}(theValue),
                 _ => base.ConvertFrom(context, culture, value)
             };
     }
 
-    [System.ComponentModel.TypeConverter(typeof({{mapping.key}}Converter))]
-    public sealed partial class {{mapping.key}} : Arbor.ModelBinding.Primitives.ValueObjectBase<{{mapping.net_type}}>
+    [System.ComponentModel.TypeConverter(typeof({{mapping.identifier}}Converter))]
+    public sealed partial class {{mapping.identifier}} : Arbor.ModelBinding.Primitives.ValueObjectBase<{{mapping.net_type}}>
     {
-        public {{mapping.key}}({{mapping.net_type}} value) : base(value)
+        public {{mapping.identifier}}({{mapping.net_type}} value) : base(value)
         {
-            // DataType {{mapping.data_type}}
         }
     }
 }
@@ -65,27 +63,27 @@ namespace {{mapping.namespace}}
 namespace {{mapping.namespace}}
 {
     using System.Text.Json;
-    // {{mapping.key}}
+    // {{mapping.identifier}}
 
     {{~ if mapping.net_type == 'string'~}}
-    public class {{mapping.key}}SystemJsonConverter : System.Text.Json.Serialization.JsonConverter<{{mapping.key}}>
+    public class {{mapping.identifier}}SystemJsonConverter : System.Text.Json.Serialization.JsonConverter<{{mapping.identifier}}>
     {
-        public override {{mapping.key}}? Read(
+        public override {{mapping.identifier}}? Read(
             ref Utf8JsonReader reader,
             Type typeToConvert,
-            JsonSerializerOptions options) => reader.GetString() is { } value ? new {{mapping.key}}(value) : null;
+            JsonSerializerOptions options) => reader.GetString() is { } value ? new {{mapping.identifier}}(value) : null;
 
-        public override void Write(Utf8JsonWriter writer, {{mapping.key}} value, JsonSerializerOptions options) => writer.WriteStringValue(value.Value);
+        public override void Write(Utf8JsonWriter writer, {{mapping.identifier}} value, JsonSerializerOptions options) => writer.WriteStringValue(value.Value);
     }
     {{~ else if mapping.net_type == 'int'~}}
-    public class {{mapping.key}}SystemJsonConverter : System.Text.Json.Serialization.JsonConverter<{{mapping.key}}>
+    public class {{mapping.identifier}}SystemJsonConverter : System.Text.Json.Serialization.JsonConverter<{{mapping.identifier}}>
     {
-        public override {{mapping.key}}? Read(
+        public override {{mapping.identifier}}? Read(
             ref Utf8JsonReader reader,
             Type typeToConvert,
-            JsonSerializerOptions options) => reader.TryGetInt32(out var value) ? new {{mapping.key}}(value) : null;
+            JsonSerializerOptions options) => reader.TryGetInt32(out var value) ? new {{mapping.identifier}}(value) : null;
 
-        public override void Write(Utf8JsonWriter writer, {{mapping.key}} value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+        public override void Write(Utf8JsonWriter writer, {{mapping.identifier}} value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
     }
     {{~ else ~}}
         // No supported net type {{mapping.net_type}}
@@ -100,9 +98,9 @@ namespace {{mapping.namespace}}
     using Newtonsoft.Json;
 
     {{~ if mapping.net_type == 'string'~}}
-    public class {{mapping.key}}NewtonsoftJsonConverter : Newtonsoft.Json.JsonConverter<{{mapping.key}}>
+    public class {{mapping.identifier}}NewtonsoftJsonConverter : Newtonsoft.Json.JsonConverter<{{mapping.identifier}}>
     {
-        public override void WriteJson(JsonWriter writer, {{mapping.key}}? value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, {{mapping.identifier}}? value, JsonSerializer serializer)
         {
             if (value is null)
             {
@@ -114,14 +112,14 @@ namespace {{mapping.namespace}}
             }
         }
 
-        public override {{mapping.key}}? ReadJson(JsonReader reader, Type objectType, {{mapping.key}}? existingValue, bool hasExistingValue,
+        public override {{mapping.identifier}}? ReadJson(JsonReader reader, Type objectType, {{mapping.identifier}}? existingValue, bool hasExistingValue,
             JsonSerializer serializer) =>
-            existingValue ?? (reader.Value is string stringValue ? new {{mapping.key}}(stringValue) : null);
+            existingValue ?? (reader.Value is string stringValue ? new {{mapping.identifier}}(stringValue) : null);
     }
     {{~ else if mapping.net_type == 'int'~}}
-    public class {{mapping.key}}NewtonsoftJsonConverter : Newtonsoft.Json.JsonConverter<{{mapping.key}}>
+    public class {{mapping.identifier}}NewtonsoftJsonConverter : Newtonsoft.Json.JsonConverter<{{mapping.identifier}}>
     {
-        public override void WriteJson(JsonWriter writer, {{mapping.key}}? value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, {{mapping.identifier}}? value, JsonSerializer serializer)
         {
             if (value is null)
             {
@@ -133,9 +131,9 @@ namespace {{mapping.namespace}}
             }
         }
 
-        public override {{mapping.key}}? ReadJson(JsonReader reader, Type objectType, {{mapping.key}}? existingValue, bool hasExistingValue,
+        public override {{mapping.identifier}}? ReadJson(JsonReader reader, Type objectType, {{mapping.identifier}}? existingValue, bool hasExistingValue,
             JsonSerializer serializer) =>
-            existingValue ?? (reader.Value is int intValue ? new {{mapping.key}}(intValue) : null);
+            existingValue ?? (reader.Value is int intValue ? new {{mapping.identifier}}(intValue) : null);
     }
     {{~ else ~}}
         // No supported net type {{mapping.net_type}}

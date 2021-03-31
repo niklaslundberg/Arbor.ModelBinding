@@ -9,7 +9,7 @@ namespace Arbor.ModelBinding.Generators
 {
     internal class ModelBindingSyntaxReceiver : ISyntaxReceiver
     {
-        public List<ClassData> CommandsToGenerateFor { get; } = new ();
+        public List<ClassData> ClassesToGenerateConvertersFor { get; } = new ();
 
         private readonly HashSet<string> _supportedDataTypes =
             new(StringComparer.OrdinalIgnoreCase) {"int", "string"};
@@ -21,7 +21,7 @@ namespace Arbor.ModelBinding.Generators
                 && cds.DataType() is {} dataType
                 && _supportedDataTypes.Contains(dataType))
             {
-                CommandsToGenerateFor.Add(new ClassData(cds, cds.Namespace(), dataType));
+                ClassesToGenerateConvertersFor.Add(new ClassData(cds, cds.Namespace(), dataType));
             }
         }
     }

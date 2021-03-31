@@ -35,26 +35,29 @@ namespace Arbor.ModelBinding.Generators
                 return;
             }
 
+            if (mySyntaxReceiver.ClassesToGenerateConvertersFor.Count == 0)
+            {
+                return;
+            }
+
             string all = string.Join(", ",
-                mySyntaxReceiver.CommandsToGenerateFor.Select(s => s.Syntax.Identifier.ValueText));
+                mySyntaxReceiver.ClassesToGenerateConvertersFor.Select(classData => classData.Syntax.Identifier.ValueText));
 
             context.ReportDiagnostic(Diagnostic.Create(CustomInformation, Location.None,
-                $"Received nodes {all}"));
+                $"Generating code for items {all}"));
 
             try
             {
                 var model = new
                 {
-                    Mappings = mySyntaxReceiver.CommandsToGenerateFor.Select(n =>
+                    Mappings = mySyntaxReceiver.ClassesToGenerateConvertersFor.Select(n =>
                         new
                         {
-                            Key = n.Syntax.Identifier.ValueText,
+                            Identifier = n.Syntax.Identifier.ValueText,
                             n.Namespace,
-                            Value = "TestValue",
-                            n.DataType,
                             n.NetType
                         }).ToArray(),
-                    MainNamespace = mySyntaxReceiver.CommandsToGenerateFor.FirstOrDefault()?.Namespace
+                    MainNamespace = mySyntaxReceiver.ClassesToGenerateConvertersFor.FirstOrDefault()?.Namespace
                 };
 
                 using var manifestResourceStream = typeof(MetadataGenerator).Assembly.GetManifestResourceStream("Arbor.ModelBinding.Generators.Template.sbntxt");
