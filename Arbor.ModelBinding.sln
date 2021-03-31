@@ -5,14 +5,11 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding", "src\Arbor.ModelBinding\Arbor.ModelBinding.csproj", "{99CDB465-7ECD-4EC1-B18C-ADE4E6DCB40E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.Tests.Unit", "test\Arbor.ModelBinding.Tests.Unit\Arbor.ModelBinding.Tests.Unit.csproj", "{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{098E97EE-48D3-4AE7-9CB8-BFF6F3705ED1}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		Arbor.ModelBinding.nuspec = Arbor.ModelBinding.nuspec
 		build\build.bat = build\build.bat
 		.github\workflows\ci.yml = .github\workflows\ci.yml
 		Directory.Build.props = Directory.Build.props
@@ -32,9 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.AspNetCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.Generators", "src\Arbor.ModelBinding.Generators\Arbor.ModelBinding.Generators.csproj", "{B6CAD951-9878-40B7-AD75-BAC2C442C08F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.Primitives", "Arbor.ModelBinding.Primitives\Arbor.ModelBinding.Primitives.csproj", "{A8ED117E-5591-443D-AA8B-F2B3970362F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.Primitives", "src\Arbor.ModelBinding.Primitives\Arbor.ModelBinding.Primitives.csproj", "{A8ED117E-5591-443D-AA8B-F2B3970362F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbor.ModelBinding.Generators.Tests", "Arbor.ModelBInding.Generators.Tests\Arbor.ModelBinding.Generators.Tests.csproj", "{577950C5-CA65-4019-831F-D03F342893FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.Generators.Tests", "tests\Arbor.ModelBInding.Generators.Tests\Arbor.ModelBinding.Generators.Tests.csproj", "{577950C5-CA65-4019-831F-D03F342893FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.Tests.Unit", "tests\Arbor.ModelBinding.Tests.Unit\Arbor.ModelBinding.Tests.Unit.csproj", "{F1018429-09F4-41F3-A95C-64575A298069}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,18 +57,6 @@ Global
 		{99CDB465-7ECD-4EC1-B18C-ADE4E6DCB40E}.Release|x64.Build.0 = Release|Any CPU
 		{99CDB465-7ECD-4EC1-B18C-ADE4E6DCB40E}.Release|x86.ActiveCfg = Release|Any CPU
 		{99CDB465-7ECD-4EC1-B18C-ADE4E6DCB40E}.Release|x86.Build.0 = Release|Any CPU
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}.Debug|x64.Build.0 = Debug|Any CPU
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}.Debug|x86.Build.0 = Debug|Any CPU
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}.Release|x64.ActiveCfg = Release|Any CPU
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}.Release|x64.Build.0 = Release|Any CPU
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}.Release|x86.ActiveCfg = Release|Any CPU
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0}.Release|x86.Build.0 = Release|Any CPU
 		{3FA1A24E-977A-430A-A57B-5B5E71145A84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3FA1A24E-977A-430A-A57B-5B5E71145A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FA1A24E-977A-430A-A57B-5B5E71145A84}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -130,12 +117,26 @@ Global
 		{577950C5-CA65-4019-831F-D03F342893FB}.Release|x64.Build.0 = Release|Any CPU
 		{577950C5-CA65-4019-831F-D03F342893FB}.Release|x86.ActiveCfg = Release|Any CPU
 		{577950C5-CA65-4019-831F-D03F342893FB}.Release|x86.Build.0 = Release|Any CPU
+		{F1018429-09F4-41F3-A95C-64575A298069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1018429-09F4-41F3-A95C-64575A298069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1018429-09F4-41F3-A95C-64575A298069}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F1018429-09F4-41F3-A95C-64575A298069}.Debug|x64.Build.0 = Debug|Any CPU
+		{F1018429-09F4-41F3-A95C-64575A298069}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1018429-09F4-41F3-A95C-64575A298069}.Debug|x86.Build.0 = Debug|Any CPU
+		{F1018429-09F4-41F3-A95C-64575A298069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1018429-09F4-41F3-A95C-64575A298069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1018429-09F4-41F3-A95C-64575A298069}.Release|x64.ActiveCfg = Release|Any CPU
+		{F1018429-09F4-41F3-A95C-64575A298069}.Release|x64.Build.0 = Release|Any CPU
+		{F1018429-09F4-41F3-A95C-64575A298069}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1018429-09F4-41F3-A95C-64575A298069}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7DA9145F-5ED6-4C2B-B0AB-3CBBA2177DB0} = {B7C2E2D3-D64E-4778-83C6-3BE642DF32CB}
+		{DFBD28C6-9901-4F9C-A25C-B4F034612D6B} = {B7C2E2D3-D64E-4778-83C6-3BE642DF32CB}
+		{577950C5-CA65-4019-831F-D03F342893FB} = {B7C2E2D3-D64E-4778-83C6-3BE642DF32CB}
+		{F1018429-09F4-41F3-A95C-64575A298069} = {B7C2E2D3-D64E-4778-83C6-3BE642DF32CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EED4B2A4-4151-4D4A-A4E3-27BA3FC55AF1}
