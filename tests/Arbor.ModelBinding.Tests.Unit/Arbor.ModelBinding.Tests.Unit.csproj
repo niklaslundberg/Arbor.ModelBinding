@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="*.ncrunchproject" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\Arbor.ModelBinding.NewtonsoftJson\Arbor.ModelBinding.NewtonsoftJson.csproj" />
   </ItemGroup>
 
