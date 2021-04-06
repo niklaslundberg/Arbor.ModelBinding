@@ -12,7 +12,7 @@ namespace Arbor.ModelBinding.Generators
         public List<ClassData> ClassesToGenerateConvertersFor { get; } = new ();
 
         private readonly HashSet<string> _supportedDataTypes =
-            new(StringComparer.OrdinalIgnoreCase) {"int", "string"};
+            new(StringComparer.OrdinalIgnoreCase) {"int", "string", "long"};
 
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
         {

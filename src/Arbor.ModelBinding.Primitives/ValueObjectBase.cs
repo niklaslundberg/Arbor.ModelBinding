@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Arbor.ModelBinding.Primitives
 {
-    public abstract class ValueObjectBase<T> : IEquatable<ValueObjectBase<T>>
+    public abstract class ValueObjectBase<T> : IEquatable<ValueObjectBase<T>>, IComparable<ValueObjectBase<T>> where T : notnull, IComparable<T>
     {
         private readonly IComparer<T>? _comparer;
 
@@ -33,12 +33,14 @@ namespace Arbor.ModelBinding.Primitives
             return EqualityComparer<T>.Default.Equals(Value, other.Value);
         }
 
+        public int CompareTo(ValueObjectBase<T> other) => Value.CompareTo(other.Value);
+
         public override bool Equals(object? obj) => Equals(obj as ValueObjectBase<T>);
 
 
         public override int GetHashCode()
         {
-            if (_comparer is StringComparer comparer && comparer == StringComparer.OrdinalIgnoreCase && Value is string stringValue)
+            if (_comparer is StringComparer comparer && comparer == StringComparer.OrdinalIgnoreCase && Value is string {} stringValue)
             {
                 #if NETSTANDARD2_0
                 return stringValue.ToLowerInvariant().GetHashCode();

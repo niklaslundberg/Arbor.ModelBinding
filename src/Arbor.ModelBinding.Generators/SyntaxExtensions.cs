@@ -53,6 +53,14 @@ namespace Arbor.ModelBinding.Generators
                 return "int";
             }
 
+            var longAttribute = classDeclarationSyntax.AttributeLists.SelectMany(al => al.Attributes)
+                .SingleOrDefault(attribute => attribute.Name.ToString().EndsWith("LongValueType"));
+
+            if (longAttribute is {})
+            {
+                return "long";
+            }
+
             return null;
         }
         public static StringComparison? StringComparison(

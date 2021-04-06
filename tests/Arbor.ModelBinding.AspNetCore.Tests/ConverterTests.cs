@@ -34,7 +34,7 @@ namespace Arbor.ModelBinding.AspNetCore.Tests
         }
 
         [Fact]
-        public void ValueObjectOridnalCompareCasing()
+        public void ValueObjectOrdinalCompareCasing()
         {
             var myValueObject = new MyOrdinalValueObject("Abc");
             var valueObject = new MyOrdinalValueObject("abc");
