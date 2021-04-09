@@ -6,6 +6,7 @@ namespace Arbor.ModelBinding.Primitives
     public sealed class IntValueTypeAttribute : Attribute
     {
         public IntValueTypeAttribute(int minValue = 1) => MinValue = minValue;
+
         public int MinValue { get; }
     }
 }

@@ -63,6 +63,7 @@ namespace Arbor.ModelBinding.Generators
 
             return null;
         }
+
         public static StringComparison? StringComparison(
             this ClassDeclarationSyntax classDeclarationSyntax)
         {
@@ -93,6 +94,55 @@ namespace Arbor.ModelBinding.Generators
                 "StringComparison.OrdinalIgnoreCase" => System.StringComparison.OrdinalIgnoreCase,
                 _ => System.StringComparison.Ordinal,
             };
+        }
+
+        public static long? MinValue(
+            this ClassDeclarationSyntax classDeclarationSyntax)
+        {
+            if (classDeclarationSyntax.AttributeLists.Count == 0)
+            {
+                return null;
+            }
+
+            var integerAttribute = classDeclarationSyntax.AttributeLists.SelectMany(al => al.Attributes)
+                .SingleOrDefault(attribute =>
+                    attribute.Name.ToString().EndsWith("IntValueType")
+                    || attribute.Name.ToString().EndsWith("LongValueType"));
+
+            if (integerAttribute is null)
+            {
+                return null;
+            }
+
+            string? valueAttribute =
+                integerAttribute.ArgumentList?.Arguments.FirstOrDefault()
+                ?.DescendantNodes().OfType<LiteralExpressionSyntax>().LastOrDefault(s => s.Kind() == SyntaxKind.NumericLiteralExpression)?.Token.ValueText;
+
+            if (long.TryParse(valueAttribute, out long value))
+            {
+                if (value == long.MinValue)
+                {
+                    return null;
+                }
+
+                if (value == int.MinValue)
+                {
+                    return null;
+                }
+
+                return value;
+            }
+
+            string? minValueAttribute =
+                integerAttribute.ArgumentList?.Arguments.FirstOrDefault()
+                ?.DescendantNodes().OfType<MemberAccessExpressionSyntax>().LastOrDefault()?.Name.Identifier.ValueText;
+
+            if (string.Equals(minValueAttribute, "MinValue"))
+            {
+                return null;
+            }
+
+            return 1;
         }
     }
 }

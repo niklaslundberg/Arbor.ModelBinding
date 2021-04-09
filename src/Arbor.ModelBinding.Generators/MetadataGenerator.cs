@@ -56,7 +56,8 @@ namespace Arbor.ModelBinding.Generators
                             Identifier = n.Syntax.Identifier.ValueText,
                             n.Namespace,
                             n.NetType,
-                            n.StringComparison
+                            n.StringComparison,
+                            n.MinValue,
                         }).ToArray(),
                     MainNamespace = mySyntaxReceiver.ClassesToGenerateConvertersFor.FirstOrDefault()?.Namespace
                 };

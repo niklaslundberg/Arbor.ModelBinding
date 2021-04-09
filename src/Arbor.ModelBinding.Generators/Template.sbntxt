@@ -60,10 +60,10 @@ namespace {{mapping.namespace}}
             {
                 throw new ArgumentException("Value cannot be null or white space", nameof(value));
             }
-            {{~ else ~}}
-            if (value <= 0)
+            {{~ else if mapping.min_value ~}}
+            if (value < {{ mapping.min_value }})
             {
-                throw new ArgumentOutOfRangeException("Value cannot be negative", nameof(value));
+                throw new ArgumentOutOfRangeException("Value cannot be less than {{ mapping.min_value }}", nameof(value));
             }
             {{~ end ~}}
         }
@@ -84,7 +84,7 @@ namespace {{mapping.namespace}}
 
 		public static bool TryParse(string? attemptedValue, out {{mapping.identifier}} value)
         {
-            if (int.TryParse(attemptedValue, out long longValue) && longValue > 0)
+            if (long.TryParse(attemptedValue, out long longValue) && longValue > 0)
             {
                 value = new {{mapping.identifier}}(longValue);
                 return true;

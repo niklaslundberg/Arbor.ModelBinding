@@ -5,13 +5,18 @@ namespace Arbor.ModelBinding.Generators
 {
     internal class ClassData
     {
-        public ClassData(ClassDeclarationSyntax syntax, string? @namespace, string? dataType,
-            StringComparison? stringComparison)
+        public ClassData(
+            ClassDeclarationSyntax syntax,
+            string? @namespace,
+            string? dataType,
+            StringComparison? stringComparison,
+            long? minValue)
         {
             Syntax = syntax;
             Namespace = @namespace;
             DataType = dataType;
             StringComparison = stringComparison;
+            MinValue = minValue;
         }
 
         public string NetType => DataType switch
@@ -20,6 +25,8 @@ namespace Arbor.ModelBinding.Generators
             "int" => "int",
             "String" => "string",
             "Int" => "int",
+            "Long" => "long",
+            "long" => "long",
             _ => "string"
         };
 
@@ -29,5 +36,6 @@ namespace Arbor.ModelBinding.Generators
 
         public string? DataType { get; }
         public StringComparison? StringComparison { get; }
+        public long? MinValue { get; }
     }
 }

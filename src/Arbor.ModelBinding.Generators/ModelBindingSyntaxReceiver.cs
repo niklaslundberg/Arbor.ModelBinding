@@ -21,7 +21,7 @@ namespace Arbor.ModelBinding.Generators
                 && cds.DataType() is {} dataType
                 && _supportedDataTypes.Contains(dataType))
             {
-                ClassesToGenerateConvertersFor.Add(new ClassData(cds, cds.Namespace(), dataType, cds.StringComparison()));
+                ClassesToGenerateConvertersFor.Add(new ClassData(cds, cds.Namespace(), dataType, cds.StringComparison(), cds.MinValue()));
             }
         }
     }

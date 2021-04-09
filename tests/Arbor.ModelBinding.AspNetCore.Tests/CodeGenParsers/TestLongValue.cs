@@ -2,7 +2,7 @@
 
 namespace Arbor.ModelBinding.AspNetCore.Tests.CodeGenParsers
 {
-    [LongValueType]
+    [LongValueType(3)]
     public partial class TestLongValue
     {
     }
