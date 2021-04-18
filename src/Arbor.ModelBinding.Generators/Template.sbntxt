@@ -1,0 +1,226 @@
+﻿/// <summary>
+///
+/// </summary>
+#nullable enable
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System;
+using System.ComponentModel;
+using System.Globalization;
+using System.ComponentModel.DataAnnotations;
+
+namespace {{main_namespace}} {
+    public static class GeneratedJsonConverters
+    {
+        public static readonly ImmutableArray<System.Text.Json.Serialization.JsonConverter> SystemJsonConverters =
+            new List<System.Text.Json.Serialization.JsonConverter>
+            {
+{{~ for mapping in mappings ~}}
+                new {{mapping.namespace}}.{{mapping.identifier}}SystemJsonConverter(),
+{{~ end ~}}
+
+            }.ToImmutableArray();
+
+        public static readonly ImmutableArray<Newtonsoft.Json.JsonConverter> NewtonsoftJsonConverters =
+            new List<Newtonsoft.Json.JsonConverter>
+            {
+{{~ for mapping in mappings ~}}
+                new {{mapping.namespace}}.{{mapping.identifier}}NewtonsoftJsonConverter(),
+{{~ end ~}}
+
+            }.ToImmutableArray();
+    }
+}
+
+{{~ for mapping in mappings ~}}
+namespace {{mapping.namespace}}
+{
+    public sealed class {{mapping.identifier}}Converter : System.ComponentModel.TypeConverter
+    {
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) => sourceType == typeof(string);
+
+        public override object? ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) =>
+            value switch
+            {
+                {{mapping.net_type}} theValue => new {{mapping.namespace}}.{{mapping.identifier}}(theValue),
+                _ => base.ConvertFrom(context, culture, value)
+            };
+    }
+
+    [System.ComponentModel.TypeConverter(typeof({{mapping.identifier}}Converter))]
+    [Newtonsoft.Json.JsonConverter(typeof({{mapping.identifier}}NewtonsoftJsonConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof({{mapping.identifier}}SystemJsonConverter))]
+    public sealed partial class {{mapping.identifier}} : Arbor.ModelBinding.Primitives.ValueObjectBase<{{mapping.net_type}}>
+    {
+        public {{mapping.identifier}}({{mapping.net_type}} value) : base(value{{if mapping.string_comparison}}, System.StringComparer.{{mapping.string_comparison}}{{end}})
+        {
+            {{~ if mapping.net_type == 'string'~}}
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException("Value cannot be null or white space", nameof(value));
+            }
+            {{~ else if mapping.min_value ~}}
+            if (value < {{ mapping.min_value }})
+            {
+                throw new ArgumentOutOfRangeException("Value cannot be less than {{ mapping.min_value }}", nameof(value));
+            }
+            {{~ end ~}}
+        }
+		{{~ if mapping.net_type == 'int'~}}
+
+        public static bool TryParse(string? attemptedValue, out {{mapping.identifier}} value)
+        {
+            if (int.TryParse(attemptedValue, out int intValue) && intValue > 0)
+            {
+                value = new {{mapping.identifier}}(intValue);
+                return true;
+            }
+
+            value = default;
+            return false;
+        }
+		{{~ else if mapping.net_type == 'long'~}}
+
+		public static bool TryParse(string? attemptedValue, out {{mapping.identifier}} value)
+        {
+            if (long.TryParse(attemptedValue, out long longValue) && longValue > 0)
+            {
+                value = new {{mapping.identifier}}(longValue);
+                return true;
+            }
+
+            value = default;
+            return false;
+        }
+        {{~ end ~}}
+
+        public override string ToString()
+        {
+            {{~ if mapping.net_type != 'string'~}}
+            return Value.ToString();
+            {{~ else ~}}
+            return Value;
+            {{~ end ~}}
+        }
+
+        public static explicit operator {{mapping.identifier}}({{mapping.net_type}} value)
+        {
+            return new {{mapping.identifier}}(value);
+        }
+    }
+}
+
+{{~ end ~}}
+
+{{~ for mapping in mappings ~}}
+namespace {{mapping.namespace}}
+{
+    using System.Text.Json;
+    // {{mapping.identifier}}
+
+    {{~ if mapping.net_type == 'string'~}}
+    public class {{mapping.identifier}}SystemJsonConverter : System.Text.Json.Serialization.JsonConverter<{{mapping.identifier}}>
+    {
+        public override {{mapping.identifier}}? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options) => reader.GetString() is { } value ? new {{mapping.identifier}}(value) : null;
+
+        public override void Write(Utf8JsonWriter writer, {{mapping.identifier}} value, JsonSerializerOptions options) => writer.WriteStringValue(value.Value);
+    }
+    {{~ else if mapping.net_type == 'int'~}}
+    public class {{mapping.identifier}}SystemJsonConverter : System.Text.Json.Serialization.JsonConverter<{{mapping.identifier}}>
+    {
+        public override {{mapping.identifier}}? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options) => reader.TryGetInt32(out var value) ? new {{mapping.identifier}}(value) : null;
+
+        public override void Write(Utf8JsonWriter writer, {{mapping.identifier}} value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+    }
+    {{~ else if mapping.net_type == 'long'~}}
+    public class {{mapping.identifier}}SystemJsonConverter : System.Text.Json.Serialization.JsonConverter<{{mapping.identifier}}>
+    {
+        public override {{mapping.identifier}}? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options) => reader.TryGetInt64(out var value) ? new {{mapping.identifier}}(value) : null;
+
+        public override void Write(Utf8JsonWriter writer, {{mapping.identifier}} value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+    }
+    {{~ else ~}}
+        // No supported net type {{mapping.net_type}}
+    {{~ end ~}}
+}
+
+{{~ end ~}}
+
+{{~ for mapping in mappings ~}}
+namespace {{mapping.namespace}}
+{
+    using Newtonsoft.Json;
+
+    {{~ if mapping.net_type == 'string'~}}
+    public class {{mapping.identifier}}NewtonsoftJsonConverter : Newtonsoft.Json.JsonConverter<{{mapping.identifier}}>
+    {
+        public override void WriteJson(JsonWriter writer, {{mapping.identifier}}? value, JsonSerializer serializer)
+        {
+            if (value is null)
+            {
+                writer.WriteNull();
+            }
+            else
+            {
+                writer.WriteValue(value.Value);
+            }
+        }
+
+        public override {{mapping.identifier}}? ReadJson(JsonReader reader, Type objectType, {{mapping.identifier}}? existingValue, bool hasExistingValue,
+            JsonSerializer serializer) =>
+            existingValue ?? (reader.Value is string stringValue ? new {{mapping.identifier}}(stringValue) : null);
+    }
+    {{~ else if mapping.net_type == 'int'~}}
+    public class {{mapping.identifier}}NewtonsoftJsonConverter : Newtonsoft.Json.JsonConverter<{{mapping.identifier}}>
+    {
+        public override void WriteJson(JsonWriter writer, {{mapping.identifier}}? value, JsonSerializer serializer)
+        {
+            if (value is null)
+            {
+                writer.WriteNull();
+            }
+            else
+            {
+                writer.WriteValue(value.Value);
+            }
+        }
+
+        public override {{mapping.identifier}}? ReadJson(JsonReader reader, Type objectType, {{mapping.identifier}}? existingValue, bool hasExistingValue,
+            JsonSerializer serializer) =>
+            existingValue ?? (reader.Value is int intValue ? new {{mapping.identifier}}(intValue) : null);
+    }
+    {{~ else if mapping.net_type == 'long'~}}
+    public class {{mapping.identifier}}NewtonsoftJsonConverter : Newtonsoft.Json.JsonConverter<{{mapping.identifier}}>
+    {
+        public override void WriteJson(JsonWriter writer, {{mapping.identifier}}? value, JsonSerializer serializer)
+        {
+            if (value is null)
+            {
+                writer.WriteNull();
+            }
+            else
+            {
+                writer.WriteValue(value.Value);
+            }
+        }
+
+        public override {{mapping.identifier}}? ReadJson(JsonReader reader, Type objectType, {{mapping.identifier}}? existingValue, bool hasExistingValue,
+            JsonSerializer serializer) =>
+            existingValue ?? (reader.Value is long longValue ? new {{mapping.identifier}}(longValue) : null);
+    }
+    {{~ else ~}}
+        // No supported net type {{mapping.net_type}}
+    {{~ end ~}}
+}
+
+{{~ end ~}}
