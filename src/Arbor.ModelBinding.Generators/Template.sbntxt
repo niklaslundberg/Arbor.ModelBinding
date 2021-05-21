@@ -104,6 +104,32 @@ namespace {{mapping.namespace}}
             {{~ end ~}}
         }
 
+        {{~ if mapping.net_type == 'string' && mapping.string_comparison != '' ~}}
+        public string NormalizedValue
+        {
+            get
+            {
+                if (Value is string stringValue && _comparer is StringComparer stringComparer)
+                {
+                    if (stringComparer == StringComparer.CurrentCultureIgnoreCase)
+                    {
+                        return stringValue.ToLower();
+                    }
+                    if (stringComparer == StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        return stringValue.ToLower(CultureInfo.InvariantCulture);
+                    }
+                    if (stringComparer == StringComparer.OrdinalIgnoreCase)
+                    {
+                        return stringValue.ToLowerInvariant();
+                    }
+                }
+
+                return Value;
+            }
+        }
+        {{~ end ~}}
+
         public static explicit operator {{mapping.identifier}}({{mapping.net_type}} value)
         {
             return new {{mapping.identifier}}(value);

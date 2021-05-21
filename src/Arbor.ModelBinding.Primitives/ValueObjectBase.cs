@@ -5,7 +5,7 @@ namespace Arbor.ModelBinding.Primitives
 {
     public abstract class ValueObjectBase<T> : IEquatable<ValueObjectBase<T>>, IComparable<ValueObjectBase<T>> where T : notnull, IComparable<T>
     {
-        private readonly IComparer<T>? _comparer;
+        protected readonly IComparer<T>? _comparer;
 
         protected ValueObjectBase(T value, IComparer<T>? comparer = null)
         {

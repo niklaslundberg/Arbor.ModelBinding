@@ -2,7 +2,7 @@
 
 namespace Arbor.ModelBinding.AspNetCore.Tests
 {
-    public sealed    class MyIntValueObject : ValueObjectBase<int>
+    public sealed class MyIntValueObject : ValueObjectBase<int>
     {
         public MyIntValueObject(int value): base(value)
         {
