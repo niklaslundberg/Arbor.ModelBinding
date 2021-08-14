@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -13,10 +11,7 @@ namespace Arbor.ModelBinding.Generators.Tests
     {
         private readonly ITestOutputHelper _testOutputHelper;
 
-        public GeneratorTests(ITestOutputHelper testOutputHelper)
-        {
-            _testOutputHelper = testOutputHelper;
-        }
+        public GeneratorTests(ITestOutputHelper testOutputHelper) => _testOutputHelper = testOutputHelper;
 
         [Fact]
         public void Test()
@@ -27,7 +22,6 @@ namespace MyCode
     [Arbor.ModelBinding.Primitives.StringValueType(System.StringComparison.OrdinalIgnoreCase)]
     public partial class Program
     {
-        
     }
 }
 ");
@@ -35,11 +29,12 @@ namespace MyCode
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(generator);
 
-            driver = driver.RunGeneratorsAndUpdateCompilation(inputCompilation, out var outputCompilation, out var diagnostics);
+            driver = driver.RunGeneratorsAndUpdateCompilation(inputCompilation, out var outputCompilation,
+                out var diagnostics);
 
             GeneratorDriverRunResult runResult = driver.GetRunResult();
 
-            GeneratorRunResult generatorResult = runResult.Results[0];
+            var generatorResult = runResult.Results[0];
 
             generatorResult.GeneratedSources.Length.Should().Be(1);
         }
@@ -61,14 +56,16 @@ namespace MyCode
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(generator);
 
-            driver = driver.RunGeneratorsAndUpdateCompilation(inputCompilation, out var outputCompilation, out var diagnostics);
+            driver = driver.RunGeneratorsAndUpdateCompilation(inputCompilation, out var outputCompilation,
+                out var diagnostics);
 
             GeneratorDriverRunResult runResult = driver.GetRunResult();
 
-            GeneratorRunResult generatorResult = runResult.Results[0];
+            var generatorResult = runResult.Results[0];
 
             generatorResult.GeneratedSources.Length.Should().Be(1);
         }
+
         [Fact]
         public void Test3()
         {
@@ -86,11 +83,12 @@ namespace MyCode
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(generator);
 
-            driver = driver.RunGeneratorsAndUpdateCompilation(inputCompilation, out var outputCompilation, out var diagnostics);
+            driver = driver.RunGeneratorsAndUpdateCompilation(inputCompilation, out var outputCompilation,
+                out var diagnostics);
 
             GeneratorDriverRunResult runResult = driver.GetRunResult();
 
-            GeneratorRunResult generatorResult = runResult.Results[0];
+            var generatorResult = runResult.Results[0];
 
             foreach (var outputCompilationSyntaxTree in outputCompilation.SyntaxTrees)
             {
