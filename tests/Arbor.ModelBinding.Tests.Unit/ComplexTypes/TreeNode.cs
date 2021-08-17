@@ -5,7 +5,7 @@ namespace Arbor.ModelBinding.Tests.Unit.ComplexTypes
 {
     public class TreeNode
     {
-        public TreeNode(string name, IEnumerable<TreeNode> nodes)
+        public TreeNode(string name, IReadOnlyList<TreeNode> nodes)
         {
             Name = name;
             Nodes = nodes?.ToList();
@@ -13,6 +13,6 @@ namespace Arbor.ModelBinding.Tests.Unit.ComplexTypes
 
         public string Name { get; }
 
-        public List<TreeNode> Nodes { get; }
+        public IReadOnlyList<TreeNode> Nodes { get; }
     }
 }

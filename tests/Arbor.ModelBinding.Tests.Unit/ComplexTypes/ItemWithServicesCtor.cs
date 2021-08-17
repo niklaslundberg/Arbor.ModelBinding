@@ -16,7 +16,7 @@ namespace Arbor.ModelBinding.Tests.Unit.ComplexTypes
 
         public int NumberOfItems { get; }
 
-        public List<Service> Services { get; }
+        public IEnumerable<Service> Services { get; }
 
         public override string ToString()
         {

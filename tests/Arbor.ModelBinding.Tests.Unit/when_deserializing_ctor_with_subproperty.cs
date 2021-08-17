@@ -4,7 +4,12 @@ using Arbor.ModelBinding.Tests.Unit.ComplexTypes;
 using Machine.Specifications;
 
 using Microsoft.Extensions.Primitives;
+#if Newtonsoft
+using Newtonsoft.Json;
 using Arbor.ModelBinding.NewtonsoftJson;
+#else
+using Arbor.ModelBinding.SystemTextJson;
+#endif
 
 namespace Arbor.ModelBinding.Tests.Unit
 {
@@ -18,9 +23,9 @@ namespace Arbor.ModelBinding.Tests.Unit
             {
                 values = new List<KeyValuePair<string, StringValues>>
                              {
-                                 new KeyValuePair<string, StringValues>("a", "123"),
-                                 new KeyValuePair<string, StringValues>("s.s1", "234"),
-                                 new KeyValuePair<string, StringValues>("s.s2", "345")
+                                 new("a", "123"),
+                                 new("s.s1", "234"),
+                                 new("s.s2", "345")
                              };
             };
 

@@ -4,6 +4,7 @@
     <TargetFrameworks>net5.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
+    <DefineConstants>Newtonsoft</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using Arbor.ModelBinding.Tests.Unit.SampleTypes;
 using Machine.Specifications;
 using Microsoft.Extensions.Primitives;
+#if Newtonsoft
 using Newtonsoft.Json;
 using Arbor.ModelBinding.NewtonsoftJson;
+#else
+using Arbor.ModelBinding.SystemTextJson;
+#endif
 
 namespace Arbor.ModelBinding.Tests.Unit
 {
@@ -23,7 +27,7 @@ namespace Arbor.ModelBinding.Tests.Unit
         {
             values = new List<KeyValuePair<string, StringValues>>
             {
-                new KeyValuePair<string, StringValues>("enabled", "on"),
+                new("enabled", "on"),
             };
         };
 
@@ -32,9 +36,6 @@ namespace Arbor.ModelBinding.Tests.Unit
             {
                 result = FormsExtensions.ParseFromPairs(values, typeof(ItemWithBool));
                 target = result as ItemWithBool;
-
-                Console.WriteLine(
-                    $"Instance: {JsonConvert.SerializeObject(target, Formatting.Indented)}");
             };
 
         It should_have_bool_property_set_to_true = () => target.Enabled.ShouldBeTrue();

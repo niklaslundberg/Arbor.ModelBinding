@@ -1,5 +1,10 @@
 ﻿using System.Collections.Generic;
+#if Newtonsoft
+using Newtonsoft.Json;
 using Arbor.ModelBinding.NewtonsoftJson;
+#else
+using Arbor.ModelBinding.SystemTextJson;
+#endif
 
 using Machine.Specifications;
 
@@ -30,8 +35,8 @@ namespace Arbor.ModelBinding.Tests.Unit
         {
             values = new List<KeyValuePair<string, StringValues>>
                      {
-                         new KeyValuePair<string, StringValues>("enabled", "on"),
-                         new KeyValuePair<string, StringValues>("enabled2", "true")
+                         new("enabled", "on"),
+                         new("enabled2", "true")
                      };
         };
 

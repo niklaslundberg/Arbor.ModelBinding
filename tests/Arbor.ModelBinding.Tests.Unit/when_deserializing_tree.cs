@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using Arbor.ModelBinding.Tests.Unit.ComplexTypes;
 
 using Machine.Specifications;
-
-using Arbor.ModelBinding.NewtonsoftJson;
 using Microsoft.Extensions.Primitives;
 
+#if Newtonsoft
 using Newtonsoft.Json;
+using Arbor.ModelBinding.NewtonsoftJson;
+#else
+using Arbor.ModelBinding.SystemTextJson;
+#endif
 
 namespace Arbor.ModelBinding.Tests.Unit
 {
@@ -28,12 +31,12 @@ namespace Arbor.ModelBinding.Tests.Unit
         {
             values = new List<KeyValuePair<string, StringValues>>
                      {
-                         new KeyValuePair<string, StringValues>("name", "root"),
-                         new KeyValuePair<string, StringValues>("nodes[0].name", "a"),
-                         new KeyValuePair<string, StringValues>("nodes[0].nodes[0].name", "a-1"),
-                         new KeyValuePair<string, StringValues>("nodes[1].name", "b"),
-                         new KeyValuePair<string, StringValues>("nodes[1].nodes[0].name", "b-1"),
-                         new KeyValuePair<string, StringValues>("nodes[1].nodes[1].name", "b-2")
+                         new("name", "root"),
+                         new("nodes[0].name", "a"),
+                         new("nodes[0].nodes[0].name", "a-1"),
+                         new("nodes[1].name", "b"),
+                         new("nodes[1].nodes[0].name", "b-1"),
+                         new("nodes[1].nodes[1].name", "b-2")
                      };
         };
 
@@ -42,9 +45,6 @@ namespace Arbor.ModelBinding.Tests.Unit
             {
                 result = FormsExtensions.ParseFromPairs(values, targetType);
                 target = result as TreeNode;
-
-                Console.WriteLine(
-                    $"Instance: {JsonConvert.SerializeObject(target, Formatting.Indented)}");
             };
 
         It should_have_name_set = () => target.Name.ShouldEqual("root");

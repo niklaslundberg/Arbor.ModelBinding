@@ -1,7 +1,12 @@
 ﻿using System.Collections.Generic;
 using Machine.Specifications;
 using Microsoft.Extensions.Primitives;
+#if Newtonsoft
+using Newtonsoft.Json;
 using Arbor.ModelBinding.NewtonsoftJson;
+#else
+using Arbor.ModelBinding.SystemTextJson;
+#endif
 
 namespace Arbor.ModelBinding.Tests.Unit
 {

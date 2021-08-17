@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Arbor.ModelBinding.Tests.Unit.ComplexTypes;
-using Arbor.ModelBinding.NewtonsoftJson;
 using Machine.Specifications;
 using Microsoft.Extensions.Primitives;
+#if Newtonsoft
 using Newtonsoft.Json;
+using Arbor.ModelBinding.NewtonsoftJson;
+#else
+using Arbor.ModelBinding.SystemTextJson;
+#endif
 
 namespace Arbor.ModelBinding.Tests.Unit
 {
@@ -23,12 +27,12 @@ namespace Arbor.ModelBinding.Tests.Unit
         {
             values = new List<KeyValuePair<string, StringValues>>
             {
-                new KeyValuePair<string, StringValues>("description", "myDescription"),
-                new KeyValuePair<string, StringValues>("numberOfItems", "33"),
-                new KeyValuePair<string, StringValues>("services[0].title", "myFirstServiceTitle"),
-                new KeyValuePair<string, StringValues>("services[0].otherProperty", "42"),
-                new KeyValuePair<string, StringValues>("services[1].title", "mySecondServiceTitle"),
-                new KeyValuePair<string, StringValues>("services[1].otherProperty", "123")
+                new("description", "myDescription"),
+                new("numberOfItems", "33"),
+                new("services[0].title", "myFirstServiceTitle"),
+                new("services[0].otherProperty", "42"),
+                new("services[1].title", "mySecondServiceTitle"),
+                new("services[1].otherProperty", "123")
             };
         };
 
@@ -37,9 +41,6 @@ namespace Arbor.ModelBinding.Tests.Unit
             {
                 result = FormsExtensions.ParseFromPairs(values, typeof(ItemWithServices));
                 target = result as ItemWithServices;
-
-                Console.WriteLine(
-                    $"Instance: {JsonConvert.SerializeObject(target, Formatting.Indented)}");
             };
 
         It should_have_other_simple_property_set = () => target.NumberOfItems.ShouldEqual(33);

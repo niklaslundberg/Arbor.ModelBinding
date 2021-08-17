@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using Arbor.ModelBinding.Tests.Unit.ComplexTypes;
 using Machine.Specifications;
 using Microsoft.Extensions.Primitives;
+#if Newtonsoft
+using Newtonsoft.Json;
 using Arbor.ModelBinding.NewtonsoftJson;
+#else
+using Arbor.ModelBinding.SystemTextJson;
+#endif
 
 namespace Arbor.ModelBinding.Tests.Unit
 {
@@ -21,7 +26,7 @@ namespace Arbor.ModelBinding.Tests.Unit
                 FormsExtensions.ParseFromPairs(
                     new List<KeyValuePair<string, StringValues>>
                     {
-                        new KeyValuePair<string, StringValues>("bad", "data")
+                        new("bad", "data")
                     },
                     typeof(DateWrapper));
             });

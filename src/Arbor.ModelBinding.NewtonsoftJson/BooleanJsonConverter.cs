@@ -11,22 +11,19 @@ namespace Arbor.ModelBinding.NewtonsoftJson
     /// </summary>
     internal class BooleanJsonConverter : JsonConverter
     {
-        private readonly Dictionary<string, bool> _dictionary;
-
-        public BooleanJsonConverter() =>
-            _dictionary = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "true", true },
-                { "y", true },
-                { "yes", true },
-                { "1", true },
-                { "on", true },
-                { "false", false },
-                { "n", false },
-                { "no", false },
-                { "0", false },
-                { "off", false }
-            };
+        private static readonly Dictionary<string, bool> _dictionary = new(StringComparer.OrdinalIgnoreCase)
+        {
+            { "true", true },
+            { "y", true },
+            { "yes", true },
+            { "1", true },
+            { "on", true },
+            { "false", false },
+            { "n", false },
+            { "no", false },
+            { "0", false },
+            { "off", false }
+        };
 
         /// <summary>
         /// Specifies that this converter will not participate in writing results.
