@@ -69,7 +69,7 @@ namespace {{mapping.namespace}}
         }
 		{{~ if mapping.net_type == 'int'~}}
 
-        public static bool TryParse(string? attemptedValue, out {{mapping.identifier}} value)
+        public static bool TryParse(string? attemptedValue, out {{mapping.identifier}}? value)
         {
             if (int.TryParse(attemptedValue, out int intValue) && intValue > 0)
             {
@@ -82,7 +82,7 @@ namespace {{mapping.namespace}}
         }
 		{{~ else if mapping.net_type == 'long'~}}
 
-		public static bool TryParse(string? attemptedValue, out {{mapping.identifier}} value)
+		public static bool TryParse(string? attemptedValue, out {{mapping.identifier}}? value)
         {
             if (long.TryParse(attemptedValue, out long longValue) && longValue > 0)
             {
