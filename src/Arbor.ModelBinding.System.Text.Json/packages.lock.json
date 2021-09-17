@@ -14,6 +14,20 @@
           "Microsoft.Extensions.Primitives": "5.0.1"
         }
       }
+    },
+    "net6.0": {
+      "Microsoft.Extensions.Primitives": {
+        "type": "Direct",
+        "requested": "[5.0.1, )",
+        "resolved": "5.0.1",
+        "contentHash": "5WPSmL4YeP7eW+Vc8XZ4DwjYWBAiSwDV9Hm63JJWcz1Ie3Xjv4KuJXzgCstj48LkLfVCYa7mLcx7y+q6yqVvtw=="
+      },
+      "arbor.modelbinding": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "5.0.1"
+        }
+      }
     }
   }
 }
