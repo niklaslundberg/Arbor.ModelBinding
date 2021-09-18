@@ -16,6 +16,7 @@ SET Arbor.Build.Tools.External.MSBuild.DotNet.Enabled=true
 SET Arbor.Build.Vcs.Branch.BranchModel=GitFlowBuildOnMain
 SET Fallback.Version.Build=0
 SET CI_BUILD=true
+SET Arbor.Build.Tests.AssemblyStartsWith=Arbor.ModelBinding.Tests,Arbor.Build.Tests.Generators.Tests,Arbor.ModelBinding.Primitives.Tests
 
 IF "%Arbor.Build.Bootstrapper.AllowPrerelease%" == "" (
 	SET Arbor.Build.Bootstrapper.AllowPrerelease=true
