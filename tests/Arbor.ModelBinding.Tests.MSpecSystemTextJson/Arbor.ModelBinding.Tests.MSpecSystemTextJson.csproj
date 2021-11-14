@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\ComplexRootObject.cs" Link="ComplexTypes\ComplexRootObject.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\DateWrapper.cs" Link="ComplexTypes\DateWrapper.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\ItemWithServices.cs" Link="ComplexTypes\ItemWithServices.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\ItemWithServicesCtor.cs" Link="ComplexTypes\ItemWithServicesCtor.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\MainType.cs" Link="ComplexTypes\MainType.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\MainTypeCtor.cs" Link="ComplexTypes\MainTypeCtor.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\Service.cs" Link="ComplexTypes\Service.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\SubComplexType.cs" Link="ComplexTypes\SubComplexType.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\SubListItem.cs" Link="ComplexTypes\SubListItem.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\SubType.cs" Link="ComplexTypes\SubType.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\SubTypeCtor.cs" Link="ComplexTypes\SubTypeCtor.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\TreeNode.cs" Link="ComplexTypes\TreeNode.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\TypeWithStringUri.cs" Link="ComplexTypes\TypeWithStringUri.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\ComplexTypes\TypeWithUri.cs" Link="ComplexTypes\TypeWithUri.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\MyAbstract.cs" Link="MyAbstract.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\SampleTypes\BookingCancellationRequest.cs" Link="SampleTypes\BookingCancellationRequest.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\SampleTypes\DefaultConstructorObjectWithSimpleGetSetProperties.cs" Link="SampleTypes\DefaultConstructorObjectWithSimpleGetSetProperties.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\SampleTypes\ItemWithBool.cs" Link="SampleTypes\ItemWithBool.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\SampleTypes\NewUsersRequest.cs" Link="SampleTypes\NewUsersRequest.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_complex_ctor_type.cs" Link="when_deserializing_complex_ctor_type.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_complex_type.cs" Link="when_deserializing_complex_type.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_ctor_subproperty.cs" Link="when_deserializing_ctor_subproperty.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_ctor_with_subproperty.cs" Link="when_deserializing_ctor_with_subproperty.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_ctor_with_sub_properties.cs" Link="when_deserializing_ctor_with_sub_properties.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_ctor_with_sub_properties2.cs" Link="when_deserializing_ctor_with_sub_properties2.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_nested_complex_type.cs" Link="when_deserializing_nested_complex_type.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_simple_type.cs" Link="when_deserializing_simple_type.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_stringvalues.cs" Link="when_deserializing_stringvalues.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_string_uri.cs" Link="when_deserializing_string_uri.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_tree.cs" Link="when_deserializing_tree.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_type_with_bool_from_on.cs" Link="when_deserializing_type_with_bool_from_on.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_uri.cs" Link="when_deserializing_uri.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_deserializing_with_bad_data.cs" Link="when_deserializing_with_bad_data.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_getting_an_abstract_class.cs" Link="when_getting_an_abstract_class.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_getting_an_enumerable_of_abstract_class.cs" Link="when_getting_an_enumerable_of_abstract_class.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_getting_a_class_from_empty_collection.cs" Link="when_getting_a_class_from_empty_collection.cs" />
+    <Compile Include="..\Arbor.ModelBinding.Tests.Unit\when_getting_a_struct_from_empty_collection.cs" Link="when_getting_a_struct_from_empty_collection.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Arbor.ModelBinding.System.Text.Json\Arbor.ModelBinding.System.Text.Json.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Machine.Specifications" Version="1.0.0" />
+    <PackageReference Include="Machine.Specifications.Runner.VisualStudio" Version="2.10.2" />
+    <PackageReference Include="Machine.Specifications.Should" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ComplexTypes\" />
+    <Folder Include="SampleTypes\" />
+  </ItemGroup>
+
+</Project>

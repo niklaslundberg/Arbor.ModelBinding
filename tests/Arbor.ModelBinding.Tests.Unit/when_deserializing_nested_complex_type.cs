@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Arbor.ModelBinding.Tests.Unit.ComplexTypes;
 using Machine.Specifications;
-using Arbor.ModelBinding.NewtonsoftJson;
 using Microsoft.Extensions.Primitives;
+#if Newtonsoft
 using Newtonsoft.Json;
+using Arbor.ModelBinding.NewtonsoftJson;
+#else
+using Arbor.ModelBinding.SystemTextJson;
+#endif
 
 namespace Arbor.ModelBinding.Tests.Unit
 {
@@ -46,9 +50,6 @@ namespace Arbor.ModelBinding.Tests.Unit
             {
                 result = FormsExtensions.ParseFromPairs(values, targetType);
                 target = result as ComplexRootObject;
-
-                Console.WriteLine("Instance: " +
-                                  JsonConvert.SerializeObject(target, Formatting.Indented));
             };
 
         It should_have_other_simple_property_set = () => target.RootOtherProperty.ShouldEqual(911);
@@ -60,8 +61,6 @@ namespace Arbor.ModelBinding.Tests.Unit
         It should_return_an_object_of_type_the_requested_type =
             () =>
             {
-                Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
-
                 result.ShouldBeOfExactType<ComplexRootObject>();
             };
 

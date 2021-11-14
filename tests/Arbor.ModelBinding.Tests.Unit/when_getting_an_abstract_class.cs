@@ -1,5 +1,10 @@
 ﻿using System.Collections.Generic;
+#if Newtonsoft
+using Newtonsoft.Json;
 using Arbor.ModelBinding.NewtonsoftJson;
+#else
+using Arbor.ModelBinding.SystemTextJson;
+#endif
 using Machine.Specifications;
 using Microsoft.Extensions.Primitives;
 

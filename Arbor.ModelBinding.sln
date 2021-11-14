@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31606.5
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding", "src\Arbor.ModelBinding\Arbor.ModelBinding.csproj", "{99CDB465-7ECD-4EC1-B18C-ADE4E6DCB40E}"
 EndProject
@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{B7C2E2D3-D64E-4778-83C6-3BE642DF32CB}"
 	ProjectSection(SolutionItems) = preProject
-		test\.editorconfig = test\.editorconfig
+		tests\.editorconfig = tests\.editorconfig
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.NewtonsoftJson", "src\Arbor.ModelBinding.NewtonsoftJson\Arbor.ModelBinding.NewtonsoftJson.csproj", "{3FA1A24E-977A-430A-A57B-5B5E71145A84}"
@@ -35,7 +35,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.Generato
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.Tests.Unit", "tests\Arbor.ModelBinding.Tests.Unit\Arbor.ModelBinding.Tests.Unit.csproj", "{F1018429-09F4-41F3-A95C-64575A298069}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbor.ModelBinding.Primitives.Tests", "Arbor.ModelBinding.Primitives.Tests\Arbor.ModelBinding.Primitives.Tests.csproj", "{FA60C49F-5FD5-465E-965E-2B47B34A738A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.Primitives.Tests", "Arbor.ModelBinding.Primitives.Tests\Arbor.ModelBinding.Primitives.Tests.csproj", "{FA60C49F-5FD5-465E-965E-2B47B34A738A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.System.Text.Json", "src\Arbor.ModelBinding.System.Text.Json\Arbor.ModelBinding.System.Text.Json.csproj", "{685500C8-6E84-4CEB-934B-240C4653574A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.Tests.System.Text.Json", "tests\Arbor.ModelBinding.Tests.System.Text.Json\Arbor.ModelBinding.Tests.System.Text.Json.csproj", "{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arbor.ModelBinding.Tests.MSpecSystemTextJson", "tests\Arbor.ModelBinding.Tests.MSpecSystemTextJson\Arbor.ModelBinding.Tests.MSpecSystemTextJson.csproj", "{97349415-44C9-480A-B48F-BFC2BC5C8863}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -143,6 +149,42 @@ Global
 		{FA60C49F-5FD5-465E-965E-2B47B34A738A}.Release|x64.Build.0 = Release|Any CPU
 		{FA60C49F-5FD5-465E-965E-2B47B34A738A}.Release|x86.ActiveCfg = Release|Any CPU
 		{FA60C49F-5FD5-465E-965E-2B47B34A738A}.Release|x86.Build.0 = Release|Any CPU
+		{685500C8-6E84-4CEB-934B-240C4653574A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{685500C8-6E84-4CEB-934B-240C4653574A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{685500C8-6E84-4CEB-934B-240C4653574A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{685500C8-6E84-4CEB-934B-240C4653574A}.Debug|x64.Build.0 = Debug|Any CPU
+		{685500C8-6E84-4CEB-934B-240C4653574A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{685500C8-6E84-4CEB-934B-240C4653574A}.Debug|x86.Build.0 = Debug|Any CPU
+		{685500C8-6E84-4CEB-934B-240C4653574A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{685500C8-6E84-4CEB-934B-240C4653574A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{685500C8-6E84-4CEB-934B-240C4653574A}.Release|x64.ActiveCfg = Release|Any CPU
+		{685500C8-6E84-4CEB-934B-240C4653574A}.Release|x64.Build.0 = Release|Any CPU
+		{685500C8-6E84-4CEB-934B-240C4653574A}.Release|x86.ActiveCfg = Release|Any CPU
+		{685500C8-6E84-4CEB-934B-240C4653574A}.Release|x86.Build.0 = Release|Any CPU
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}.Debug|x64.Build.0 = Debug|Any CPU
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}.Debug|x86.Build.0 = Debug|Any CPU
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}.Release|x64.ActiveCfg = Release|Any CPU
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}.Release|x64.Build.0 = Release|Any CPU
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}.Release|x86.ActiveCfg = Release|Any CPU
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38}.Release|x86.Build.0 = Release|Any CPU
+		{97349415-44C9-480A-B48F-BFC2BC5C8863}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97349415-44C9-480A-B48F-BFC2BC5C8863}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97349415-44C9-480A-B48F-BFC2BC5C8863}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{97349415-44C9-480A-B48F-BFC2BC5C8863}.Debug|x64.Build.0 = Debug|Any CPU
+		{97349415-44C9-480A-B48F-BFC2BC5C8863}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{97349415-44C9-480A-B48F-BFC2BC5C8863}.Debug|x86.Build.0 = Debug|Any CPU
+		{97349415-44C9-480A-B48F-BFC2BC5C8863}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97349415-44C9-480A-B48F-BFC2BC5C8863}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97349415-44C9-480A-B48F-BFC2BC5C8863}.Release|x64.ActiveCfg = Release|Any CPU
+		{97349415-44C9-480A-B48F-BFC2BC5C8863}.Release|x64.Build.0 = Release|Any CPU
+		{97349415-44C9-480A-B48F-BFC2BC5C8863}.Release|x86.ActiveCfg = Release|Any CPU
+		{97349415-44C9-480A-B48F-BFC2BC5C8863}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,6 +193,8 @@ Global
 		{DFBD28C6-9901-4F9C-A25C-B4F034612D6B} = {B7C2E2D3-D64E-4778-83C6-3BE642DF32CB}
 		{577950C5-CA65-4019-831F-D03F342893FB} = {B7C2E2D3-D64E-4778-83C6-3BE642DF32CB}
 		{F1018429-09F4-41F3-A95C-64575A298069} = {B7C2E2D3-D64E-4778-83C6-3BE642DF32CB}
+		{7B2DF8BD-88FF-422F-ABF8-567F2926EF38} = {B7C2E2D3-D64E-4778-83C6-3BE642DF32CB}
+		{97349415-44C9-480A-B48F-BFC2BC5C8863} = {B7C2E2D3-D64E-4778-83C6-3BE642DF32CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EED4B2A4-4151-4D4A-A4E3-27BA3FC55AF1}

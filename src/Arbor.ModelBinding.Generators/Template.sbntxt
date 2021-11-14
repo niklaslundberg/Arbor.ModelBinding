@@ -69,7 +69,7 @@ namespace {{mapping.namespace}}
         }
 		{{~ if mapping.net_type == 'int'~}}
 
-        public static bool TryParse(string? attemptedValue, out {{mapping.identifier}} value)
+        public static bool TryParse(string? attemptedValue, out {{mapping.identifier}}? value)
         {
             if (int.TryParse(attemptedValue, out int intValue) && intValue > 0)
             {
@@ -82,7 +82,7 @@ namespace {{mapping.namespace}}
         }
 		{{~ else if mapping.net_type == 'long'~}}
 
-		public static bool TryParse(string? attemptedValue, out {{mapping.identifier}} value)
+		public static bool TryParse(string? attemptedValue, out {{mapping.identifier}}? value)
         {
             if (long.TryParse(attemptedValue, out long longValue) && longValue > 0)
             {
@@ -103,6 +103,32 @@ namespace {{mapping.namespace}}
             return Value;
             {{~ end ~}}
         }
+
+        {{~ if mapping.net_type == 'string' && mapping.string_comparison != '' ~}}
+        public string NormalizedValue
+        {
+            get
+            {
+                if (Value is string stringValue && _comparer is StringComparer stringComparer)
+                {
+                    if (stringComparer == StringComparer.CurrentCultureIgnoreCase)
+                    {
+                        return stringValue.ToLower();
+                    }
+                    if (stringComparer == StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        return stringValue.ToLower(CultureInfo.InvariantCulture);
+                    }
+                    if (stringComparer == StringComparer.OrdinalIgnoreCase)
+                    {
+                        return stringValue.ToLowerInvariant();
+                    }
+                }
+
+                return Value;
+            }
+        }
+        {{~ end ~}}
 
         public static explicit operator {{mapping.identifier}}({{mapping.net_type}} value)
         {

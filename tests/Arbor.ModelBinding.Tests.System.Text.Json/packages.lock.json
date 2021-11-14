@@ -90,6 +90,14 @@
           "System.Threading": "4.0.11"
         }
       },
+      "Microsoft.Extensions.Primitives": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "9+PnzmQFfEFNR9J2aDTfJGGupShHjOuGw4VUv+JB044biSHrnmCIMD+mJHmb2H7YryrfBEXDurxQ47gJZdCKNQ==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        }
+      },
       "Microsoft.NETCore.Platforms": {
         "type": "Transitive",
         "resolved": "2.1.2",
@@ -371,11 +379,6 @@
         "type": "Transitive",
         "resolved": "5.0.0",
         "contentHash": "FXkLXiK0sVVewcso0imKQoOxjoPAj42R8HtjjbSjVPAzwDfzoyoznWxgA3c38LDbN9SJux1xXoXYAhz98j7r2g=="
-      },
-      "System.ComponentModel.Annotations": {
-        "type": "Transitive",
-        "resolved": "5.0.0",
-        "contentHash": "dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg=="
       },
       "System.Configuration.ConfigurationManager": {
         "type": "Transitive",
@@ -781,8 +784,8 @@
       },
       "System.Runtime.CompilerServices.Unsafe": {
         "type": "Transitive",
-        "resolved": "5.0.0",
-        "contentHash": "ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA=="
+        "resolved": "6.0.0",
+        "contentHash": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg=="
       },
       "System.Runtime.Extensions": {
         "type": "Transitive",
@@ -1158,10 +1161,17 @@
           "xunit.extensibility.core": "[2.4.1]"
         }
       },
-      "arbor.modelbinding.generators": {
+      "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
-          "System.ComponentModel.Annotations": "5.0.0"
+          "Microsoft.Extensions.Primitives": "6.0.0"
+        }
+      },
+      "arbor.modelbinding.system.text.json": {
+        "type": "Project",
+        "dependencies": {
+          "Arbor.ModelBinding": "1.0.0",
+          "Microsoft.Extensions.Primitives": "6.0.0"
         }
       }
     }

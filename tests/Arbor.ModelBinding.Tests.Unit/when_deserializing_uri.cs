@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Arbor.ModelBinding.NewtonsoftJson;
 using Arbor.ModelBinding.Tests.Unit.ComplexTypes;
 using Machine.Specifications;
 using Microsoft.Extensions.Primitives;
+#if Newtonsoft
 using Newtonsoft.Json;
+using Arbor.ModelBinding.NewtonsoftJson;
+#else
+using Arbor.ModelBinding.SystemTextJson;
+#endif
 
 namespace Arbor.ModelBinding.Tests.Unit
 {
@@ -23,7 +27,7 @@ namespace Arbor.ModelBinding.Tests.Unit
         {
             values = new List<KeyValuePair<string, StringValues>>
             {
-                new KeyValuePair<string, StringValues>("url", "http://example.local"),
+                new("url", "http://example.local"),
             };
         };
 
@@ -32,9 +36,6 @@ namespace Arbor.ModelBinding.Tests.Unit
             {
                 result = FormsExtensions.ParseFromPairs(values, targetType);
                 target = result as TypeWithUri;
-
-                Console.WriteLine(
-                    $"Instance: {JsonConvert.SerializeObject(target, Formatting.Indented)}");
             };
 
         It should_have_url_not_null = () => target.Url.ShouldNotBeNull();

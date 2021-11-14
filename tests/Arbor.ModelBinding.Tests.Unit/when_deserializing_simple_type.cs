@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using Arbor.ModelBinding.Tests.Unit.SampleTypes;
 using Machine.Specifications;
 using Microsoft.Extensions.Primitives;
-using Arbor.ModelBinding.NewtonsoftJson;
+#if Newtonsoft
 using Newtonsoft.Json;
+using Arbor.ModelBinding.NewtonsoftJson;
+#else
+using Arbor.ModelBinding.SystemTextJson;
+#endif
 
 namespace Arbor.ModelBinding.Tests.Unit
 {
@@ -23,8 +27,8 @@ namespace Arbor.ModelBinding.Tests.Unit
         {
             values = new List<KeyValuePair<string, StringValues>>
             {
-                new KeyValuePair<string, StringValues>("bookingId", "123"),
-                new KeyValuePair<string, StringValues>("reason", "sunshine"),
+                new("bookingId", "123"),
+                new("reason", "sunshine"),
             };
         };
 
@@ -33,9 +37,6 @@ namespace Arbor.ModelBinding.Tests.Unit
             {
                 result = FormsExtensions.ParseFromPairs(values, typeof(BookingCancellationRequest));
                 target = result as BookingCancellationRequest;
-
-                Console.WriteLine(
-                    $"Instance: {JsonConvert.SerializeObject(target, Formatting.Indented)}");
             };
 
         It should_have_string_property_set = () => target.Reason.Equals("sunshine");

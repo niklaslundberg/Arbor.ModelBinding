@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using Machine.Specifications;
 
 using Microsoft.Extensions.Primitives;
-using Arbor.ModelBinding.NewtonsoftJson;
-
+#if Newtonsoft
 using Newtonsoft.Json;
+using Arbor.ModelBinding.NewtonsoftJson;
+#else
+using Arbor.ModelBinding.SystemTextJson;
+#endif
 
 namespace Arbor.ModelBinding.Tests.Unit
 {
@@ -33,7 +36,7 @@ namespace Arbor.ModelBinding.Tests.Unit
         {
             values = new List<KeyValuePair<string, StringValues>>
                      {
-                         new KeyValuePair<string, StringValues>(
+                         new(
                              "values",
                              new StringValues(new[] { "a", "b", "c", "d", "e" }))
                      };
@@ -44,9 +47,6 @@ namespace Arbor.ModelBinding.Tests.Unit
             {
                 result = FormsExtensions.ParseFromPairs(values, targetType);
                 target = result as TypeWithStringValues;
-
-                Console.WriteLine(
-                    $"Instance: {JsonConvert.SerializeObject(target, Formatting.Indented)}");
             };
 
         It should_have_string_values = () => target.Values.Count.ShouldEqual(5);
