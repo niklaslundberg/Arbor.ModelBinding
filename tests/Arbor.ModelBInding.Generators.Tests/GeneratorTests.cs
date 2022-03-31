@@ -99,7 +99,7 @@ namespace MyCode
         private static Compilation CreateCompilation(string source)
             => CSharpCompilation.Create("compilation",
                 new[] { CSharpSyntaxTree.ParseText(source) },
-                new[] { MetadataReference.CreateFromFile(typeof(Binder).GetTypeInfo().Assembly.Location) },
+                new[] { MetadataReference.CreateFromFile(typeof(Binder).Assembly.Location) },
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication));
     }
 }
