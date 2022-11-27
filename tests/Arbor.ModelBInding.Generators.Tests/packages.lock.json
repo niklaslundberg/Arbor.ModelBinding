@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    "net6.0": {
+    "net7.0": {
       "FluentAssertions": {
         "type": "Direct",
         "requested": "[6.5.1, )",
@@ -1161,7 +1161,7 @@
       "arbor.modelbinding.generators": {
         "type": "Project",
         "dependencies": {
-          "System.ComponentModel.Annotations": "5.0.0"
+          "System.ComponentModel.Annotations": "[5.0.0, )"
         }
       }
     }

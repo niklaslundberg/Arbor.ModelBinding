@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    "net6.0": {
+    "net7.0": {
       "FluentAssertions": {
         "type": "Direct",
         "requested": "[6.5.1, )",
@@ -1164,14 +1164,14 @@
       "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "6.0.0"
+          "Microsoft.Extensions.Primitives": "[6.0.0, )"
         }
       },
       "arbor.modelbinding.system.text.json": {
         "type": "Project",
         "dependencies": {
-          "Arbor.ModelBinding": "1.0.0",
-          "Microsoft.Extensions.Primitives": "6.0.0"
+          "Arbor.ModelBinding": "[1.0.0, )",
+          "Microsoft.Extensions.Primitives": "[6.0.0, )"
         }
       }
     }
