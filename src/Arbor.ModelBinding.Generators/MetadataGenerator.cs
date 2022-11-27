@@ -62,7 +62,7 @@ namespace Arbor.ModelBinding.Generators
                     MainNamespace = mySyntaxReceiver.ClassesToGenerateConvertersFor.FirstOrDefault()?.Namespace
                 };
 
-                using var manifestResourceStream = typeof(MetadataGenerator).Assembly.GetManifestResourceStream("Arbor.ModelBinding.Generators.Template.sbntxt");
+                using var manifestResourceStream = typeof(MetadataGenerator).Assembly.GetManifestResourceStream("Arbor.ModelBinding.Generators.Template.scriban-cs");
 
                 if (manifestResourceStream is null)
                 {

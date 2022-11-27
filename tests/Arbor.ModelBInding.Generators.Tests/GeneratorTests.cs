@@ -14,7 +14,7 @@ namespace Arbor.ModelBinding.Generators.Tests
         public GeneratorTests(ITestOutputHelper testOutputHelper) => _testOutputHelper = testOutputHelper;
 
         [Fact]
-        public void Test()
+        public void GenerateStringBasedValueType()
         {
             Compilation inputCompilation = CreateCompilation(@"
 namespace MyCode
@@ -40,7 +40,7 @@ namespace MyCode
         }
 
         [Fact]
-        public void Test2()
+        public void GenerateIntBasedValueType()
         {
             Compilation inputCompilation = CreateCompilation(@"
 namespace MyCode
@@ -48,7 +48,6 @@ namespace MyCode
     [Arbor.ModelBinding.Primitives.IntValueType(1)]
     public partial class Program
     {
-        
     }
 }
 ");
@@ -67,7 +66,7 @@ namespace MyCode
         }
 
         [Fact]
-        public void Test3()
+        public void GenerateLongBasedValueType()
         {
             Compilation inputCompilation = CreateCompilation(@"
 namespace MyCode
@@ -75,7 +74,6 @@ namespace MyCode
     [Arbor.ModelBinding.Primitives.LongValueType(long.MinValue)]
     public partial class Program
     {
-        
     }
 }
 ");
@@ -101,7 +99,7 @@ namespace MyCode
         private static Compilation CreateCompilation(string source)
             => CSharpCompilation.Create("compilation",
                 new[] { CSharpSyntaxTree.ParseText(source) },
-                new[] { MetadataReference.CreateFromFile(typeof(Binder).GetTypeInfo().Assembly.Location) },
+                new[] { MetadataReference.CreateFromFile(typeof(Binder).Assembly.Location) },
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication));
     }
 }

@@ -78,11 +78,11 @@ namespace Arbor.ModelBinding.Core
                 .GetTypeInfo()
                 .DeclaredProperties
                 .Where(
-                    property => !(typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(
-                                      property.PropertyType.GetTypeInfo())
+                    property => !(typeof(IEnumerable).IsAssignableFrom(
+                                      property.PropertyType)
                                   || property.PropertyType == typeof(string))
                                 && !property.PropertyType.IsPrimitive
-                                && !property.PropertyType.GetTypeInfo().IsGenericType
+                                && !property.PropertyType.IsGenericType
                                 && !ContainsKey(property.Name)))
             {
                 var subProperties = nameCollection
@@ -103,9 +103,9 @@ namespace Arbor.ModelBinding.Core
                 .GetTypeInfo()
                 .DeclaredProperties
                 .Where(
-                    property => typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(
-                                    property.PropertyType.GetTypeInfo()) &&
-                                property.PropertyType.GetTypeInfo().IsGenericType))
+                    property => typeof(IEnumerable).IsAssignableFrom(
+                                    property.PropertyType) &&
+                                property.PropertyType.IsGenericType))
             {
                 Type? subTargetType = propertyInfo.PropertyType.GenericTypeArguments.FirstOrDefault();
 
