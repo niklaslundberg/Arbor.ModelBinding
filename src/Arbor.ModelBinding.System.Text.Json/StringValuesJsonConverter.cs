@@ -26,6 +26,13 @@ namespace Arbor.ModelBinding.SystemTextJson
                 return new StringValues(values);
             }
 
+            if (reader.TokenType == JsonTokenType.String)
+            {
+                string? stringValue = reader.GetString();
+
+                return new StringValues(stringValue);
+            }
+
             return StringValues.Empty;
         }
 
@@ -43,7 +50,14 @@ namespace Arbor.ModelBinding.SystemTextJson
 
             if (value.Count > 1)
             {
-                writer.WriteStringValue(string.Join(", ", value));
+                writer.WriteStartArray();
+
+                foreach (string? item in value)
+                {
+                    writer.WriteStringValue(item);
+                }
+
+                writer.WriteEndArray();
             }
         }
     }
