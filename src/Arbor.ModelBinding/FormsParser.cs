@@ -69,7 +69,7 @@ namespace Arbor.ModelBinding.Core
 
             foreach (KeyValuePair<string, StringValues> keyValuePair in multipleValuesPairs)
             {
-                string[] values = keyValuePair.Value;
+                var values = keyValuePair.Value;
 
                 dynamicObjectDictionary[keyValuePair.Key] = values;
             }

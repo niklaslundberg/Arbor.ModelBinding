@@ -45,11 +45,13 @@ namespace Arbor.ModelBinding.Tests.Unit
         Because of =
             () =>
             {
-                result = FormsExtensions.ParseFromPairs(values, targetType);
+                result = values.ParseFromPairs(targetType);
                 target = result as TypeWithStringValues;
             };
 
         It should_have_string_values = () => target.Values.Count.ShouldEqual(5);
+
+        It should_have_all_string_values = () => target.Values.ShouldContain("a", "b", "c", "d", "e");
 
     }
 }

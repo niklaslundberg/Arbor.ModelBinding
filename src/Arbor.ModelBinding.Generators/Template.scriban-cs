@@ -38,9 +38,9 @@ namespace {{mapping.namespace}}
 {
     public sealed class {{mapping.identifier}}Converter : System.ComponentModel.TypeConverter
     {
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) => sourceType == typeof(string);
+        public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType) => sourceType == typeof(string);
 
-        public override object? ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) =>
+        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value) =>
             value switch
             {
                 {{mapping.net_type}} theValue => new {{mapping.namespace}}.{{mapping.identifier}}(theValue),
