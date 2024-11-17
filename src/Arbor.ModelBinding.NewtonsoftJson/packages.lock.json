@@ -4,9 +4,9 @@
     ".NETFramework,Version=v4.6.2": {
       "Microsoft.Extensions.Primitives": {
         "type": "Direct",
-        "requested": "[7.0.0, )",
-        "resolved": "7.0.0",
-        "contentHash": "um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q==",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "N3qEBzmLMYiASUlKxxFIISP4AiwuPTHF5uCh+2CWSwwzAJiIYx0kBJsS30cp1nvhSySFAVi30jecD307jV+8Kg==",
         "dependencies": {
           "System.Memory": "4.5.5",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -46,16 +46,16 @@
       "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "[7.0.0, )"
+          "Microsoft.Extensions.Primitives": "[9.0.0, )"
         }
       }
     },
     ".NETFramework,Version=v4.7": {
       "Microsoft.Extensions.Primitives": {
         "type": "Direct",
-        "requested": "[7.0.0, )",
-        "resolved": "7.0.0",
-        "contentHash": "um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q==",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "N3qEBzmLMYiASUlKxxFIISP4AiwuPTHF5uCh+2CWSwwzAJiIYx0kBJsS30cp1nvhSySFAVi30jecD307jV+8Kg==",
         "dependencies": {
           "System.Memory": "4.5.5",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -95,16 +95,16 @@
       "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "[7.0.0, )"
+          "Microsoft.Extensions.Primitives": "[9.0.0, )"
         }
       }
     },
     ".NETFramework,Version=v4.7.1": {
       "Microsoft.Extensions.Primitives": {
         "type": "Direct",
-        "requested": "[7.0.0, )",
-        "resolved": "7.0.0",
-        "contentHash": "um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q==",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "N3qEBzmLMYiASUlKxxFIISP4AiwuPTHF5uCh+2CWSwwzAJiIYx0kBJsS30cp1nvhSySFAVi30jecD307jV+8Kg==",
         "dependencies": {
           "System.Memory": "4.5.5",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -144,16 +144,16 @@
       "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "[7.0.0, )"
+          "Microsoft.Extensions.Primitives": "[9.0.0, )"
         }
       }
     },
     ".NETFramework,Version=v4.7.2": {
       "Microsoft.Extensions.Primitives": {
         "type": "Direct",
-        "requested": "[7.0.0, )",
-        "resolved": "7.0.0",
-        "contentHash": "um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q==",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "N3qEBzmLMYiASUlKxxFIISP4AiwuPTHF5uCh+2CWSwwzAJiIYx0kBJsS30cp1nvhSySFAVi30jecD307jV+8Kg==",
         "dependencies": {
           "System.Memory": "4.5.5",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -193,16 +193,16 @@
       "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "[7.0.0, )"
+          "Microsoft.Extensions.Primitives": "[9.0.0, )"
         }
       }
     },
     ".NETFramework,Version=v4.8": {
       "Microsoft.Extensions.Primitives": {
         "type": "Direct",
-        "requested": "[7.0.0, )",
-        "resolved": "7.0.0",
-        "contentHash": "um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q==",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "N3qEBzmLMYiASUlKxxFIISP4AiwuPTHF5uCh+2CWSwwzAJiIYx0kBJsS30cp1nvhSySFAVi30jecD307jV+8Kg==",
         "dependencies": {
           "System.Memory": "4.5.5",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -242,16 +242,16 @@
       "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "[7.0.0, )"
+          "Microsoft.Extensions.Primitives": "[9.0.0, )"
         }
       }
     },
     ".NETFramework,Version=v4.8.1": {
       "Microsoft.Extensions.Primitives": {
         "type": "Direct",
-        "requested": "[7.0.0, )",
-        "resolved": "7.0.0",
-        "contentHash": "um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q==",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "N3qEBzmLMYiASUlKxxFIISP4AiwuPTHF5uCh+2CWSwwzAJiIYx0kBJsS30cp1nvhSySFAVi30jecD307jV+8Kg==",
         "dependencies": {
           "System.Memory": "4.5.5",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -291,16 +291,16 @@
       "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "[7.0.0, )"
+          "Microsoft.Extensions.Primitives": "[9.0.0, )"
         }
       }
     },
     ".NETStandard,Version=v2.0": {
       "Microsoft.Extensions.Primitives": {
         "type": "Direct",
-        "requested": "[7.0.0, )",
-        "resolved": "7.0.0",
-        "contentHash": "um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q==",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "N3qEBzmLMYiASUlKxxFIISP4AiwuPTHF5uCh+2CWSwwzAJiIYx0kBJsS30cp1nvhSySFAVi30jecD307jV+8Kg==",
         "dependencies": {
           "System.Memory": "4.5.5",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -354,44 +354,16 @@
       "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "[7.0.0, )"
+          "Microsoft.Extensions.Primitives": "[9.0.0, )"
         }
       }
     },
-    "net6.0": {
+    "net8.0": {
       "Microsoft.Extensions.Primitives": {
         "type": "Direct",
-        "requested": "[7.0.0, )",
-        "resolved": "7.0.0",
-        "contentHash": "um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q==",
-        "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
-        }
-      },
-      "Newtonsoft.Json": {
-        "type": "Direct",
-        "requested": "[13.0.3, )",
-        "resolved": "13.0.3",
-        "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
-      },
-      "System.Runtime.CompilerServices.Unsafe": {
-        "type": "Transitive",
-        "resolved": "6.0.0",
-        "contentHash": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg=="
-      },
-      "arbor.modelbinding": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.Extensions.Primitives": "[7.0.0, )"
-        }
-      }
-    },
-    "net7.0": {
-      "Microsoft.Extensions.Primitives": {
-        "type": "Direct",
-        "requested": "[7.0.0, )",
-        "resolved": "7.0.0",
-        "contentHash": "um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q=="
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "N3qEBzmLMYiASUlKxxFIISP4AiwuPTHF5uCh+2CWSwwzAJiIYx0kBJsS30cp1nvhSySFAVi30jecD307jV+8Kg=="
       },
       "Newtonsoft.Json": {
         "type": "Direct",
@@ -402,7 +374,27 @@
       "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "[7.0.0, )"
+          "Microsoft.Extensions.Primitives": "[9.0.0, )"
+        }
+      }
+    },
+    "net9.0": {
+      "Microsoft.Extensions.Primitives": {
+        "type": "Direct",
+        "requested": "[9.0.0, )",
+        "resolved": "9.0.0",
+        "contentHash": "N3qEBzmLMYiASUlKxxFIISP4AiwuPTHF5uCh+2CWSwwzAJiIYx0kBJsS30cp1nvhSySFAVi30jecD307jV+8Kg=="
+      },
+      "Newtonsoft.Json": {
+        "type": "Direct",
+        "requested": "[13.0.3, )",
+        "resolved": "13.0.3",
+        "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
+      },
+      "arbor.modelbinding": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "[9.0.0, )"
         }
       }
     }
