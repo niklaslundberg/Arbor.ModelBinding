@@ -4,28 +4,28 @@
     "net8.0": {
       "Microsoft.Extensions.Primitives": {
         "type": "Direct",
-        "requested": "[9.0.0, )",
-        "resolved": "9.0.0",
-        "contentHash": "N3qEBzmLMYiASUlKxxFIISP4AiwuPTHF5uCh+2CWSwwzAJiIYx0kBJsS30cp1nvhSySFAVi30jecD307jV+8Kg=="
+        "requested": "[10.0.6, )",
+        "resolved": "10.0.6",
+        "contentHash": "L8P21mqaG+CXvPheLndean/cHCOcItJqH8nx+0YQnK7wAiOR0G1IOC418ZSzTMD2D6Gmo0f2M5WR70XtpX2B8g=="
       },
       "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "[9.0.0, )"
+          "Microsoft.Extensions.Primitives": "[10.0.6, )"
         }
       }
     },
     "net9.0": {
       "Microsoft.Extensions.Primitives": {
         "type": "Direct",
-        "requested": "[9.0.0, )",
-        "resolved": "9.0.0",
-        "contentHash": "N3qEBzmLMYiASUlKxxFIISP4AiwuPTHF5uCh+2CWSwwzAJiIYx0kBJsS30cp1nvhSySFAVi30jecD307jV+8Kg=="
+        "requested": "[10.0.6, )",
+        "resolved": "10.0.6",
+        "contentHash": "L8P21mqaG+CXvPheLndean/cHCOcItJqH8nx+0YQnK7wAiOR0G1IOC418ZSzTMD2D6Gmo0f2M5WR70XtpX2B8g=="
       },
       "arbor.modelbinding": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "[9.0.0, )"
+          "Microsoft.Extensions.Primitives": "[10.0.6, )"
         }
       }
     }
