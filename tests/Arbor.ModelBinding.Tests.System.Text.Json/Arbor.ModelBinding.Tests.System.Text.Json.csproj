@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Arbor.ModelBinding.NewtonsoftJson\Arbor.ModelBinding.NewtonsoftJson.csproj" />
     <ProjectReference Include="..\..\src\Arbor.ModelBinding.System.Text.Json\Arbor.ModelBinding.System.Text.Json.csproj" />
   </ItemGroup>
 
