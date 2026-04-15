@@ -45,67 +45,97 @@ namespace Arbor.ModelBinding.Core
             }
 
             var dynamicObject = new ExpandoObject();
-
-            KeyValuePair<string, StringValues>[] nested =
-                nameCollection.Where(pair => pair.Key.IndexOf("[", StringComparison.Ordinal) >= 0).ToArray();
-
             IDictionary<string, object?> dynamicObjectDictionary = dynamicObject;
+            var existingKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-            bool ContainsKey(string lookup)
+            var nested = new List<KeyValuePair<string, StringValues>>();
+            var dotted = new List<KeyValuePair<string, StringValues>>();
+
+            void SetValue(string key, object? value)
             {
-                return dynamicObjectDictionary.Keys.Any(key => key.Equals(lookup, StringComparison.OrdinalIgnoreCase));
+                dynamicObjectDictionary[key] = value;
+                existingKeys.Add(key);
             }
 
-            IEnumerable<KeyValuePair<string, StringValues>> singleValuePairs =
-                nameCollection.Where(pairGroup => pairGroup.Value.Count == 1).Except(nested);
-
-            foreach (KeyValuePair<string, StringValues> keyValuePair in singleValuePairs.Where(pair => !pair.Key.Contains(".")))
+            foreach (KeyValuePair<string, StringValues> keyValuePair in nameCollection)
             {
-                dynamicObjectDictionary[keyValuePair.Key] = keyValuePair.Value.Single();
-            }
+                string key = keyValuePair.Key;
 
-            IEnumerable<KeyValuePair<string, StringValues>> multipleValuesPairs =
-                nameCollection.Where(pairGroup => pairGroup.Value.Count >= 2).Except(nested);
-
-            foreach (KeyValuePair<string, StringValues> keyValuePair in multipleValuesPairs)
-            {
-                var values = keyValuePair.Value;
-
-                dynamicObjectDictionary[keyValuePair.Key] = values;
-            }
-
-            foreach (PropertyInfo propertyInfo in targetType
-                .GetTypeInfo()
-                .DeclaredProperties
-                .Where(
-                    property => !(typeof(IEnumerable).IsAssignableFrom(
-                                      property.PropertyType)
-                                  || property.PropertyType == typeof(string))
-                                && !property.PropertyType.IsPrimitive
-                                && !property.PropertyType.IsGenericType
-                                && !ContainsKey(property.Name)))
-            {
-                var subProperties = nameCollection
-                    .Where(pair => pair.Key.IndexOf(".", StringComparison.Ordinal) >= 0 && pair.Key.StartsWith(propertyInfo.Name + ".", StringComparison.OrdinalIgnoreCase))
-                    .Select(
-                        pair => new KeyValuePair<string, StringValues>(
-                            pair.Key.Substring(pair.Key.IndexOf(".", StringComparison.Ordinal)).TrimStart('.'),
-                            pair.Value))
-                    .ToArray();
-
-                if (subProperties.Length > 0)
+                if (key.IndexOf(".", StringComparison.Ordinal) >= 0)
                 {
-                    dynamicObjectDictionary[propertyInfo.Name] = ParseFromPairs(subProperties, propertyInfo.PropertyType, serializer, deserializer);
+                    dotted.Add(keyValuePair);
+                }
+
+                if (key.IndexOf("[", StringComparison.Ordinal) >= 0)
+                {
+                    nested.Add(keyValuePair);
+                    continue;
+                }
+
+                StringValues values = keyValuePair.Value;
+
+                if (values.Count == 1 && key.IndexOf(".", StringComparison.Ordinal) < 0)
+                {
+                    SetValue(key, values[0]);
+                }
+                else if (values.Count >= 2)
+                {
+                    SetValue(key, values);
                 }
             }
 
-            foreach (PropertyInfo propertyInfo in targetType
-                .GetTypeInfo()
-                .DeclaredProperties
-                .Where(
-                    property => typeof(IEnumerable).IsAssignableFrom(
-                                    property.PropertyType) &&
-                                property.PropertyType.IsGenericType))
+            PropertyInfo[] declaredProperties = targetType.GetTypeInfo().DeclaredProperties.ToArray();
+
+            foreach (PropertyInfo propertyInfo in declaredProperties.Where(
+                         property => !(typeof(IEnumerable).IsAssignableFrom(property.PropertyType) || property.PropertyType == typeof(string))
+                                     && !property.PropertyType.IsPrimitive
+                                     && !property.PropertyType.IsGenericType
+                                     && !existingKeys.Contains(property.Name)))
+            {
+                string propertyNamePrefix = propertyInfo.Name + ".";
+                var subProperties = new List<KeyValuePair<string, StringValues>>();
+
+                foreach (KeyValuePair<string, StringValues> pair in dotted)
+                {
+                    string key = pair.Key;
+
+                    if (!key.StartsWith(propertyNamePrefix, StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    int dotIndex = key.IndexOf(".", StringComparison.Ordinal);
+                    subProperties.Add(new KeyValuePair<string, StringValues>(key.Substring(dotIndex + 1), pair.Value));
+                }
+
+                if (subProperties.Count > 0)
+                {
+                    SetValue(propertyInfo.Name, ParseFromPairs(subProperties, propertyInfo.PropertyType, serializer, deserializer));
+                }
+            }
+
+            var nestedIndexedProperties = nested.Select(
+                    nestedGroup =>
+                    {
+                        int indexIndex = nestedGroup.Key.IndexOf("[", StringComparison.Ordinal);
+                        int indexStopIndex = nestedGroup.Key.IndexOf("]", StringComparison.Ordinal);
+                        int indexLength = indexStopIndex - indexIndex;
+
+                        int dotIndex = nestedGroup.Key.IndexOf(".", StringComparison.Ordinal);
+
+                        string name = nestedGroup.Key.Substring(0, indexIndex);
+
+                        string index = nestedGroup.Key.Substring(indexIndex + 1, indexLength - 1);
+
+                        string propertyName = nestedGroup.Key.Substring(dotIndex + 1);
+
+                        return new { GroupName = name, nestedGroup.Value, Index = index, PropertyName = propertyName };
+                    })
+                .ToArray();
+
+            foreach (PropertyInfo propertyInfo in declaredProperties.Where(
+                         property => typeof(IEnumerable).IsAssignableFrom(property.PropertyType) &&
+                                     property.PropertyType.IsGenericType))
             {
                 Type? subTargetType = propertyInfo.PropertyType.GenericTypeArguments.FirstOrDefault();
 
@@ -116,23 +146,7 @@ namespace Arbor.ModelBinding.Core
 
                 string expectedName = propertyInfo.Name;
 
-                var matchingProperty = nested.Select(
-                        nestedGroup =>
-                        {
-                            int indexIndex = nestedGroup.Key.IndexOf("[", StringComparison.Ordinal);
-                            int indexStopIndex = nestedGroup.Key.IndexOf("]", StringComparison.Ordinal);
-                            int indexLength = indexStopIndex - indexIndex;
-
-                            int dotIndex = nestedGroup.Key.IndexOf(".", StringComparison.Ordinal);
-
-                            string name = nestedGroup.Key.Substring(0, indexIndex);
-
-                            string index = nestedGroup.Key.Substring(indexIndex + 1, indexLength - 1);
-
-                            string propertyName = nestedGroup.Key.Substring(dotIndex + 1);
-
-                            return new { GroupName = name, nestedGroup.Value, Index = index, propertyName };
-                        })
+                var matchingProperty = nestedIndexedProperties
                     .Where(s => s.GroupName.Equals(expectedName, StringComparison.OrdinalIgnoreCase))
                     .ToArray();
 
@@ -162,7 +176,7 @@ namespace Arbor.ModelBinding.Core
                     {
                         foreach (string valueProperty in value.Value)
                         {
-                            pairs.Add(new KeyValuePair<string, StringValues>(value.propertyName, valueProperty));
+                            pairs.Add(new KeyValuePair<string, StringValues>(value.PropertyName, valueProperty));
                         }
                     }
 
@@ -170,7 +184,7 @@ namespace Arbor.ModelBinding.Core
 
                     if (subTargetInstance is { })
                     {
-                        AddInstanceToCollection(subTargetType, newCollection, subTargetInstance);
+                        AddInstanceToCollection(newCollection, subTargetInstance);
                     }
                 }
             }
@@ -191,18 +205,11 @@ namespace Arbor.ModelBinding.Core
             return instance;
         }
 
-        private static void AddInstanceToCollection(Type subTargetType, object newCollection, object subTargetInstance)
+        private static void AddInstanceToCollection(object newCollection, object subTargetInstance)
         {
-            Type genericCollectionType = typeof(ICollection<>);
-
-            Type constructedCollectionType = genericCollectionType.MakeGenericType(subTargetType);
-
-            if (constructedCollectionType.IsInstanceOfType(newCollection))
+            if (newCollection is IList list)
             {
-                MethodInfo? addMethod = newCollection.GetType().GetTypeInfo()
-                    .GetDeclaredMethod(nameof(ICollection<object>.Add));
-
-                addMethod?.Invoke(newCollection, new[] { subTargetInstance });
+                list.Add(subTargetInstance);
             }
         }
     }
