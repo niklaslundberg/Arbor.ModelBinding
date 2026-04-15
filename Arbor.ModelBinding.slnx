@@ -1,0 +1,35 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/Arbor.ModelBinding.Benchmarks/Arbor.ModelBinding.Benchmarks.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".github/workflows/ci.yml" />
+    <File Path=".gitignore" />
+    <File Path="build/build.bat" />
+    <File Path="Directory.Build.props" />
+    <File Path="global.json" />
+    <File Path="LICENSE.txt" />
+    <File Path="version.json" />
+  </Folder>
+  <Folder Name="/Test/">
+    <File Path="tests/.editorconfig" />
+    <Project Path="tests/Arbor.ModelBinding.AspNetCore.Tests/Arbor.ModelBinding.AspNetCore.Tests.csproj" />
+    <Project Path="tests/Arbor.ModelBInding.Generators.Tests/Arbor.ModelBinding.Generators.Tests.csproj" />
+    <Project Path="tests/Arbor.ModelBinding.Tests.MSpecSystemTextJson/Arbor.ModelBinding.Tests.MSpecSystemTextJson.csproj" />
+    <Project Path="tests/Arbor.ModelBinding.Tests.System.Text.Json/Arbor.ModelBinding.Tests.System.Text.Json.csproj" />
+    <Project Path="tests/Arbor.ModelBinding.Tests.Unit/Arbor.ModelBinding.Tests.Unit.csproj" />
+  </Folder>
+  <Project Path="Arbor.ModelBinding.Primitives.Tests/Arbor.ModelBinding.Primitives.Tests.csproj" />
+  <Project Path="src/Arbor.ModelBinding.Generators/Arbor.ModelBinding.Generators.csproj" />
+  <Project Path="src/Arbor.ModelBinding.NewtonsoftJson/Arbor.ModelBinding.NewtonsoftJson.csproj" />
+  <Project Path="src/Arbor.ModelBinding.Primitives/Arbor.ModelBinding.Primitives.csproj" />
+  <Project Path="src/Arbor.ModelBinding.System.Text.Json/Arbor.ModelBinding.System.Text.Json.csproj" />
+  <Project Path="src/Arbor.ModelBinding/Arbor.ModelBinding.csproj" />
+</Solution>
