@@ -60,13 +60,15 @@ namespace Arbor.ModelBinding.Core
             foreach (KeyValuePair<string, StringValues> keyValuePair in nameCollection)
             {
                 string key = keyValuePair.Key;
+                int dotIndex = key.IndexOf(".", StringComparison.Ordinal);
+                int bracketIndex = key.IndexOf("[", StringComparison.Ordinal);
 
-                if (key.IndexOf(".", StringComparison.Ordinal) >= 0)
+                if (dotIndex >= 0)
                 {
                     dotted.Add(keyValuePair);
                 }
 
-                if (key.IndexOf("[", StringComparison.Ordinal) >= 0)
+                if (bracketIndex >= 0)
                 {
                     nested.Add(keyValuePair);
                     continue;
@@ -74,7 +76,7 @@ namespace Arbor.ModelBinding.Core
 
                 StringValues values = keyValuePair.Value;
 
-                if (values.Count == 1 && key.IndexOf(".", StringComparison.Ordinal) < 0)
+                if (values.Count == 1 && dotIndex < 0)
                 {
                     SetValue(key, values[0]);
                 }
