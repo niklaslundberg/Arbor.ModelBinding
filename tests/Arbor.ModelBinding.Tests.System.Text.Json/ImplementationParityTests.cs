@@ -9,7 +9,7 @@ namespace Arbor.ModelBinding.Tests.System.Text.Json
     public class ImplementationParityTests
     {
         [Fact]
-        public void Parse_bool_on_should_match()
+        public void Parse_bool_from_on_should_match_across_implementations()
         {
             var values = new List<KeyValuePair<string, StringValues>>
             {
