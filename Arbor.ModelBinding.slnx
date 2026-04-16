@@ -21,7 +21,7 @@
   <Folder Name="/Test/">
     <File Path="tests/.editorconfig" />
     <Project Path="tests/Arbor.ModelBinding.AspNetCore.Tests/Arbor.ModelBinding.AspNetCore.Tests.csproj" />
-    <Project Path="tests/Arbor.ModelBInding.Generators.Tests/Arbor.ModelBinding.Generators.Tests.csproj" />
+    <Project Path="tests/Arbor.ModelBinding.Generators.Tests/Arbor.ModelBinding.Generators.Tests.csproj" />
     <Project Path="tests/Arbor.ModelBinding.Tests.MSpecSystemTextJson/Arbor.ModelBinding.Tests.MSpecSystemTextJson.csproj" />
     <Project Path="tests/Arbor.ModelBinding.Tests.System.Text.Json/Arbor.ModelBinding.Tests.System.Text.Json.csproj" />
     <Project Path="tests/Arbor.ModelBinding.Tests.Unit/Arbor.ModelBinding.Tests.Unit.csproj" />
