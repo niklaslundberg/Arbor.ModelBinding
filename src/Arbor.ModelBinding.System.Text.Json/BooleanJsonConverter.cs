@@ -33,13 +33,22 @@ namespace Arbor.ModelBinding.SystemTextJson
                 return false;
             }
 
-            if (reader.TokenType == JsonTokenType.String && reader.GetString() is { } stringValue &&
-                BooleanMappings.TryGetValue(stringValue, out bool result))
+            if (reader.TokenType == JsonTokenType.String && reader.GetString() is { } stringValue)
             {
-                return result;
+                if (string.IsNullOrWhiteSpace(stringValue))
+                {
+                    return false;
+                }
+
+                if (BooleanMappings.TryGetValue(stringValue, out bool result))
+                {
+                    return result;
+                }
+
+                throw new FormatException($"Cannot parse {typeToConvert.FullName} from value '{stringValue}'");
             }
 
-            return false;
+            throw new JsonException($"Cannot parse {typeToConvert.FullName} from token type {reader.TokenType}");
         }
 
         public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options) => writer.WriteBooleanValue(value);

@@ -38,12 +38,22 @@ namespace Arbor.ModelBinding.SystemTextJson
                 return null;
             }
 
-            if (reader.GetString() is { } stringValue && BooleanMappings.TryGetValue(stringValue, out bool result))
+            if (reader.TokenType == JsonTokenType.String && reader.GetString() is { } stringValue)
             {
-                return result;
+                if (string.IsNullOrWhiteSpace(stringValue))
+                {
+                    return null;
+                }
+
+                if (BooleanMappings.TryGetValue(stringValue, out bool result))
+                {
+                    return result;
+                }
+
+                throw new FormatException($"Cannot parse {typeToConvert.FullName} from value '{stringValue}'");
             }
 
-            return null;
+            throw new JsonException($"Cannot parse {typeToConvert.FullName} from token type {reader.TokenType}");
 
         }
 
